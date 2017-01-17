@@ -1,0 +1,320 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<service xmlns="http://www.activegrid.com/namespaces/ServiceDefinitions/1.0" id="NEW_IXTEST_20" type="DataService" springFile="NEW_IXTEST_20.spring.xml">
+    <dataobjects>
+        <dataobject javaType="com.ixtest20.new_ixtest_20.AssociatedApp">
+            <element name="id" typeRef="java.lang.Integer" allowNull="true"/>
+            <element name="name" typeRef="java.lang.String" allowNull="true"/>
+            <element name="version" typeRef="java.lang.String" allowNull="true"/>
+        </dataobject>
+        <dataobject javaType="com.ixtest20.new_ixtest_20.AuthGroup">
+            <element name="id" typeRef="java.lang.Integer" allowNull="true"/>
+            <element name="name" typeRef="java.lang.String" allowNull="true"/>
+        </dataobject>
+        <dataobject javaType="com.ixtest20.new_ixtest_20.AuthGroupPermissions">
+            <element name="groupId" typeRef="java.lang.Integer" allowNull="true"/>
+            <element name="id" typeRef="java.lang.Integer" allowNull="true"/>
+            <element name="permissionId" typeRef="java.lang.Integer" allowNull="true"/>
+        </dataobject>
+        <dataobject javaType="com.ixtest20.new_ixtest_20.AuthPermission">
+            <element name="codename" typeRef="java.lang.String" allowNull="true"/>
+            <element name="contentTypeId" typeRef="java.lang.Integer" allowNull="true"/>
+            <element name="id" typeRef="java.lang.Integer" allowNull="true"/>
+            <element name="name" typeRef="java.lang.String" allowNull="true"/>
+        </dataobject>
+        <dataobject javaType="com.ixtest20.new_ixtest_20.AuthUser">
+            <element name="dateJoined" typeRef="org.joda.time.LocalDateTime" allowNull="true"/>
+            <element name="email" typeRef="java.lang.String" allowNull="true"/>
+            <element name="firstName" typeRef="java.lang.String" allowNull="true"/>
+            <element name="id" typeRef="java.lang.Integer" allowNull="true"/>
+            <element name="isActive" typeRef="java.lang.Integer" allowNull="true"/>
+            <element name="isStaff" typeRef="java.lang.Integer" allowNull="true"/>
+            <element name="isSuperuser" typeRef="java.lang.Integer" allowNull="true"/>
+            <element name="lastLogin" typeRef="org.joda.time.LocalDateTime" allowNull="true"/>
+            <element name="lastName" typeRef="java.lang.String" allowNull="true"/>
+            <element name="password" typeRef="java.lang.String" allowNull="true"/>
+            <element name="username" typeRef="java.lang.String" allowNull="true"/>
+        </dataobject>
+        <dataobject javaType="com.ixtest20.new_ixtest_20.AuthUserGroups">
+            <element name="groupId" typeRef="java.lang.Integer" allowNull="true"/>
+            <element name="id" typeRef="java.lang.Integer" allowNull="true"/>
+            <element name="userId" typeRef="java.lang.Integer" allowNull="true"/>
+        </dataobject>
+        <dataobject javaType="com.ixtest20.new_ixtest_20.AuthUserUserPermissions">
+            <element name="id" typeRef="java.lang.Integer" allowNull="true"/>
+            <element name="permissionId" typeRef="java.lang.Integer" allowNull="true"/>
+            <element name="userId" typeRef="java.lang.Integer" allowNull="true"/>
+        </dataobject>
+        <dataobject javaType="com.ixtest20.new_ixtest_20.Bugstatus">
+            <element name="bugstatus" typeRef="java.lang.String" allowNull="true"/>
+            <element name="statusid" typeRef="java.lang.Integer" allowNull="true"/>
+        </dataobject>
+        <dataobject javaType="com.ixtest20.new_ixtest_20.Bugtable">
+            <element name="assignedto" typeRef="java.lang.Integer" allowNull="true"/>
+            <element name="bugid" typeRef="java.lang.Integer" allowNull="true"/>
+            <element name="buildnumber" typeRef="java.lang.Integer" allowNull="true"/>
+            <element name="lastmodified" typeRef="org.joda.time.LocalDateTime" allowNull="true"/>
+            <element name="status" typeRef="java.lang.Integer" allowNull="true"/>
+        </dataobject>
+        <dataobject javaType="com.ixtest20.new_ixtest_20.Builds">
+            <element name="anchornumber" typeRef="java.lang.String" allowNull="true"/>
+            <element name="builddate" typeRef="org.joda.time.LocalDateTime" allowNull="true"/>
+            <element name="buildid" typeRef="java.lang.Integer" allowNull="true"/>
+            <element name="buildnumber" typeRef="java.lang.String" allowNull="true"/>
+            <element name="invalid" typeRef="java.lang.Integer" allowNull="true"/>
+            <element name="path" typeRef="java.lang.String" allowNull="true"/>
+            <element name="productid" typeRef="java.lang.Integer" allowNull="true"/>
+            <element name="serverexpected" typeRef="java.lang.Integer" allowNull="true"/>
+            <element name="xmlVersion" typeRef="java.lang.Integer" allowNull="true"/>
+        </dataobject>
+        <dataobject javaType="com.ixtest20.new_ixtest_20.BuildsBack">
+            <element name="builddate" typeRef="org.joda.time.LocalDateTime" allowNull="true"/>
+            <element name="buildid" typeRef="java.lang.Integer" allowNull="true"/>
+            <element name="buildnumber" typeRef="java.lang.String" allowNull="true"/>
+            <element name="path" typeRef="java.lang.String" allowNull="true"/>
+            <element name="productid" typeRef="java.lang.Integer" allowNull="true"/>
+            <element name="serverexpected" typeRef="java.lang.Integer" allowNull="true"/>
+            <element name="xmlVersion" typeRef="java.lang.Integer" allowNull="true"/>
+        </dataobject>
+        <dataobject javaType="com.ixtest20.new_ixtest_20.Chassis">
+            <element name="chassisid" typeRef="java.lang.Integer" allowNull="true"/>
+            <element name="name" typeRef="java.lang.String" allowNull="true"/>
+        </dataobject>
+        <dataobject javaType="com.ixtest20.new_ixtest_20.DeletedBuild">
+            <element name="associatedApp" typeRef="java.lang.Integer" allowNull="true"/>
+            <element name="buildDate" typeRef="org.joda.time.LocalDateTime" allowNull="true"/>
+            <element name="buildId" typeRef="java.lang.Integer" allowNull="true"/>
+            <element name="buildNumber" typeRef="java.lang.String" allowNull="true"/>
+            <element name="idDeletedBuild" typeRef="java.lang.Integer" allowNull="true"/>
+            <element name="path" typeRef="java.lang.String" allowNull="true"/>
+            <element name="productId" typeRef="java.lang.Integer" allowNull="true"/>
+        </dataobject>
+        <dataobject javaType="com.ixtest20.new_ixtest_20.DeletedEngine">
+            <element name="buildId" typeRef="java.lang.Integer" allowNull="true"/>
+            <element name="engineId" typeRef="java.lang.Integer" allowNull="true"/>
+            <element name="engineName" typeRef="java.lang.String" allowNull="true"/>
+            <element name="idDeletedEngine" typeRef="java.lang.Integer" allowNull="true"/>
+            <element name="iopSuiteId" typeRef="java.lang.Integer" allowNull="true"/>
+            <element name="noOfTestcases" typeRef="java.lang.Integer" allowNull="true"/>
+            <element name="productId" typeRef="java.lang.Integer" allowNull="true"/>
+        </dataobject>
+        <dataobject javaType="com.ixtest20.new_ixtest_20.DeletionStatus">
+            <element name="statusId" typeRef="java.lang.Integer" allowNull="true"/>
+            <element name="statusName" typeRef="java.lang.String" allowNull="true"/>
+        </dataobject>
+        <dataobject javaType="com.ixtest20.new_ixtest_20.DjangoContentType">
+            <element name="appLabel" typeRef="java.lang.String" allowNull="true"/>
+            <element name="id" typeRef="java.lang.Integer" allowNull="true"/>
+            <element name="model" typeRef="java.lang.String" allowNull="true"/>
+            <element name="name" typeRef="java.lang.String" allowNull="true"/>
+        </dataobject>
+        <dataobject javaType="com.ixtest20.new_ixtest_20.DjangoSite">
+            <element name="domain" typeRef="java.lang.String" allowNull="true"/>
+            <element name="id" typeRef="java.lang.Integer" allowNull="true"/>
+            <element name="name" typeRef="java.lang.String" allowNull="true"/>
+        </dataobject>
+        <dataobject javaType="com.ixtest20.new_ixtest_20.Dut">
+            <element name="description" typeRef="java.lang.String" allowNull="true"/>
+            <element name="dutid" typeRef="java.lang.Integer" allowNull="true"/>
+            <element name="ip" typeRef="java.lang.String" allowNull="true"/>
+            <element name="name" typeRef="java.lang.String" allowNull="true"/>
+            <element name="type" typeRef="java.lang.String" allowNull="true"/>
+        </dataobject>
+        <dataobject javaType="com.ixtest20.new_ixtest_20.Engines">
+            <element name="buildid" typeRef="java.lang.Integer" allowNull="true"/>
+            <element name="engineid" typeRef="java.lang.Integer" allowNull="true"/>
+            <element name="enginename" typeRef="java.lang.String" allowNull="true"/>
+            <element name="invalid" typeRef="java.lang.Integer" allowNull="true"/>
+            <element name="iopSuiteId" typeRef="java.lang.Integer" allowNull="true"/>
+            <element name="ixtestplancount" typeRef="java.lang.Integer" allowNull="true"/>
+            <element name="ixtestplanid" typeRef="java.lang.Integer" allowNull="true"/>
+            <element name="noOfTestcases" typeRef="java.lang.Integer" allowNull="true"/>
+            <element name="parentenginename" typeRef="java.lang.String" allowNull="true"/>
+            <element name="productid" typeRef="java.lang.Integer" allowNull="true"/>
+        </dataobject>
+        <dataobject javaType="com.ixtest20.new_ixtest_20.EnginesBack">
+            <element name="buildid" typeRef="java.lang.Integer" allowNull="true"/>
+            <element name="engineid" typeRef="java.lang.Integer" allowNull="true"/>
+            <element name="enginename" typeRef="java.lang.String" allowNull="true"/>
+            <element name="iopSuiteId" typeRef="java.lang.Integer" allowNull="true"/>
+            <element name="noOfTestcases" typeRef="java.lang.Integer" allowNull="true"/>
+            <element name="productid" typeRef="java.lang.Integer" allowNull="true"/>
+        </dataobject>
+        <dataobject javaType="com.ixtest20.new_ixtest_20.EnginesBack97">
+            <element name="buildid" typeRef="java.lang.Integer" allowNull="true"/>
+            <element name="engineid" typeRef="java.lang.Integer" allowNull="true"/>
+            <element name="enginename" typeRef="java.lang.String" allowNull="true"/>
+            <element name="iopSuiteId" typeRef="java.lang.Integer" allowNull="true"/>
+            <element name="ixtestplancount" typeRef="java.lang.Integer" allowNull="true"/>
+            <element name="ixtestplanid" typeRef="java.lang.Integer" allowNull="true"/>
+            <element name="noOfTestcases" typeRef="java.lang.Integer" allowNull="true"/>
+            <element name="productid" typeRef="java.lang.Integer" allowNull="true"/>
+        </dataobject>
+        <dataobject javaType="com.ixtest20.new_ixtest_20.IopBuildApps">
+            <element name="buildid" typeRef="java.lang.Integer" allowNull="true"/>
+            <element name="buildnumber" typeRef="java.lang.String" allowNull="true"/>
+            <element name="iopBuildAppsId" typeRef="java.lang.Integer" allowNull="true"/>
+            <element name="productid" typeRef="java.lang.Integer" allowNull="true"/>
+            <element name="releasename" typeRef="java.lang.String" allowNull="true"/>
+        </dataobject>
+        <dataobject javaType="com.ixtest20.new_ixtest_20.IopEnginesDetails">
+            <element name="buildnumber" typeRef="java.lang.String" allowNull="true"/>
+            <element name="engineid" typeRef="java.lang.Integer" allowNull="true"/>
+            <element name="iopEnginesDetailsId" typeRef="java.lang.Integer" allowNull="true"/>
+            <element name="productid" typeRef="java.lang.Integer" allowNull="true"/>
+            <element name="releasename" typeRef="java.lang.String" allowNull="true"/>
+        </dataobject>
+        <dataobject javaType="com.ixtest20.new_ixtest_20.IopSuite">
+            <element name="buildid" typeRef="java.lang.Integer" allowNull="true"/>
+            <element name="iopSuiteId" typeRef="java.lang.Integer" allowNull="true"/>
+            <element name="iopSuiteName" typeRef="java.lang.String" allowNull="true"/>
+            <element name="totalTestCases" typeRef="java.lang.Integer" allowNull="true"/>
+        </dataobject>
+        <dataobject javaType="com.ixtest20.new_ixtest_20.Loadmodules">
+            <element name="lmid" typeRef="java.lang.Integer" allowNull="true"/>
+            <element name="name" typeRef="java.lang.String" allowNull="true"/>
+        </dataobject>
+        <dataobject javaType="com.ixtest20.new_ixtest_20.Network">
+            <element name="associatedApp" typeRef="java.lang.Integer" allowNull="true"/>
+            <element name="combine" typeRef="java.lang.String" allowNull="true"/>
+            <element name="interfaceid" typeRef="java.lang.Integer" allowNull="true"/>
+            <element name="name" typeRef="java.lang.String" allowNull="true"/>
+            <element name="networkid" typeRef="java.lang.Integer" allowNull="true"/>
+            <element name="platformid" typeRef="java.lang.Integer" allowNull="true"/>
+            <element name="portSerialNumber" typeRef="java.lang.String" allowNull="true"/>
+            <element name="portnumber" typeRef="java.lang.Integer" allowNull="true"/>
+            <element name="slotnumber" typeRef="java.lang.Integer" allowNull="true"/>
+        </dataobject>
+        <dataobject javaType="com.ixtest20.new_ixtest_20.PBugtableRun">
+            <element name="bugid" typeRef="java.lang.Integer" allowNull="true"/>
+            <element name="id" typeRef="java.lang.Integer" allowNull="true"/>
+            <element name="invalid" typeRef="java.lang.Integer" allowNull="true"/>
+            <element name="runid" typeRef="java.lang.Integer" allowNull="true"/>
+        </dataobject>
+        <dataobject javaType="com.ixtest20.new_ixtest_20.PDutRun">
+            <element name="dutid" typeRef="java.lang.Integer" allowNull="true"/>
+            <element name="id" typeRef="java.lang.Integer" allowNull="true"/>
+            <element name="invalid" typeRef="java.lang.Integer" allowNull="true"/>
+            <element name="runid" typeRef="java.lang.Integer" allowNull="true"/>
+        </dataobject>
+        <dataobject javaType="com.ixtest20.new_ixtest_20.PDutRunTesting">
+            <element name="dutid" typeRef="java.lang.Integer" allowNull="true"/>
+            <element name="id" typeRef="java.lang.Integer" allowNull="true"/>
+            <element name="invalidrun" typeRef="java.lang.Integer" allowNull="true"/>
+            <element name="runid" typeRef="java.lang.Integer" allowNull="true"/>
+        </dataobject>
+        <dataobject javaType="com.ixtest20.new_ixtest_20.PNetworkRun">
+            <element name="id" typeRef="java.lang.Integer" allowNull="true"/>
+            <element name="invalid" typeRef="java.lang.Integer" allowNull="true"/>
+            <element name="runid" typeRef="java.lang.Integer" allowNull="true"/>
+            <element name="testconfigid" typeRef="java.lang.Integer" allowNull="true"/>
+        </dataobject>
+        <dataobject javaType="com.ixtest20.new_ixtest_20.PNetworkRunTesting">
+            <element name="id" typeRef="java.lang.Integer" allowNull="true"/>
+            <element name="invalidrun" typeRef="java.lang.Integer" allowNull="true"/>
+            <element name="runid" typeRef="java.lang.Integer" allowNull="true"/>
+            <element name="testconfigid" typeRef="java.lang.Integer" allowNull="true"/>
+        </dataobject>
+        <dataobject javaType="com.ixtest20.new_ixtest_20.ProductBack97">
+            <element name="productid" typeRef="java.lang.Integer" allowNull="true"/>
+            <element name="productname" typeRef="java.lang.String" allowNull="true"/>
+            <element name="status" typeRef="java.lang.Integer" allowNull="true"/>
+        </dataobject>
+        <dataobject javaType="com.ixtest20.new_ixtest_20.Products">
+            <element name="ixtrackerid" typeRef="java.lang.Integer" allowNull="true"/>
+            <element name="productid" typeRef="java.lang.Integer" allowNull="true"/>
+            <element name="productname" typeRef="java.lang.String" allowNull="true"/>
+            <element name="status" typeRef="java.lang.Integer" allowNull="true"/>
+        </dataobject>
+        <dataobject javaType="com.ixtest20.new_ixtest_20.ProductsBack">
+            <element name="productid" typeRef="java.lang.Integer" allowNull="true"/>
+            <element name="productname" typeRef="java.lang.String" allowNull="true"/>
+            <element name="status" typeRef="java.lang.Integer" allowNull="true"/>
+        </dataobject>
+        <dataobject javaType="com.ixtest20.new_ixtest_20.RecycleTable">
+            <element name="idDeletedBuild" typeRef="java.lang.Integer" allowNull="true"/>
+            <element name="idDeletedEngine" typeRef="java.lang.Integer" allowNull="true"/>
+            <element name="idRecycle" typeRef="java.lang.Integer" allowNull="true"/>
+            <element name="statusId" typeRef="java.lang.Integer" allowNull="true"/>
+            <element name="triggeredBy" typeRef="java.lang.String" allowNull="true"/>
+            <element name="triggeredTime" typeRef="org.joda.time.LocalDateTime" allowNull="true"/>
+        </dataobject>
+        <dataobject javaType="com.ixtest20.new_ixtest_20.Releases">
+            <element name="productid" typeRef="java.lang.Integer" allowNull="true"/>
+            <element name="releaseid" typeRef="java.lang.Integer" allowNull="true"/>
+            <element name="releasename" typeRef="java.lang.String" allowNull="true"/>
+        </dataobject>
+        <dataobject javaType="com.ixtest20.new_ixtest_20.Result">
+            <element name="id" typeRef="java.lang.Integer" allowNull="true"/>
+            <element name="path" typeRef="java.lang.String" allowNull="true"/>
+            <element name="status" typeRef="java.lang.String" allowNull="true"/>
+            <element name="time" typeRef="org.joda.time.LocalDateTime" allowNull="true"/>
+        </dataobject>
+        <dataobject javaType="com.ixtest20.new_ixtest_20.Testcaserun">
+            <element name="buildid" typeRef="java.lang.Integer" allowNull="true"/>
+            <element name="cardSerialNumber" typeRef="java.lang.String" allowNull="true"/>
+            <element name="comments" typeRef="java.lang.String" allowNull="true"/>
+            <element name="config" typeRef="java.lang.String" allowNull="true"/>
+            <element name="description" typeRef="java.lang.String" allowNull="true"/>
+            <element name="endDate" typeRef="org.joda.time.LocalDateTime" allowNull="true"/>
+            <element name="engineid" typeRef="java.lang.Integer" allowNull="true"/>
+            <element name="invalid" typeRef="java.lang.Integer" allowNull="true"/>
+            <element name="iopSuiteId" typeRef="java.lang.Integer" allowNull="true"/>
+            <element name="logfilelink" typeRef="java.lang.String" allowNull="true"/>
+            <element name="obtained" typeRef="java.lang.String" allowNull="true"/>
+            <element name="preCon" typeRef="java.lang.String" allowNull="true"/>
+            <element name="productid" typeRef="java.lang.Integer" allowNull="true"/>
+            <element name="resultid" typeRef="java.lang.Integer" allowNull="true"/>
+            <element name="startDate" typeRef="org.joda.time.LocalDateTime" allowNull="true"/>
+            <element name="target" typeRef="java.lang.String" allowNull="true"/>
+            <element name="testcaseid" typeRef="java.lang.Integer" allowNull="true"/>
+            <element name="testcaserunid" typeRef="java.lang.Integer" allowNull="true"/>
+        </dataobject>
+        <dataobject javaType="com.ixtest20.new_ixtest_20.Testcases">
+            <element name="created" typeRef="org.joda.time.LocalDateTime" allowNull="true"/>
+            <element name="engineid" typeRef="java.lang.Integer" allowNull="true"/>
+            <element name="invalid" typeRef="java.lang.Integer" allowNull="true"/>
+            <element name="ixtestcaseid" typeRef="java.lang.Integer" allowNull="true"/>
+            <element name="productid" typeRef="java.lang.Integer" allowNull="true"/>
+            <element name="testcaseauthorid" typeRef="java.lang.Integer" allowNull="true"/>
+            <element name="testcasedescription" typeRef="java.lang.String" allowNull="true"/>
+            <element name="testcaseid" typeRef="java.lang.Integer" allowNull="true"/>
+            <element name="testcasename" typeRef="java.lang.String" allowNull="true"/>
+            <element name="testcaseownerid" typeRef="java.lang.Integer" allowNull="true"/>
+        </dataobject>
+        <dataobject javaType="com.ixtest20.new_ixtest_20.TestcasesBack">
+            <element name="created" typeRef="org.joda.time.LocalDateTime" allowNull="true"/>
+            <element name="engineid" typeRef="java.lang.Integer" allowNull="true"/>
+            <element name="productid" typeRef="java.lang.Integer" allowNull="true"/>
+            <element name="testcaseauthorid" typeRef="java.lang.Integer" allowNull="true"/>
+            <element name="testcasedescription" typeRef="java.lang.String" allowNull="true"/>
+            <element name="testcaseid" typeRef="java.lang.Integer" allowNull="true"/>
+            <element name="testcasename" typeRef="java.lang.String" allowNull="true"/>
+            <element name="testcaseownerid" typeRef="java.lang.Integer" allowNull="true"/>
+        </dataobject>
+        <dataobject javaType="com.ixtest20.new_ixtest_20.Testplan">
+            <element name="branchid" typeRef="java.lang.Integer" allowNull="true"/>
+            <element name="branchname" typeRef="java.lang.String" allowNull="true"/>
+            <element name="enginename" typeRef="java.lang.String" allowNull="true"/>
+            <element name="maxtestcases" typeRef="java.lang.Integer" allowNull="true"/>
+            <element name="productid" typeRef="java.lang.Integer" allowNull="true"/>
+            <element name="status" typeRef="java.lang.Integer" allowNull="true"/>
+            <element name="updatedby" typeRef="java.lang.String" allowNull="true"/>
+            <element name="updatedon" typeRef="org.joda.time.LocalDateTime" allowNull="true"/>
+        </dataobject>
+        <dataobject javaType="com.wavemaker.runtime.data.expression.QueryFilter">
+            <element name="attributeName" typeRef="java.lang.String" allowNull="true"/>
+            <element name="attributeType" typeRef="java.lang.String" allowNull="true"/>
+            <element name="attributeValue" allowNull="true"/>
+            <element name="filterCondition" typeRef="java.lang.String" allowNull="true"/>
+        </dataobject>
+        <dataobject javaType="com.wavemaker.runtime.data.model.CustomProcedure">
+            <element name="procedureParams" typeRef="com.wavemaker.runtime.data.model.CustomProcedureParam" isList="true" allowNull="true"/>
+            <element name="procedureStr" typeRef="java.lang.String" allowNull="true"/>
+        </dataobject>
+        <dataobject javaType="com.wavemaker.runtime.data.model.CustomQuery">
+            <element name="nativeSql" typeRef="java.lang.Boolean" allowNull="true"/>
+            <element name="queryParams" typeRef="com.wavemaker.runtime.data.model.CustomQueryParam" isList="true" allowNull="true"/>
+            <element name="queryStr" typeRef="java.lang.String" allowNull="true"/>
+        </dataobject>
+    </dataobjects>
+</service>

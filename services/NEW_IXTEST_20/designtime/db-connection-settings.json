@@ -1,0 +1,151 @@
+{
+  "username" : "{WM_CLOUD_MYSQL_USER_NAME}",
+  "password" : "{WM_CLOUD_MYSQL_PASSWORD}",
+  "url" : "jdbc:mysql://{WM_CLOUD_MYSQL_HOST}/NEW_IXTEST_20?useUnicode=yes&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull&createDatabaseIfNotExist=true",
+  "driverClass" : "com.mysql.jdbc.Driver",
+  "dialect" : "com.wavemaker.runtime.data.dialect.MySQLDialect",
+  "serviceId" : "NEW_IXTEST_20",
+  "packageName" : "com.ixtest20.new_ixtest_20",
+  "dbType" : "MySQL",
+  "host" : "{WM_CLOUD_MYSQL_HOST}",
+  "dbName" : "NEW_IXTEST_20",
+  "port" : "",
+  "schemaName" : null,
+  "tableFilter" : [ {
+    "table" : "ASSOCIATED_APP",
+    "schema" : null
+  }, {
+    "table" : "AUTH_GROUP",
+    "schema" : null
+  }, {
+    "table" : "AUTH_GROUP_PERMISSIONS",
+    "schema" : null
+  }, {
+    "table" : "AUTH_PERMISSION",
+    "schema" : null
+  }, {
+    "table" : "AUTH_USER",
+    "schema" : null
+  }, {
+    "table" : "AUTH_USER_GROUPS",
+    "schema" : null
+  }, {
+    "table" : "AUTH_USER_USER_PERMISSIONS",
+    "schema" : null
+  }, {
+    "table" : "BUGSTATUS",
+    "schema" : null
+  }, {
+    "table" : "BUGTABLE",
+    "schema" : null
+  }, {
+    "table" : "BUILDS",
+    "schema" : null
+  }, {
+    "table" : "BUILDS_BACK",
+    "schema" : null
+  }, {
+    "table" : "CHASSIS",
+    "schema" : null
+  }, {
+    "table" : "DELETED_BUILD",
+    "schema" : null
+  }, {
+    "table" : "DELETED_ENGINE",
+    "schema" : null
+  }, {
+    "table" : "DELETION_STATUS",
+    "schema" : null
+  }, {
+    "table" : "DJANGO_CONTENT_TYPE",
+    "schema" : null
+  }, {
+    "table" : "DJANGO_SITE",
+    "schema" : null
+  }, {
+    "table" : "DUT",
+    "schema" : null
+  }, {
+    "table" : "ENGINES",
+    "schema" : null
+  }, {
+    "table" : "ENGINES_BACK",
+    "schema" : null
+  }, {
+    "table" : "ENGINES_BACK_9_7",
+    "schema" : null
+  }, {
+    "table" : "IOP_BUILD_APPS",
+    "schema" : null
+  }, {
+    "table" : "IOP_ENGINES_DETAILS",
+    "schema" : null
+  }, {
+    "table" : "IOP_SUITE",
+    "schema" : null
+  }, {
+    "table" : "LOADMODULES",
+    "schema" : null
+  }, {
+    "table" : "NETWORK",
+    "schema" : null
+  }, {
+    "table" : "PRODUCTS",
+    "schema" : null
+  }, {
+    "table" : "PRODUCTS_BACK",
+    "schema" : null
+  }, {
+    "table" : "PRODUCT_BACK_9_7",
+    "schema" : null
+  }, {
+    "table" : "P_BUGTABLE_RUN",
+    "schema" : null
+  }, {
+    "table" : "P_DUT_RUN",
+    "schema" : null
+  }, {
+    "table" : "P_DUT_RUN_TESTING",
+    "schema" : null
+  }, {
+    "table" : "P_NETWORK_RUN",
+    "schema" : null
+  }, {
+    "table" : "P_NETWORK_RUN_TESTING",
+    "schema" : null
+  }, {
+    "table" : "RECYCLE_TABLE",
+    "schema" : null
+  }, {
+    "table" : "RELEASES",
+    "schema" : null
+  }, {
+    "table" : "RESULT",
+    "schema" : null
+  }, {
+    "table" : "TESTCASERUN",
+    "schema" : null
+  }, {
+    "table" : "TESTCASES",
+    "schema" : null
+  }, {
+    "table" : "TESTCASES_BACK",
+    "schema" : null
+  }, {
+    "table" : "TESTPLAN",
+    "schema" : null
+  } ],
+  "schemaFilter" : [ ],
+  "impersonateUser" : false,
+  "activeDirectoryDomain" : null,
+  "hbm2ddl" : "update",
+  "maxPageSize" : 100,
+  "dataSourceType" : "WM_MANAGED_DATASOURCE",
+  "jndiName" : "",
+  "reloadInfo" : {
+    "reload" : false,
+    "reason" : null,
+    "message" : null
+  },
+  "readOnly" : false
+}

@@ -27,6 +27,9 @@ import com.wordnik.swagger.annotations.Api;
 import com.wordnik.swagger.annotations.ApiOperation;
 import com.wordnik.swagger.annotations.ApiParam;
 import com.ixtest20.new_ixtest_20.Engines;
+import com.ixtest20.new_ixtest_20.IopEnginesDetails;
+import com.ixtest20.new_ixtest_20.Testcaserun;
+import com.ixtest20.new_ixtest_20.Testcases;
 import com.ixtest20.new_ixtest_20.service.EnginesService;
 
 /**
@@ -117,6 +120,28 @@ public class EnginesController {
     public Long countEngines(@ApiParam("conditions to filter the results") @RequestParam(value = "q", required = false) String query) {
         LOGGER.debug("counting Engines");
         return enginesService.count(query);
+    }
+
+    @RequestMapping(value = "/{id}/iopEnginesDetailses", method = RequestMethod.GET)
+    @ApiOperation(value = "Gets the iopEnginesDetailses instance associated with the given id.")
+    @WMAccessVisibility(value = AccessSpecifier.APP_ONLY)
+    public Page<IopEnginesDetails> findAssociatedIopEnginesDetailses(@PathVariable("id") BigInteger id, Pageable pageable) {
+        LOGGER.debug("Fetching all associated iopEnginesDetailses");
+        return enginesService.findAssociatedIopEnginesDetailses(id, pageable);
+    }
+
+    @RequestMapping(value = "/{id:.+}/testcaseruns", method = RequestMethod.GET)
+    @ApiOperation(value = "Gets the testcaseruns instance associated with the given id.")
+    public Page<Testcaserun> findAssociatedTestcaseruns(@PathVariable("id") BigInteger id, Pageable pageable) {
+        LOGGER.debug("Fetching all associated testcaseruns");
+        return enginesService.findAssociatedTestcaseruns(id, pageable);
+    }
+
+    @RequestMapping(value = "/{id:.+}/testcaseses", method = RequestMethod.GET)
+    @ApiOperation(value = "Gets the testcaseses instance associated with the given id.")
+    public Page<Testcases> findAssociatedTestcaseses(@PathVariable("id") BigInteger id, Pageable pageable) {
+        LOGGER.debug("Fetching all associated testcaseses");
+        return enginesService.findAssociatedTestcaseses(id, pageable);
     }
 
     /**

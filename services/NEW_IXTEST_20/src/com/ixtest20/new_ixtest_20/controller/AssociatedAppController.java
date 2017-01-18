@@ -27,6 +27,7 @@ import com.wordnik.swagger.annotations.Api;
 import com.wordnik.swagger.annotations.ApiOperation;
 import com.wordnik.swagger.annotations.ApiParam;
 import com.ixtest20.new_ixtest_20.AssociatedApp;
+import com.ixtest20.new_ixtest_20.Builds;
 import com.ixtest20.new_ixtest_20.service.AssociatedAppService;
 
 /**
@@ -117,6 +118,14 @@ public class AssociatedAppController {
     public Long countAssociatedApps(@ApiParam("conditions to filter the results") @RequestParam(value = "q", required = false) String query) {
         LOGGER.debug("counting AssociatedApps");
         return associatedAppService.count(query);
+    }
+
+    @RequestMapping(value = "/{id}/buildses", method = RequestMethod.GET)
+    @ApiOperation(value = "Gets the buildses instance associated with the given id.")
+    @WMAccessVisibility(value = AccessSpecifier.APP_ONLY)
+    public Page<Builds> findAssociatedBuildses(@PathVariable("id") BigInteger id, Pageable pageable) {
+        LOGGER.debug("Fetching all associated buildses");
+        return associatedAppService.findAssociatedBuildses(id, pageable);
     }
 
     /**

@@ -11,7 +11,10 @@ import java.util.Objects;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
@@ -24,6 +27,8 @@ public class AuthGroupPermissions implements Serializable {
     private BigInteger id;
     private BigInteger groupId;
     private BigInteger permissionId;
+    private AuthGroup authGroup;
+    private AuthPermission authPermission;
 
     @Id
     @Column(name = "`ID`", nullable = false, scale = 0, precision = 19)
@@ -35,7 +40,7 @@ public class AuthGroupPermissions implements Serializable {
         this.id = id;
     }
 
-    @Column(name = "`GROUP_ID`", nullable = true, scale = 0, precision = 19)
+    @Column(name = "`GROUP_ID`", nullable = false, scale = 0, precision = 19)
     public BigInteger getGroupId() {
         return this.groupId;
     }
@@ -44,7 +49,7 @@ public class AuthGroupPermissions implements Serializable {
         this.groupId = groupId;
     }
 
-    @Column(name = "`PERMISSION_ID`", nullable = true, scale = 0, precision = 19)
+    @Column(name = "`PERMISSION_ID`", nullable = false, scale = 0, precision = 19)
     public BigInteger getPermissionId() {
         return this.permissionId;
     }
@@ -53,6 +58,33 @@ public class AuthGroupPermissions implements Serializable {
         this.permissionId = permissionId;
     }
 
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "`GROUP_ID`", referencedColumnName = "`ID`", insertable = false, updatable = false)
+    public AuthGroup getAuthGroup() {
+        return this.authGroup;
+    }
+
+    public void setAuthGroup(AuthGroup authGroup) {
+        if(authGroup != null) {
+            this.groupId = authGroup.getId();
+        }
+
+        this.authGroup = authGroup;
+    }
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "`PERMISSION_ID`", referencedColumnName = "`ID`", insertable = false, updatable = false)
+    public AuthPermission getAuthPermission() {
+        return this.authPermission;
+    }
+
+    public void setAuthPermission(AuthPermission authPermission) {
+        if(authPermission != null) {
+            this.permissionId = authPermission.getId();
+        }
+
+        this.authPermission = authPermission;
+    }
 
     @Override
     public boolean equals(Object o) {

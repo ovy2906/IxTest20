@@ -16,6 +16,8 @@ import com.wavemaker.runtime.data.expression.QueryFilter;
 import com.wavemaker.runtime.file.model.Downloadable;
 
 import com.ixtest20.new_ixtest_20.AuthUser;
+import com.ixtest20.new_ixtest_20.AuthUserGroups;
+import com.ixtest20.new_ixtest_20.AuthUserUserPermissions;
 
 /**
  * Service object for domain model class {@link AuthUser}.
@@ -126,6 +128,29 @@ public interface AuthUserService {
 	 */
 	long count(String query);
 
+    /*
+     * Returns the associated authUserGroupses for given AuthUser id.
+     *
+     * @param id value of id; value cannot be null
+     * @param pageable Details of the pagination information along with the sorting options. If null returns all matching records.
+     * @return Paginated list of associated AuthUserGroups instances.
+     *
+     * @see Pageable
+     * @see Page
+     */
+    Page<AuthUserGroups> findAssociatedAuthUserGroupses(BigInteger id, Pageable pageable);
+
+    /*
+     * Returns the associated authUserUserPermissionses for given AuthUser id.
+     *
+     * @param id value of id; value cannot be null
+     * @param pageable Details of the pagination information along with the sorting options. If null returns all matching records.
+     * @return Paginated list of associated AuthUserUserPermissions instances.
+     *
+     * @see Pageable
+     * @see Page
+     */
+    Page<AuthUserUserPermissions> findAssociatedAuthUserUserPermissionses(BigInteger id, Pageable pageable);
 
 }
 

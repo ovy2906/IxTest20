@@ -11,7 +11,10 @@ import java.util.Objects;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
@@ -24,6 +27,8 @@ public class AuthUserGroups implements Serializable {
     private BigInteger id;
     private BigInteger userId;
     private BigInteger groupId;
+    private AuthUser authUser;
+    private AuthGroup authGroup;
 
     @Id
     @Column(name = "`ID`", nullable = false, scale = 0, precision = 19)
@@ -53,6 +58,33 @@ public class AuthUserGroups implements Serializable {
         this.groupId = groupId;
     }
 
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "`USER_ID`", referencedColumnName = "`ID`", insertable = false, updatable = false)
+    public AuthUser getAuthUser() {
+        return this.authUser;
+    }
+
+    public void setAuthUser(AuthUser authUser) {
+        if(authUser != null) {
+            this.userId = authUser.getId();
+        }
+
+        this.authUser = authUser;
+    }
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "`GROUP_ID`", referencedColumnName = "`ID`", insertable = false, updatable = false)
+    public AuthGroup getAuthGroup() {
+        return this.authGroup;
+    }
+
+    public void setAuthGroup(AuthGroup authGroup) {
+        if(authGroup != null) {
+            this.groupId = authGroup.getId();
+        }
+
+        this.authGroup = authGroup;
+    }
 
     @Override
     public boolean equals(Object o) {

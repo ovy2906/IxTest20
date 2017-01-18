@@ -16,6 +16,7 @@ import com.wavemaker.runtime.data.expression.QueryFilter;
 import com.wavemaker.runtime.file.model.Downloadable;
 
 import com.ixtest20.new_ixtest_20.Chassis;
+import com.ixtest20.new_ixtest_20.Network;
 
 /**
  * Service object for domain model class {@link Chassis}.
@@ -126,6 +127,17 @@ public interface ChassisService {
 	 */
 	long count(String query);
 
+    /*
+     * Returns the associated networks for given Chassis id.
+     *
+     * @param chassisid value of chassisid; value cannot be null
+     * @param pageable Details of the pagination information along with the sorting options. If null returns all matching records.
+     * @return Paginated list of associated Network instances.
+     *
+     * @see Pageable
+     * @see Page
+     */
+    Page<Network> findAssociatedNetworks(BigInteger chassisid, Pageable pageable);
 
 }
 

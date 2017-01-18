@@ -26,7 +26,15 @@ import com.wavemaker.tools.api.core.models.AccessSpecifier;
 import com.wordnik.swagger.annotations.Api;
 import com.wordnik.swagger.annotations.ApiOperation;
 import com.wordnik.swagger.annotations.ApiParam;
+import com.ixtest20.new_ixtest_20.Builds;
+import com.ixtest20.new_ixtest_20.Engines;
+import com.ixtest20.new_ixtest_20.IopBuildApps;
+import com.ixtest20.new_ixtest_20.IopEnginesDetails;
 import com.ixtest20.new_ixtest_20.Products;
+import com.ixtest20.new_ixtest_20.Releases;
+import com.ixtest20.new_ixtest_20.Testcaserun;
+import com.ixtest20.new_ixtest_20.Testcases;
+import com.ixtest20.new_ixtest_20.Testplan;
 import com.ixtest20.new_ixtest_20.service.ProductsService;
 
 /**
@@ -117,6 +125,66 @@ public class ProductsController {
     public Long countProducts(@ApiParam("conditions to filter the results") @RequestParam(value = "q", required = false) String query) {
         LOGGER.debug("counting Products");
         return productsService.count(query);
+    }
+
+    @RequestMapping(value = "/{id}/buildses", method = RequestMethod.GET)
+    @ApiOperation(value = "Gets the buildses instance associated with the given id.")
+    @WMAccessVisibility(value = AccessSpecifier.APP_ONLY)
+    public Page<Builds> findAssociatedBuildses(@PathVariable("id") BigInteger id, Pageable pageable) {
+        LOGGER.debug("Fetching all associated buildses");
+        return productsService.findAssociatedBuildses(id, pageable);
+    }
+
+    @RequestMapping(value = "/{id}/engineses", method = RequestMethod.GET)
+    @ApiOperation(value = "Gets the engineses instance associated with the given id.")
+    @WMAccessVisibility(value = AccessSpecifier.APP_ONLY)
+    public Page<Engines> findAssociatedEngineses(@PathVariable("id") BigInteger id, Pageable pageable) {
+        LOGGER.debug("Fetching all associated engineses");
+        return productsService.findAssociatedEngineses(id, pageable);
+    }
+
+    @RequestMapping(value = "/{id}/iopBuildAppses", method = RequestMethod.GET)
+    @ApiOperation(value = "Gets the iopBuildAppses instance associated with the given id.")
+    @WMAccessVisibility(value = AccessSpecifier.APP_ONLY)
+    public Page<IopBuildApps> findAssociatedIopBuildAppses(@PathVariable("id") BigInteger id, Pageable pageable) {
+        LOGGER.debug("Fetching all associated iopBuildAppses");
+        return productsService.findAssociatedIopBuildAppses(id, pageable);
+    }
+
+    @RequestMapping(value = "/{id}/iopEnginesDetailses", method = RequestMethod.GET)
+    @ApiOperation(value = "Gets the iopEnginesDetailses instance associated with the given id.")
+    @WMAccessVisibility(value = AccessSpecifier.APP_ONLY)
+    public Page<IopEnginesDetails> findAssociatedIopEnginesDetailses(@PathVariable("id") BigInteger id, Pageable pageable) {
+        LOGGER.debug("Fetching all associated iopEnginesDetailses");
+        return productsService.findAssociatedIopEnginesDetailses(id, pageable);
+    }
+
+    @RequestMapping(value = "/{id:.+}/releaseses", method = RequestMethod.GET)
+    @ApiOperation(value = "Gets the releaseses instance associated with the given id.")
+    public Page<Releases> findAssociatedReleaseses(@PathVariable("id") BigInteger id, Pageable pageable) {
+        LOGGER.debug("Fetching all associated releaseses");
+        return productsService.findAssociatedReleaseses(id, pageable);
+    }
+
+    @RequestMapping(value = "/{id:.+}/testcaseruns", method = RequestMethod.GET)
+    @ApiOperation(value = "Gets the testcaseruns instance associated with the given id.")
+    public Page<Testcaserun> findAssociatedTestcaseruns(@PathVariable("id") BigInteger id, Pageable pageable) {
+        LOGGER.debug("Fetching all associated testcaseruns");
+        return productsService.findAssociatedTestcaseruns(id, pageable);
+    }
+
+    @RequestMapping(value = "/{id:.+}/testcaseses", method = RequestMethod.GET)
+    @ApiOperation(value = "Gets the testcaseses instance associated with the given id.")
+    public Page<Testcases> findAssociatedTestcaseses(@PathVariable("id") BigInteger id, Pageable pageable) {
+        LOGGER.debug("Fetching all associated testcaseses");
+        return productsService.findAssociatedTestcaseses(id, pageable);
+    }
+
+    @RequestMapping(value = "/{id:.+}/testplans", method = RequestMethod.GET)
+    @ApiOperation(value = "Gets the testplans instance associated with the given id.")
+    public Page<Testplan> findAssociatedTestplans(@PathVariable("id") BigInteger id, Pageable pageable) {
+        LOGGER.debug("Fetching all associated testplans");
+        return productsService.findAssociatedTestplans(id, pageable);
     }
 
     /**

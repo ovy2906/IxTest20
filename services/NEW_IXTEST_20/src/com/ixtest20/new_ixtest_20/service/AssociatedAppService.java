@@ -16,6 +16,7 @@ import com.wavemaker.runtime.data.expression.QueryFilter;
 import com.wavemaker.runtime.file.model.Downloadable;
 
 import com.ixtest20.new_ixtest_20.AssociatedApp;
+import com.ixtest20.new_ixtest_20.Builds;
 
 /**
  * Service object for domain model class {@link AssociatedApp}.
@@ -126,6 +127,17 @@ public interface AssociatedAppService {
 	 */
 	long count(String query);
 
+    /*
+     * Returns the associated buildses for given AssociatedApp id.
+     *
+     * @param id value of id; value cannot be null
+     * @param pageable Details of the pagination information along with the sorting options. If null returns all matching records.
+     * @return Paginated list of associated Builds instances.
+     *
+     * @see Pageable
+     * @see Page
+     */
+    Page<Builds> findAssociatedBuildses(BigInteger id, Pageable pageable);
 
 }
 

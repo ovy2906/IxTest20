@@ -16,6 +16,7 @@ import com.wavemaker.runtime.data.expression.QueryFilter;
 import com.wavemaker.runtime.file.model.Downloadable;
 
 import com.ixtest20.new_ixtest_20.Bugtable;
+import com.ixtest20.new_ixtest_20.PBugtableRun;
 
 /**
  * Service object for domain model class {@link Bugtable}.
@@ -126,6 +127,17 @@ public interface BugtableService {
 	 */
 	long count(String query);
 
+    /*
+     * Returns the associated pbugtableRuns for given Bugtable id.
+     *
+     * @param bugid value of bugid; value cannot be null
+     * @param pageable Details of the pagination information along with the sorting options. If null returns all matching records.
+     * @return Paginated list of associated PBugtableRun instances.
+     *
+     * @see Pageable
+     * @see Page
+     */
+    Page<PBugtableRun> findAssociatedPbugtableRuns(BigInteger bugid, Pageable pageable);
 
 }
 

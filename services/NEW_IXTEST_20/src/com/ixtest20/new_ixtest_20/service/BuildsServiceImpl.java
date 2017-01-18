@@ -23,6 +23,10 @@ import com.wavemaker.runtime.data.expression.QueryFilter;
 import com.wavemaker.runtime.file.model.Downloadable;
 
 import com.ixtest20.new_ixtest_20.Builds;
+import com.ixtest20.new_ixtest_20.Engines;
+import com.ixtest20.new_ixtest_20.IopBuildApps;
+import com.ixtest20.new_ixtest_20.IopSuite;
+import com.ixtest20.new_ixtest_20.Testcaserun;
 
 
 /**
@@ -35,6 +39,21 @@ public class BuildsServiceImpl implements BuildsService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(BuildsServiceImpl.class);
 
+    @Autowired
+	@Qualifier("NEW_IXTEST_20.IopBuildAppsService")
+	private IopBuildAppsService iopBuildAppsService;
+
+    @Autowired
+	@Qualifier("NEW_IXTEST_20.TestcaserunService")
+	private TestcaserunService testcaserunService;
+
+    @Autowired
+	@Qualifier("NEW_IXTEST_20.EnginesService")
+	private EnginesService enginesService;
+
+    @Autowired
+	@Qualifier("NEW_IXTEST_20.IopSuiteService")
+	private IopSuiteService iopSuiteService;
 
     @Autowired
     @Qualifier("NEW_IXTEST_20.BuildsDao")
@@ -49,6 +68,37 @@ public class BuildsServiceImpl implements BuildsService {
 	public Builds create(Builds builds) {
         LOGGER.debug("Creating a new Builds with information: {}", builds);
         Builds buildsCreated = this.wmGenericDao.create(builds);
+        if(buildsCreated.getEngineses() != null) {
+            for(Engines enginese : buildsCreated.getEngineses()) {
+                enginese.setBuilds(buildsCreated);
+                LOGGER.debug("Creating a new child Engines with information: {}", enginese);
+                enginesService.create(enginese);
+            }
+        }
+
+        if(buildsCreated.getIopBuildAppses() != null) {
+            for(IopBuildApps iopBuildAppse : buildsCreated.getIopBuildAppses()) {
+                iopBuildAppse.setBuilds(buildsCreated);
+                LOGGER.debug("Creating a new child IopBuildApps with information: {}", iopBuildAppse);
+                iopBuildAppsService.create(iopBuildAppse);
+            }
+        }
+
+        if(buildsCreated.getIopSuites() != null) {
+            for(IopSuite iopSuite : buildsCreated.getIopSuites()) {
+                iopSuite.setBuilds(buildsCreated);
+                LOGGER.debug("Creating a new child IopSuite with information: {}", iopSuite);
+                iopSuiteService.create(iopSuite);
+            }
+        }
+
+        if(buildsCreated.getTestcaseruns() != null) {
+            for(Testcaserun testcaserun : buildsCreated.getTestcaseruns()) {
+                testcaserun.setBuilds(buildsCreated);
+                LOGGER.debug("Creating a new child Testcaserun with information: {}", testcaserun);
+                testcaserunService.create(testcaserun);
+            }
+        }
         return buildsCreated;
     }
 
@@ -123,7 +173,85 @@ public class BuildsServiceImpl implements BuildsService {
         return this.wmGenericDao.count(query);
     }
 
+    @Transactional(readOnly = true, value = "NEW_IXTEST_20TransactionManager")
+    @Override
+    public Page<Engines> findAssociatedEngineses(BigInteger buildid, Pageable pageable) {
+        LOGGER.debug("Fetching all associated engineses");
 
+        StringBuilder queryBuilder = new StringBuilder();
+        queryBuilder.append("builds.buildid = '" + buildid + "'");
+
+        return enginesService.findAll(queryBuilder.toString(), pageable);
+    }
+
+    @Transactional(readOnly = true, value = "NEW_IXTEST_20TransactionManager")
+    @Override
+    public Page<IopBuildApps> findAssociatedIopBuildAppses(BigInteger buildid, Pageable pageable) {
+        LOGGER.debug("Fetching all associated iopBuildAppses");
+
+        StringBuilder queryBuilder = new StringBuilder();
+        queryBuilder.append("builds.buildid = '" + buildid + "'");
+
+        return iopBuildAppsService.findAll(queryBuilder.toString(), pageable);
+    }
+
+    @Transactional(readOnly = true, value = "NEW_IXTEST_20TransactionManager")
+    @Override
+    public Page<IopSuite> findAssociatedIopSuites(BigInteger buildid, Pageable pageable) {
+        LOGGER.debug("Fetching all associated iopSuites");
+
+        StringBuilder queryBuilder = new StringBuilder();
+        queryBuilder.append("builds.buildid = '" + buildid + "'");
+
+        return iopSuiteService.findAll(queryBuilder.toString(), pageable);
+    }
+
+    @Transactional(readOnly = true, value = "NEW_IXTEST_20TransactionManager")
+    @Override
+    public Page<Testcaserun> findAssociatedTestcaseruns(BigInteger buildid, Pageable pageable) {
+        LOGGER.debug("Fetching all associated testcaseruns");
+
+        StringBuilder queryBuilder = new StringBuilder();
+        queryBuilder.append("builds.buildid = '" + buildid + "'");
+
+        return testcaserunService.findAll(queryBuilder.toString(), pageable);
+    }
+
+    /**
+	 * This setter method should only be used by unit tests
+	 *
+	 * @param service IopBuildAppsService instance
+	 */
+	protected void setIopBuildAppsService(IopBuildAppsService service) {
+        this.iopBuildAppsService = service;
+    }
+
+    /**
+	 * This setter method should only be used by unit tests
+	 *
+	 * @param service TestcaserunService instance
+	 */
+	protected void setTestcaserunService(TestcaserunService service) {
+        this.testcaserunService = service;
+    }
+
+    /**
+	 * This setter method should only be used by unit tests
+	 *
+	 * @param service EnginesService instance
+	 */
+	protected void setEnginesService(EnginesService service) {
+        this.enginesService = service;
+    }
+
+    /**
+	 * This setter method should only be used by unit tests
+	 *
+	 * @param service IopSuiteService instance
+	 */
+	protected void setIopSuiteService(IopSuiteService service) {
+        this.iopSuiteService = service;
+    }
 
 }
 

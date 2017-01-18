@@ -11,7 +11,10 @@ import java.util.Objects;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
@@ -25,6 +28,7 @@ public class IopSuite implements Serializable {
     private String iopSuiteName;
     private BigInteger totalTestCases;
     private BigInteger buildid;
+    private Builds builds;
 
     @Id
     @Column(name = "`IOP_SUITE_ID`", nullable = false, scale = 0, precision = 19)
@@ -63,6 +67,19 @@ public class IopSuite implements Serializable {
         this.buildid = buildid;
     }
 
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "`BUILDID`", referencedColumnName = "`BUILDID`", insertable = false, updatable = false)
+    public Builds getBuilds() {
+        return this.builds;
+    }
+
+    public void setBuilds(Builds builds) {
+        if(builds != null) {
+            this.buildid = builds.getBuildid();
+        }
+
+        this.builds = builds;
+    }
 
     @Override
     public boolean equals(Object o) {

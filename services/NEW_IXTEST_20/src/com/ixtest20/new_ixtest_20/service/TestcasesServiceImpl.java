@@ -22,6 +22,7 @@ import com.wavemaker.runtime.data.export.ExportType;
 import com.wavemaker.runtime.data.expression.QueryFilter;
 import com.wavemaker.runtime.file.model.Downloadable;
 
+import com.ixtest20.new_ixtest_20.Testcaserun;
 import com.ixtest20.new_ixtest_20.Testcases;
 
 
@@ -35,6 +36,9 @@ public class TestcasesServiceImpl implements TestcasesService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(TestcasesServiceImpl.class);
 
+    @Autowired
+	@Qualifier("NEW_IXTEST_20.TestcaserunService")
+	private TestcaserunService testcaserunService;
 
     @Autowired
     @Qualifier("NEW_IXTEST_20.TestcasesDao")
@@ -49,6 +53,13 @@ public class TestcasesServiceImpl implements TestcasesService {
 	public Testcases create(Testcases testcases) {
         LOGGER.debug("Creating a new Testcases with information: {}", testcases);
         Testcases testcasesCreated = this.wmGenericDao.create(testcases);
+        if(testcasesCreated.getTestcaseruns() != null) {
+            for(Testcaserun testcaserun : testcasesCreated.getTestcaseruns()) {
+                testcaserun.setTestcases(testcasesCreated);
+                LOGGER.debug("Creating a new child Testcaserun with information: {}", testcaserun);
+                testcaserunService.create(testcaserun);
+            }
+        }
         return testcasesCreated;
     }
 
@@ -123,7 +134,25 @@ public class TestcasesServiceImpl implements TestcasesService {
         return this.wmGenericDao.count(query);
     }
 
+    @Transactional(readOnly = true, value = "NEW_IXTEST_20TransactionManager")
+    @Override
+    public Page<Testcaserun> findAssociatedTestcaseruns(BigInteger testcaseid, Pageable pageable) {
+        LOGGER.debug("Fetching all associated testcaseruns");
 
+        StringBuilder queryBuilder = new StringBuilder();
+        queryBuilder.append("testcases.testcaseid = '" + testcaseid + "'");
+
+        return testcaserunService.findAll(queryBuilder.toString(), pageable);
+    }
+
+    /**
+	 * This setter method should only be used by unit tests
+	 *
+	 * @param service TestcaserunService instance
+	 */
+	protected void setTestcaserunService(TestcaserunService service) {
+        this.testcaserunService = service;
+    }
 
 }
 

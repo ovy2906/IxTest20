@@ -16,6 +16,10 @@ import com.wavemaker.runtime.data.expression.QueryFilter;
 import com.wavemaker.runtime.file.model.Downloadable;
 
 import com.ixtest20.new_ixtest_20.Builds;
+import com.ixtest20.new_ixtest_20.Engines;
+import com.ixtest20.new_ixtest_20.IopBuildApps;
+import com.ixtest20.new_ixtest_20.IopSuite;
+import com.ixtest20.new_ixtest_20.Testcaserun;
 
 /**
  * Service object for domain model class {@link Builds}.
@@ -126,6 +130,53 @@ public interface BuildsService {
 	 */
 	long count(String query);
 
+    /*
+     * Returns the associated engineses for given Builds id.
+     *
+     * @param buildid value of buildid; value cannot be null
+     * @param pageable Details of the pagination information along with the sorting options. If null returns all matching records.
+     * @return Paginated list of associated Engines instances.
+     *
+     * @see Pageable
+     * @see Page
+     */
+    Page<Engines> findAssociatedEngineses(BigInteger buildid, Pageable pageable);
+
+    /*
+     * Returns the associated iopBuildAppses for given Builds id.
+     *
+     * @param buildid value of buildid; value cannot be null
+     * @param pageable Details of the pagination information along with the sorting options. If null returns all matching records.
+     * @return Paginated list of associated IopBuildApps instances.
+     *
+     * @see Pageable
+     * @see Page
+     */
+    Page<IopBuildApps> findAssociatedIopBuildAppses(BigInteger buildid, Pageable pageable);
+
+    /*
+     * Returns the associated iopSuites for given Builds id.
+     *
+     * @param buildid value of buildid; value cannot be null
+     * @param pageable Details of the pagination information along with the sorting options. If null returns all matching records.
+     * @return Paginated list of associated IopSuite instances.
+     *
+     * @see Pageable
+     * @see Page
+     */
+    Page<IopSuite> findAssociatedIopSuites(BigInteger buildid, Pageable pageable);
+
+    /*
+     * Returns the associated testcaseruns for given Builds id.
+     *
+     * @param buildid value of buildid; value cannot be null
+     * @param pageable Details of the pagination information along with the sorting options. If null returns all matching records.
+     * @return Paginated list of associated Testcaserun instances.
+     *
+     * @see Pageable
+     * @see Page
+     */
+    Page<Testcaserun> findAssociatedTestcaseruns(BigInteger buildid, Pageable pageable);
 
 }
 

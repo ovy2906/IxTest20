@@ -23,6 +23,9 @@ import com.wavemaker.runtime.data.expression.QueryFilter;
 import com.wavemaker.runtime.file.model.Downloadable;
 
 import com.ixtest20.new_ixtest_20.Engines;
+import com.ixtest20.new_ixtest_20.IopEnginesDetails;
+import com.ixtest20.new_ixtest_20.Testcaserun;
+import com.ixtest20.new_ixtest_20.Testcases;
 
 
 /**
@@ -35,6 +38,17 @@ public class EnginesServiceImpl implements EnginesService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(EnginesServiceImpl.class);
 
+    @Autowired
+	@Qualifier("NEW_IXTEST_20.TestcasesService")
+	private TestcasesService testcasesService;
+
+    @Autowired
+	@Qualifier("NEW_IXTEST_20.IopEnginesDetailsService")
+	private IopEnginesDetailsService iopEnginesDetailsService;
+
+    @Autowired
+	@Qualifier("NEW_IXTEST_20.TestcaserunService")
+	private TestcaserunService testcaserunService;
 
     @Autowired
     @Qualifier("NEW_IXTEST_20.EnginesDao")
@@ -49,6 +63,29 @@ public class EnginesServiceImpl implements EnginesService {
 	public Engines create(Engines engines) {
         LOGGER.debug("Creating a new Engines with information: {}", engines);
         Engines enginesCreated = this.wmGenericDao.create(engines);
+        if(enginesCreated.getIopEnginesDetailses() != null) {
+            for(IopEnginesDetails iopEnginesDetailse : enginesCreated.getIopEnginesDetailses()) {
+                iopEnginesDetailse.setEngines(enginesCreated);
+                LOGGER.debug("Creating a new child IopEnginesDetails with information: {}", iopEnginesDetailse);
+                iopEnginesDetailsService.create(iopEnginesDetailse);
+            }
+        }
+
+        if(enginesCreated.getTestcaseruns() != null) {
+            for(Testcaserun testcaserun : enginesCreated.getTestcaseruns()) {
+                testcaserun.setEngines(enginesCreated);
+                LOGGER.debug("Creating a new child Testcaserun with information: {}", testcaserun);
+                testcaserunService.create(testcaserun);
+            }
+        }
+
+        if(enginesCreated.getTestcaseses() != null) {
+            for(Testcases testcasese : enginesCreated.getTestcaseses()) {
+                testcasese.setEngines(enginesCreated);
+                LOGGER.debug("Creating a new child Testcases with information: {}", testcasese);
+                testcasesService.create(testcasese);
+            }
+        }
         return enginesCreated;
     }
 
@@ -123,7 +160,65 @@ public class EnginesServiceImpl implements EnginesService {
         return this.wmGenericDao.count(query);
     }
 
+    @Transactional(readOnly = true, value = "NEW_IXTEST_20TransactionManager")
+    @Override
+    public Page<IopEnginesDetails> findAssociatedIopEnginesDetailses(BigInteger engineid, Pageable pageable) {
+        LOGGER.debug("Fetching all associated iopEnginesDetailses");
 
+        StringBuilder queryBuilder = new StringBuilder();
+        queryBuilder.append("engines.engineid = '" + engineid + "'");
+
+        return iopEnginesDetailsService.findAll(queryBuilder.toString(), pageable);
+    }
+
+    @Transactional(readOnly = true, value = "NEW_IXTEST_20TransactionManager")
+    @Override
+    public Page<Testcaserun> findAssociatedTestcaseruns(BigInteger engineid, Pageable pageable) {
+        LOGGER.debug("Fetching all associated testcaseruns");
+
+        StringBuilder queryBuilder = new StringBuilder();
+        queryBuilder.append("engines.engineid = '" + engineid + "'");
+
+        return testcaserunService.findAll(queryBuilder.toString(), pageable);
+    }
+
+    @Transactional(readOnly = true, value = "NEW_IXTEST_20TransactionManager")
+    @Override
+    public Page<Testcases> findAssociatedTestcaseses(BigInteger engineid, Pageable pageable) {
+        LOGGER.debug("Fetching all associated testcaseses");
+
+        StringBuilder queryBuilder = new StringBuilder();
+        queryBuilder.append("engines.engineid = '" + engineid + "'");
+
+        return testcasesService.findAll(queryBuilder.toString(), pageable);
+    }
+
+    /**
+	 * This setter method should only be used by unit tests
+	 *
+	 * @param service TestcasesService instance
+	 */
+	protected void setTestcasesService(TestcasesService service) {
+        this.testcasesService = service;
+    }
+
+    /**
+	 * This setter method should only be used by unit tests
+	 *
+	 * @param service IopEnginesDetailsService instance
+	 */
+	protected void setIopEnginesDetailsService(IopEnginesDetailsService service) {
+        this.iopEnginesDetailsService = service;
+    }
+
+    /**
+	 * This setter method should only be used by unit tests
+	 *
+	 * @param service TestcaserunService instance
+	 */
+	protected void setTestcaserunService(TestcaserunService service) {
+        this.testcaserunService = service;
+    }
 
 }
 

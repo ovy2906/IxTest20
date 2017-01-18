@@ -27,6 +27,7 @@ import com.wordnik.swagger.annotations.Api;
 import com.wordnik.swagger.annotations.ApiOperation;
 import com.wordnik.swagger.annotations.ApiParam;
 import com.ixtest20.new_ixtest_20.Chassis;
+import com.ixtest20.new_ixtest_20.Network;
 import com.ixtest20.new_ixtest_20.service.ChassisService;
 
 /**
@@ -117,6 +118,14 @@ public class ChassisController {
     public Long countChasses(@ApiParam("conditions to filter the results") @RequestParam(value = "q", required = false) String query) {
         LOGGER.debug("counting Chasses");
         return chassisService.count(query);
+    }
+
+    @RequestMapping(value = "/{id}/networks", method = RequestMethod.GET)
+    @ApiOperation(value = "Gets the networks instance associated with the given id.")
+    @WMAccessVisibility(value = AccessSpecifier.APP_ONLY)
+    public Page<Network> findAssociatedNetworks(@PathVariable("id") BigInteger id, Pageable pageable) {
+        LOGGER.debug("Fetching all associated networks");
+        return chassisService.findAssociatedNetworks(id, pageable);
     }
 
     /**

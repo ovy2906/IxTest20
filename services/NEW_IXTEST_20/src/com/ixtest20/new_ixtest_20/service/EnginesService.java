@@ -16,6 +16,9 @@ import com.wavemaker.runtime.data.expression.QueryFilter;
 import com.wavemaker.runtime.file.model.Downloadable;
 
 import com.ixtest20.new_ixtest_20.Engines;
+import com.ixtest20.new_ixtest_20.IopEnginesDetails;
+import com.ixtest20.new_ixtest_20.Testcaserun;
+import com.ixtest20.new_ixtest_20.Testcases;
 
 /**
  * Service object for domain model class {@link Engines}.
@@ -126,6 +129,41 @@ public interface EnginesService {
 	 */
 	long count(String query);
 
+    /*
+     * Returns the associated iopEnginesDetailses for given Engines id.
+     *
+     * @param engineid value of engineid; value cannot be null
+     * @param pageable Details of the pagination information along with the sorting options. If null returns all matching records.
+     * @return Paginated list of associated IopEnginesDetails instances.
+     *
+     * @see Pageable
+     * @see Page
+     */
+    Page<IopEnginesDetails> findAssociatedIopEnginesDetailses(BigInteger engineid, Pageable pageable);
+
+    /*
+     * Returns the associated testcaseruns for given Engines id.
+     *
+     * @param engineid value of engineid; value cannot be null
+     * @param pageable Details of the pagination information along with the sorting options. If null returns all matching records.
+     * @return Paginated list of associated Testcaserun instances.
+     *
+     * @see Pageable
+     * @see Page
+     */
+    Page<Testcaserun> findAssociatedTestcaseruns(BigInteger engineid, Pageable pageable);
+
+    /*
+     * Returns the associated testcaseses for given Engines id.
+     *
+     * @param engineid value of engineid; value cannot be null
+     * @param pageable Details of the pagination information along with the sorting options. If null returns all matching records.
+     * @return Paginated list of associated Testcases instances.
+     *
+     * @see Pageable
+     * @see Page
+     */
+    Page<Testcases> findAssociatedTestcaseses(BigInteger engineid, Pageable pageable);
 
 }
 

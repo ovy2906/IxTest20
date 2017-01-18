@@ -16,6 +16,7 @@ import com.wavemaker.runtime.data.expression.QueryFilter;
 import com.wavemaker.runtime.file.model.Downloadable;
 
 import com.ixtest20.new_ixtest_20.Dut;
+import com.ixtest20.new_ixtest_20.PDutRun;
 
 /**
  * Service object for domain model class {@link Dut}.
@@ -126,6 +127,17 @@ public interface DutService {
 	 */
 	long count(String query);
 
+    /*
+     * Returns the associated pdutRuns for given Dut id.
+     *
+     * @param dutid value of dutid; value cannot be null
+     * @param pageable Details of the pagination information along with the sorting options. If null returns all matching records.
+     * @return Paginated list of associated PDutRun instances.
+     *
+     * @see Pageable
+     * @see Page
+     */
+    Page<PDutRun> findAssociatedPdutRuns(BigInteger dutid, Pageable pageable);
 
 }
 

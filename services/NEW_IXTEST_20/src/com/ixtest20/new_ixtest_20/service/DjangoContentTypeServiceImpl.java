@@ -22,6 +22,7 @@ import com.wavemaker.runtime.data.export.ExportType;
 import com.wavemaker.runtime.data.expression.QueryFilter;
 import com.wavemaker.runtime.file.model.Downloadable;
 
+import com.ixtest20.new_ixtest_20.AuthPermission;
 import com.ixtest20.new_ixtest_20.DjangoContentType;
 
 
@@ -35,6 +36,9 @@ public class DjangoContentTypeServiceImpl implements DjangoContentTypeService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(DjangoContentTypeServiceImpl.class);
 
+    @Autowired
+	@Qualifier("NEW_IXTEST_20.AuthPermissionService")
+	private AuthPermissionService authPermissionService;
 
     @Autowired
     @Qualifier("NEW_IXTEST_20.DjangoContentTypeDao")
@@ -49,6 +53,13 @@ public class DjangoContentTypeServiceImpl implements DjangoContentTypeService {
 	public DjangoContentType create(DjangoContentType djangoContentType) {
         LOGGER.debug("Creating a new DjangoContentType with information: {}", djangoContentType);
         DjangoContentType djangoContentTypeCreated = this.wmGenericDao.create(djangoContentType);
+        if(djangoContentTypeCreated.getAuthPermissions() != null) {
+            for(AuthPermission authPermission : djangoContentTypeCreated.getAuthPermissions()) {
+                authPermission.setDjangoContentType(djangoContentTypeCreated);
+                LOGGER.debug("Creating a new child AuthPermission with information: {}", authPermission);
+                authPermissionService.create(authPermission);
+            }
+        }
         return djangoContentTypeCreated;
     }
 
@@ -123,7 +134,25 @@ public class DjangoContentTypeServiceImpl implements DjangoContentTypeService {
         return this.wmGenericDao.count(query);
     }
 
+    @Transactional(readOnly = true, value = "NEW_IXTEST_20TransactionManager")
+    @Override
+    public Page<AuthPermission> findAssociatedAuthPermissions(BigInteger id, Pageable pageable) {
+        LOGGER.debug("Fetching all associated authPermissions");
 
+        StringBuilder queryBuilder = new StringBuilder();
+        queryBuilder.append("djangoContentType.id = '" + id + "'");
+
+        return authPermissionService.findAll(queryBuilder.toString(), pageable);
+    }
+
+    /**
+	 * This setter method should only be used by unit tests
+	 *
+	 * @param service AuthPermissionService instance
+	 */
+	protected void setAuthPermissionService(AuthPermissionService service) {
+        this.authPermissionService = service;
+    }
 
 }
 

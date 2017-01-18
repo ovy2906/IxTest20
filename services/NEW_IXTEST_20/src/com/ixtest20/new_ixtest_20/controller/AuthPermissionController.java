@@ -26,7 +26,9 @@ import com.wavemaker.tools.api.core.models.AccessSpecifier;
 import com.wordnik.swagger.annotations.Api;
 import com.wordnik.swagger.annotations.ApiOperation;
 import com.wordnik.swagger.annotations.ApiParam;
+import com.ixtest20.new_ixtest_20.AuthGroupPermissions;
 import com.ixtest20.new_ixtest_20.AuthPermission;
+import com.ixtest20.new_ixtest_20.AuthUserUserPermissions;
 import com.ixtest20.new_ixtest_20.service.AuthPermissionService;
 
 /**
@@ -117,6 +119,22 @@ public class AuthPermissionController {
     public Long countAuthPermissions(@ApiParam("conditions to filter the results") @RequestParam(value = "q", required = false) String query) {
         LOGGER.debug("counting AuthPermissions");
         return authPermissionService.count(query);
+    }
+
+    @RequestMapping(value = "/{id}/authGroupPermissionses", method = RequestMethod.GET)
+    @ApiOperation(value = "Gets the authGroupPermissionses instance associated with the given id.")
+    @WMAccessVisibility(value = AccessSpecifier.APP_ONLY)
+    public Page<AuthGroupPermissions> findAssociatedAuthGroupPermissionses(@PathVariable("id") BigInteger id, Pageable pageable) {
+        LOGGER.debug("Fetching all associated authGroupPermissionses");
+        return authPermissionService.findAssociatedAuthGroupPermissionses(id, pageable);
+    }
+
+    @RequestMapping(value = "/{id}/authUserUserPermissionses", method = RequestMethod.GET)
+    @ApiOperation(value = "Gets the authUserUserPermissionses instance associated with the given id.")
+    @WMAccessVisibility(value = AccessSpecifier.APP_ONLY)
+    public Page<AuthUserUserPermissions> findAssociatedAuthUserUserPermissionses(@PathVariable("id") BigInteger id, Pageable pageable) {
+        LOGGER.debug("Fetching all associated authUserUserPermissionses");
+        return authPermissionService.findAssociatedAuthUserUserPermissionses(id, pageable);
     }
 
     /**

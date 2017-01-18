@@ -11,7 +11,10 @@ import java.util.Objects;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
@@ -26,6 +29,8 @@ public class IopBuildApps implements Serializable {
     private BigInteger productid;
     private String releasename;
     private String buildnumber;
+    private Products products;
+    private Builds builds;
 
     @Id
     @Column(name = "`IOP_BUILD_APPS_ID`", nullable = false, scale = 0, precision = 19)
@@ -73,6 +78,33 @@ public class IopBuildApps implements Serializable {
         this.buildnumber = buildnumber;
     }
 
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "`PRODUCTID`", referencedColumnName = "`PRODUCTID`", insertable = false, updatable = false)
+    public Products getProducts() {
+        return this.products;
+    }
+
+    public void setProducts(Products products) {
+        if(products != null) {
+            this.productid = products.getProductid();
+        }
+
+        this.products = products;
+    }
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "`BUILDID`", referencedColumnName = "`BUILDID`", insertable = false, updatable = false)
+    public Builds getBuilds() {
+        return this.builds;
+    }
+
+    public void setBuilds(Builds builds) {
+        if(builds != null) {
+            this.buildid = builds.getBuildid();
+        }
+
+        this.builds = builds;
+    }
 
     @Override
     public boolean equals(Object o) {

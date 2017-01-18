@@ -21,7 +21,7 @@
       "name" : "ID",
       "nullable" : false,
       "oldName" : "ID",
-      "partOfAnyRelation" : false,
+      "partOfAnyRelation" : true,
       "partOfForeignKey" : false,
       "partOfPrimaryKey" : true,
       "partOfUniqueKey" : true,
@@ -35,7 +35,7 @@
         "type" : "user-defined",
         "insertable" : true,
         "updatable" : true,
-        "defaultValue" : null
+        "defaultValue" : ""
       },
       "fieldName" : "name",
       "foreignKey" : false,
@@ -44,7 +44,7 @@
       "javaType" : "string",
       "length" : 128,
       "name" : "NAME",
-      "nullable" : true,
+      "nullable" : false,
       "oldName" : "NAME",
       "partOfAnyRelation" : false,
       "partOfForeignKey" : false,
@@ -60,7 +60,7 @@
         "type" : "user-defined",
         "insertable" : true,
         "updatable" : true,
-        "defaultValue" : null
+        "defaultValue" : ""
       },
       "fieldName" : "version",
       "foreignKey" : false,
@@ -69,7 +69,7 @@
       "javaType" : "string",
       "length" : 128,
       "name" : "VERSION",
-      "nullable" : true,
+      "nullable" : false,
       "oldName" : "VERSION",
       "partOfAnyRelation" : false,
       "partOfForeignKey" : false,
@@ -96,7 +96,24 @@
       "name" : "PRIMARY",
       "virtual" : false
     },
-    "relations" : [ ],
+    "relations" : [ {
+      "cardinality" : "OneToMany",
+      "columnsUniqueKey" : false,
+      "composite" : false,
+      "fieldName" : "buildses",
+      "mappings" : [ {
+        "sourceColumn" : "ID",
+        "targetColumn" : "SERVEREXPECTED"
+      } ],
+      "name" : "FK_BUILDS_TO_ASSOCIATED_lh8Yf",
+      "primary" : false,
+      "selfRelation" : false,
+      "sourceColumnsNotUniqueKey" : true,
+      "sourceTable" : "ASSOCIATED_APP",
+      "targetColumnsUniqueKey" : false,
+      "targetTable" : "BUILDS",
+      "virtual" : false
+    } ],
     "schema" : null,
     "type" : "TABLE"
   }, {
@@ -117,7 +134,7 @@
       "name" : "ID",
       "nullable" : false,
       "oldName" : "ID",
-      "partOfAnyRelation" : false,
+      "partOfAnyRelation" : true,
       "partOfForeignKey" : false,
       "partOfPrimaryKey" : true,
       "partOfUniqueKey" : true,
@@ -131,7 +148,7 @@
         "type" : "user-defined",
         "insertable" : true,
         "updatable" : true,
-        "defaultValue" : null
+        "defaultValue" : ""
       },
       "fieldName" : "name",
       "foreignKey" : false,
@@ -140,7 +157,7 @@
       "javaType" : "string",
       "length" : 80,
       "name" : "NAME",
-      "nullable" : true,
+      "nullable" : false,
       "oldName" : "NAME",
       "partOfAnyRelation" : false,
       "partOfForeignKey" : false,
@@ -167,7 +184,41 @@
       "name" : "PRIMARY",
       "virtual" : false
     },
-    "relations" : [ ],
+    "relations" : [ {
+      "cardinality" : "OneToMany",
+      "columnsUniqueKey" : false,
+      "composite" : false,
+      "fieldName" : "authGroupPermissionses",
+      "mappings" : [ {
+        "sourceColumn" : "ID",
+        "targetColumn" : "GROUP_ID"
+      } ],
+      "name" : "FK_AUTH_GROUP_PERMISSION84pJi",
+      "primary" : false,
+      "selfRelation" : false,
+      "sourceColumnsNotUniqueKey" : true,
+      "sourceTable" : "AUTH_GROUP",
+      "targetColumnsUniqueKey" : false,
+      "targetTable" : "AUTH_GROUP_PERMISSIONS",
+      "virtual" : false
+    }, {
+      "cardinality" : "OneToMany",
+      "columnsUniqueKey" : false,
+      "composite" : false,
+      "fieldName" : "authUserGroupses",
+      "mappings" : [ {
+        "sourceColumn" : "ID",
+        "targetColumn" : "GROUP_ID"
+      } ],
+      "name" : "FK_AUTH_USER_GROUPS_TO_AqK3pV",
+      "primary" : false,
+      "selfRelation" : false,
+      "sourceColumnsNotUniqueKey" : true,
+      "sourceTable" : "AUTH_GROUP",
+      "targetColumnsUniqueKey" : false,
+      "targetTable" : "AUTH_USER_GROUPS",
+      "virtual" : false
+    } ],
     "schema" : null,
     "type" : "TABLE"
   }, {
@@ -202,19 +253,19 @@
         "type" : "user-defined",
         "insertable" : true,
         "updatable" : true,
-        "defaultValue" : null
+        "defaultValue" : ""
       },
       "fieldName" : "groupId",
-      "foreignKey" : false,
+      "foreignKey" : true,
       "generatorType" : "assigned",
       "generatorValue" : null,
       "javaType" : "big_integer",
       "length" : 0,
       "name" : "GROUP_ID",
-      "nullable" : true,
+      "nullable" : false,
       "oldName" : "GROUP_ID",
-      "partOfAnyRelation" : false,
-      "partOfForeignKey" : false,
+      "partOfAnyRelation" : true,
+      "partOfForeignKey" : true,
       "partOfPrimaryKey" : false,
       "partOfUniqueKey" : false,
       "precision" : 19,
@@ -230,16 +281,16 @@
         "defaultValue" : null
       },
       "fieldName" : "permissionId",
-      "foreignKey" : false,
+      "foreignKey" : true,
       "generatorType" : "assigned",
       "generatorValue" : null,
       "javaType" : "big_integer",
       "length" : 0,
       "name" : "PERMISSION_ID",
-      "nullable" : true,
+      "nullable" : false,
       "oldName" : "PERMISSION_ID",
-      "partOfAnyRelation" : false,
-      "partOfForeignKey" : false,
+      "partOfAnyRelation" : true,
+      "partOfForeignKey" : true,
       "partOfPrimaryKey" : false,
       "partOfUniqueKey" : false,
       "precision" : 19,
@@ -263,7 +314,41 @@
       "name" : "PRIMARY",
       "virtual" : false
     },
-    "relations" : [ ],
+    "relations" : [ {
+      "cardinality" : "ManyToOne",
+      "columnsUniqueKey" : false,
+      "composite" : false,
+      "fieldName" : "authGroup",
+      "mappings" : [ {
+        "sourceColumn" : "GROUP_ID",
+        "targetColumn" : "ID"
+      } ],
+      "name" : "FK_AUTH_GROUP_PERMISSION84pJi",
+      "primary" : true,
+      "selfRelation" : false,
+      "sourceColumnsNotUniqueKey" : true,
+      "sourceTable" : "AUTH_GROUP_PERMISSIONS",
+      "targetColumnsUniqueKey" : false,
+      "targetTable" : "AUTH_GROUP",
+      "virtual" : false
+    }, {
+      "cardinality" : "ManyToOne",
+      "columnsUniqueKey" : false,
+      "composite" : false,
+      "fieldName" : "authPermission",
+      "mappings" : [ {
+        "sourceColumn" : "PERMISSION_ID",
+        "targetColumn" : "ID"
+      } ],
+      "name" : "FK_AUTH_GROUP_PERMISSION4FsBy",
+      "primary" : true,
+      "selfRelation" : false,
+      "sourceColumnsNotUniqueKey" : true,
+      "sourceTable" : "AUTH_GROUP_PERMISSIONS",
+      "targetColumnsUniqueKey" : false,
+      "targetTable" : "AUTH_PERMISSION",
+      "virtual" : false
+    } ],
     "schema" : null,
     "type" : "TABLE"
   }, {
@@ -284,7 +369,7 @@
       "name" : "ID",
       "nullable" : false,
       "oldName" : "ID",
-      "partOfAnyRelation" : false,
+      "partOfAnyRelation" : true,
       "partOfForeignKey" : false,
       "partOfPrimaryKey" : true,
       "partOfUniqueKey" : true,
@@ -307,7 +392,7 @@
       "javaType" : "string",
       "length" : 50,
       "name" : "NAME",
-      "nullable" : true,
+      "nullable" : false,
       "oldName" : "NAME",
       "partOfAnyRelation" : false,
       "partOfForeignKey" : false,
@@ -326,7 +411,7 @@
         "defaultValue" : null
       },
       "fieldName" : "contentTypeId",
-      "foreignKey" : false,
+      "foreignKey" : true,
       "generatorType" : "assigned",
       "generatorValue" : null,
       "javaType" : "big_integer",
@@ -334,8 +419,8 @@
       "name" : "CONTENT_TYPE_ID",
       "nullable" : true,
       "oldName" : "CONTENT_TYPE_ID",
-      "partOfAnyRelation" : false,
-      "partOfForeignKey" : false,
+      "partOfAnyRelation" : true,
+      "partOfForeignKey" : true,
       "partOfPrimaryKey" : false,
       "partOfUniqueKey" : false,
       "precision" : 19,
@@ -384,7 +469,58 @@
       "name" : "PRIMARY",
       "virtual" : false
     },
-    "relations" : [ ],
+    "relations" : [ {
+      "cardinality" : "ManyToOne",
+      "columnsUniqueKey" : false,
+      "composite" : false,
+      "fieldName" : "djangoContentType",
+      "mappings" : [ {
+        "sourceColumn" : "CONTENT_TYPE_ID",
+        "targetColumn" : "ID"
+      } ],
+      "name" : "FK_AUTH_PERMISSION_TO_DJI0Ti1",
+      "primary" : true,
+      "selfRelation" : false,
+      "sourceColumnsNotUniqueKey" : true,
+      "sourceTable" : "AUTH_PERMISSION",
+      "targetColumnsUniqueKey" : false,
+      "targetTable" : "DJANGO_CONTENT_TYPE",
+      "virtual" : false
+    }, {
+      "cardinality" : "OneToMany",
+      "columnsUniqueKey" : false,
+      "composite" : false,
+      "fieldName" : "authGroupPermissionses",
+      "mappings" : [ {
+        "sourceColumn" : "ID",
+        "targetColumn" : "PERMISSION_ID"
+      } ],
+      "name" : "FK_AUTH_GROUP_PERMISSION4FsBy",
+      "primary" : false,
+      "selfRelation" : false,
+      "sourceColumnsNotUniqueKey" : true,
+      "sourceTable" : "AUTH_PERMISSION",
+      "targetColumnsUniqueKey" : false,
+      "targetTable" : "AUTH_GROUP_PERMISSIONS",
+      "virtual" : false
+    }, {
+      "cardinality" : "OneToMany",
+      "columnsUniqueKey" : false,
+      "composite" : false,
+      "fieldName" : "authUserUserPermissionses",
+      "mappings" : [ {
+        "sourceColumn" : "ID",
+        "targetColumn" : "PERMISSION_ID"
+      } ],
+      "name" : "FK_AUTH_USER_USER_PERMIS8tUoo",
+      "primary" : false,
+      "selfRelation" : false,
+      "sourceColumnsNotUniqueKey" : true,
+      "sourceTable" : "AUTH_PERMISSION",
+      "targetColumnsUniqueKey" : false,
+      "targetTable" : "AUTH_USER_USER_PERMISSIONS",
+      "virtual" : false
+    } ],
     "schema" : null,
     "type" : "TABLE"
   }, {
@@ -405,7 +541,7 @@
       "name" : "ID",
       "nullable" : false,
       "oldName" : "ID",
-      "partOfAnyRelation" : false,
+      "partOfAnyRelation" : true,
       "partOfForeignKey" : false,
       "partOfPrimaryKey" : true,
       "partOfUniqueKey" : true,
@@ -680,7 +816,41 @@
       "name" : "PRIMARY",
       "virtual" : false
     },
-    "relations" : [ ],
+    "relations" : [ {
+      "cardinality" : "OneToMany",
+      "columnsUniqueKey" : false,
+      "composite" : false,
+      "fieldName" : "authUserGroupses",
+      "mappings" : [ {
+        "sourceColumn" : "ID",
+        "targetColumn" : "USER_ID"
+      } ],
+      "name" : "FK_AUTH_USER_GROUPS_TO_AOsGHF",
+      "primary" : false,
+      "selfRelation" : false,
+      "sourceColumnsNotUniqueKey" : true,
+      "sourceTable" : "AUTH_USER",
+      "targetColumnsUniqueKey" : false,
+      "targetTable" : "AUTH_USER_GROUPS",
+      "virtual" : false
+    }, {
+      "cardinality" : "OneToMany",
+      "columnsUniqueKey" : false,
+      "composite" : false,
+      "fieldName" : "authUserUserPermissionses",
+      "mappings" : [ {
+        "sourceColumn" : "ID",
+        "targetColumn" : "USER_ID"
+      } ],
+      "name" : "FK_AUTH_USER_USER_PERMISYG7Hx",
+      "primary" : false,
+      "selfRelation" : false,
+      "sourceColumnsNotUniqueKey" : true,
+      "sourceTable" : "AUTH_USER",
+      "targetColumnsUniqueKey" : false,
+      "targetTable" : "AUTH_USER_USER_PERMISSIONS",
+      "virtual" : false
+    } ],
     "schema" : null,
     "type" : "TABLE"
   }, {
@@ -718,7 +888,7 @@
         "defaultValue" : null
       },
       "fieldName" : "userId",
-      "foreignKey" : false,
+      "foreignKey" : true,
       "generatorType" : "assigned",
       "generatorValue" : null,
       "javaType" : "big_integer",
@@ -726,8 +896,8 @@
       "name" : "USER_ID",
       "nullable" : true,
       "oldName" : "USER_ID",
-      "partOfAnyRelation" : false,
-      "partOfForeignKey" : false,
+      "partOfAnyRelation" : true,
+      "partOfForeignKey" : true,
       "partOfPrimaryKey" : false,
       "partOfUniqueKey" : false,
       "precision" : 19,
@@ -743,7 +913,7 @@
         "defaultValue" : null
       },
       "fieldName" : "groupId",
-      "foreignKey" : false,
+      "foreignKey" : true,
       "generatorType" : "assigned",
       "generatorValue" : null,
       "javaType" : "big_integer",
@@ -751,8 +921,8 @@
       "name" : "GROUP_ID",
       "nullable" : true,
       "oldName" : "GROUP_ID",
-      "partOfAnyRelation" : false,
-      "partOfForeignKey" : false,
+      "partOfAnyRelation" : true,
+      "partOfForeignKey" : true,
       "partOfPrimaryKey" : false,
       "partOfUniqueKey" : false,
       "precision" : 19,
@@ -776,7 +946,41 @@
       "name" : "PRIMARY",
       "virtual" : false
     },
-    "relations" : [ ],
+    "relations" : [ {
+      "cardinality" : "ManyToOne",
+      "columnsUniqueKey" : false,
+      "composite" : false,
+      "fieldName" : "authUser",
+      "mappings" : [ {
+        "sourceColumn" : "USER_ID",
+        "targetColumn" : "ID"
+      } ],
+      "name" : "FK_AUTH_USER_GROUPS_TO_AOsGHF",
+      "primary" : true,
+      "selfRelation" : false,
+      "sourceColumnsNotUniqueKey" : true,
+      "sourceTable" : "AUTH_USER_GROUPS",
+      "targetColumnsUniqueKey" : false,
+      "targetTable" : "AUTH_USER",
+      "virtual" : false
+    }, {
+      "cardinality" : "ManyToOne",
+      "columnsUniqueKey" : false,
+      "composite" : false,
+      "fieldName" : "authGroup",
+      "mappings" : [ {
+        "sourceColumn" : "GROUP_ID",
+        "targetColumn" : "ID"
+      } ],
+      "name" : "FK_AUTH_USER_GROUPS_TO_AqK3pV",
+      "primary" : true,
+      "selfRelation" : false,
+      "sourceColumnsNotUniqueKey" : true,
+      "sourceTable" : "AUTH_USER_GROUPS",
+      "targetColumnsUniqueKey" : false,
+      "targetTable" : "AUTH_GROUP",
+      "virtual" : false
+    } ],
     "schema" : null,
     "type" : "TABLE"
   }, {
@@ -814,7 +1018,7 @@
         "defaultValue" : null
       },
       "fieldName" : "userId",
-      "foreignKey" : false,
+      "foreignKey" : true,
       "generatorType" : "assigned",
       "generatorValue" : null,
       "javaType" : "big_integer",
@@ -822,8 +1026,8 @@
       "name" : "USER_ID",
       "nullable" : true,
       "oldName" : "USER_ID",
-      "partOfAnyRelation" : false,
-      "partOfForeignKey" : false,
+      "partOfAnyRelation" : true,
+      "partOfForeignKey" : true,
       "partOfPrimaryKey" : false,
       "partOfUniqueKey" : false,
       "precision" : 19,
@@ -836,19 +1040,19 @@
         "type" : "user-defined",
         "insertable" : true,
         "updatable" : true,
-        "defaultValue" : null
+        "defaultValue" : ""
       },
       "fieldName" : "permissionId",
-      "foreignKey" : false,
+      "foreignKey" : true,
       "generatorType" : "assigned",
       "generatorValue" : null,
       "javaType" : "big_integer",
       "length" : 0,
       "name" : "PERMISSION_ID",
-      "nullable" : true,
+      "nullable" : false,
       "oldName" : "PERMISSION_ID",
-      "partOfAnyRelation" : false,
-      "partOfForeignKey" : false,
+      "partOfAnyRelation" : true,
+      "partOfForeignKey" : true,
       "partOfPrimaryKey" : false,
       "partOfUniqueKey" : false,
       "precision" : 19,
@@ -872,7 +1076,41 @@
       "name" : "PRIMARY",
       "virtual" : false
     },
-    "relations" : [ ],
+    "relations" : [ {
+      "cardinality" : "ManyToOne",
+      "columnsUniqueKey" : false,
+      "composite" : false,
+      "fieldName" : "authUser",
+      "mappings" : [ {
+        "sourceColumn" : "USER_ID",
+        "targetColumn" : "ID"
+      } ],
+      "name" : "FK_AUTH_USER_USER_PERMISYG7Hx",
+      "primary" : true,
+      "selfRelation" : false,
+      "sourceColumnsNotUniqueKey" : true,
+      "sourceTable" : "AUTH_USER_USER_PERMISSIONS",
+      "targetColumnsUniqueKey" : false,
+      "targetTable" : "AUTH_USER",
+      "virtual" : false
+    }, {
+      "cardinality" : "ManyToOne",
+      "columnsUniqueKey" : false,
+      "composite" : false,
+      "fieldName" : "authPermission",
+      "mappings" : [ {
+        "sourceColumn" : "PERMISSION_ID",
+        "targetColumn" : "ID"
+      } ],
+      "name" : "FK_AUTH_USER_USER_PERMIS8tUoo",
+      "primary" : true,
+      "selfRelation" : false,
+      "sourceColumnsNotUniqueKey" : true,
+      "sourceTable" : "AUTH_USER_USER_PERMISSIONS",
+      "targetColumnsUniqueKey" : false,
+      "targetTable" : "AUTH_PERMISSION",
+      "virtual" : false
+    } ],
     "schema" : null,
     "type" : "TABLE"
   }, {
@@ -964,7 +1202,7 @@
       "name" : "BUGID",
       "nullable" : false,
       "oldName" : "BUGID",
-      "partOfAnyRelation" : false,
+      "partOfAnyRelation" : true,
       "partOfForeignKey" : false,
       "partOfPrimaryKey" : true,
       "partOfUniqueKey" : true,
@@ -1089,7 +1327,24 @@
       "name" : "PRIMARY",
       "virtual" : false
     },
-    "relations" : [ ],
+    "relations" : [ {
+      "cardinality" : "OneToMany",
+      "columnsUniqueKey" : false,
+      "composite" : false,
+      "fieldName" : "pbugtableRuns",
+      "mappings" : [ {
+        "sourceColumn" : "BUGID",
+        "targetColumn" : "BUGID"
+      } ],
+      "name" : "FK_P_BUGTABLE_RUN_TO_BUGmYfvx",
+      "primary" : false,
+      "selfRelation" : false,
+      "sourceColumnsNotUniqueKey" : true,
+      "sourceTable" : "BUGTABLE",
+      "targetColumnsUniqueKey" : false,
+      "targetTable" : "P_BUGTABLE_RUN",
+      "virtual" : false
+    } ],
     "schema" : null,
     "type" : "TABLE"
   }, {
@@ -1110,7 +1365,7 @@
       "name" : "BUILDID",
       "nullable" : false,
       "oldName" : "BUILDID",
-      "partOfAnyRelation" : false,
+      "partOfAnyRelation" : true,
       "partOfForeignKey" : false,
       "partOfPrimaryKey" : true,
       "partOfUniqueKey" : true,
@@ -1177,7 +1432,7 @@
         "defaultValue" : null
       },
       "fieldName" : "productid",
-      "foreignKey" : false,
+      "foreignKey" : true,
       "generatorType" : "assigned",
       "generatorValue" : null,
       "javaType" : "big_integer",
@@ -1185,8 +1440,8 @@
       "name" : "PRODUCTID",
       "nullable" : true,
       "oldName" : "PRODUCTID",
-      "partOfAnyRelation" : false,
-      "partOfForeignKey" : false,
+      "partOfAnyRelation" : true,
+      "partOfForeignKey" : true,
       "partOfPrimaryKey" : false,
       "partOfUniqueKey" : false,
       "precision" : 19,
@@ -1202,7 +1457,7 @@
         "defaultValue" : null
       },
       "fieldName" : "serverexpected",
-      "foreignKey" : false,
+      "foreignKey" : true,
       "generatorType" : "assigned",
       "generatorValue" : null,
       "javaType" : "big_integer",
@@ -1210,8 +1465,8 @@
       "name" : "SERVEREXPECTED",
       "nullable" : true,
       "oldName" : "SERVEREXPECTED",
-      "partOfAnyRelation" : false,
-      "partOfForeignKey" : false,
+      "partOfAnyRelation" : true,
+      "partOfForeignKey" : true,
       "partOfPrimaryKey" : false,
       "partOfUniqueKey" : false,
       "precision" : 19,
@@ -1335,7 +1590,109 @@
       "name" : "PRIMARY",
       "virtual" : false
     },
-    "relations" : [ ],
+    "relations" : [ {
+      "cardinality" : "ManyToOne",
+      "columnsUniqueKey" : false,
+      "composite" : false,
+      "fieldName" : "products",
+      "mappings" : [ {
+        "sourceColumn" : "PRODUCTID",
+        "targetColumn" : "PRODUCTID"
+      } ],
+      "name" : "FK_BUILDS_TO_PRODUCTS_PR3Gv9U",
+      "primary" : true,
+      "selfRelation" : false,
+      "sourceColumnsNotUniqueKey" : true,
+      "sourceTable" : "BUILDS",
+      "targetColumnsUniqueKey" : false,
+      "targetTable" : "PRODUCTS",
+      "virtual" : false
+    }, {
+      "cardinality" : "ManyToOne",
+      "columnsUniqueKey" : false,
+      "composite" : false,
+      "fieldName" : "associatedApp",
+      "mappings" : [ {
+        "sourceColumn" : "SERVEREXPECTED",
+        "targetColumn" : "ID"
+      } ],
+      "name" : "FK_BUILDS_TO_ASSOCIATED_lh8Yf",
+      "primary" : true,
+      "selfRelation" : false,
+      "sourceColumnsNotUniqueKey" : true,
+      "sourceTable" : "BUILDS",
+      "targetColumnsUniqueKey" : false,
+      "targetTable" : "ASSOCIATED_APP",
+      "virtual" : false
+    }, {
+      "cardinality" : "OneToMany",
+      "columnsUniqueKey" : false,
+      "composite" : false,
+      "fieldName" : "engineses",
+      "mappings" : [ {
+        "sourceColumn" : "BUILDID",
+        "targetColumn" : "BUILDID"
+      } ],
+      "name" : "FK_ENGINES_TO_BUILDS_BUI2YrSO",
+      "primary" : false,
+      "selfRelation" : false,
+      "sourceColumnsNotUniqueKey" : true,
+      "sourceTable" : "BUILDS",
+      "targetColumnsUniqueKey" : false,
+      "targetTable" : "ENGINES",
+      "virtual" : false
+    }, {
+      "cardinality" : "OneToMany",
+      "columnsUniqueKey" : false,
+      "composite" : false,
+      "fieldName" : "iopBuildAppses",
+      "mappings" : [ {
+        "sourceColumn" : "BUILDID",
+        "targetColumn" : "BUILDID"
+      } ],
+      "name" : "FK_IOP_BUILD_APPS_TO_BUIDNa25",
+      "primary" : false,
+      "selfRelation" : false,
+      "sourceColumnsNotUniqueKey" : true,
+      "sourceTable" : "BUILDS",
+      "targetColumnsUniqueKey" : false,
+      "targetTable" : "IOP_BUILD_APPS",
+      "virtual" : false
+    }, {
+      "cardinality" : "OneToMany",
+      "columnsUniqueKey" : false,
+      "composite" : false,
+      "fieldName" : "iopSuites",
+      "mappings" : [ {
+        "sourceColumn" : "BUILDID",
+        "targetColumn" : "BUILDID"
+      } ],
+      "name" : "FK_IOP_SUITE_TO_BUILDS_BqK8tM",
+      "primary" : false,
+      "selfRelation" : false,
+      "sourceColumnsNotUniqueKey" : true,
+      "sourceTable" : "BUILDS",
+      "targetColumnsUniqueKey" : false,
+      "targetTable" : "IOP_SUITE",
+      "virtual" : false
+    }, {
+      "cardinality" : "OneToMany",
+      "columnsUniqueKey" : false,
+      "composite" : false,
+      "fieldName" : "testcaseruns",
+      "mappings" : [ {
+        "sourceColumn" : "BUILDID",
+        "targetColumn" : "BUILDID"
+      } ],
+      "name" : "FK_TESTCASERUN_TO_BUILDSiKkKY",
+      "primary" : false,
+      "selfRelation" : false,
+      "sourceColumnsNotUniqueKey" : true,
+      "sourceTable" : "BUILDS",
+      "targetColumnsUniqueKey" : false,
+      "targetTable" : "TESTCASERUN",
+      "virtual" : false
+    } ],
     "schema" : null,
     "type" : "TABLE"
   }, {
@@ -1552,7 +1909,7 @@
       "name" : "CHASSISID",
       "nullable" : false,
       "oldName" : "CHASSISID",
-      "partOfAnyRelation" : false,
+      "partOfAnyRelation" : true,
       "partOfForeignKey" : false,
       "partOfPrimaryKey" : true,
       "partOfUniqueKey" : true,
@@ -1602,7 +1959,24 @@
       "name" : "PRIMARY",
       "virtual" : false
     },
-    "relations" : [ ],
+    "relations" : [ {
+      "cardinality" : "OneToMany",
+      "columnsUniqueKey" : false,
+      "composite" : false,
+      "fieldName" : "networks",
+      "mappings" : [ {
+        "sourceColumn" : "CHASSISID",
+        "targetColumn" : "PLATFORMID"
+      } ],
+      "name" : "FK_NETWORK_TO_CHASSIS_PL6zLSe",
+      "primary" : false,
+      "selfRelation" : false,
+      "sourceColumnsNotUniqueKey" : true,
+      "sourceTable" : "CHASSIS",
+      "targetColumnsUniqueKey" : false,
+      "targetTable" : "NETWORK",
+      "virtual" : false
+    } ],
     "schema" : null,
     "type" : "TABLE"
   }, {
@@ -2086,7 +2460,7 @@
       "name" : "ID",
       "nullable" : false,
       "oldName" : "ID",
-      "partOfAnyRelation" : false,
+      "partOfAnyRelation" : true,
       "partOfForeignKey" : false,
       "partOfPrimaryKey" : true,
       "partOfUniqueKey" : true,
@@ -2186,7 +2560,24 @@
       "name" : "PRIMARY",
       "virtual" : false
     },
-    "relations" : [ ],
+    "relations" : [ {
+      "cardinality" : "OneToMany",
+      "columnsUniqueKey" : false,
+      "composite" : false,
+      "fieldName" : "authPermissions",
+      "mappings" : [ {
+        "sourceColumn" : "ID",
+        "targetColumn" : "CONTENT_TYPE_ID"
+      } ],
+      "name" : "FK_AUTH_PERMISSION_TO_DJI0Ti1",
+      "primary" : false,
+      "selfRelation" : false,
+      "sourceColumnsNotUniqueKey" : true,
+      "sourceTable" : "DJANGO_CONTENT_TYPE",
+      "targetColumnsUniqueKey" : false,
+      "targetTable" : "AUTH_PERMISSION",
+      "virtual" : false
+    } ],
     "schema" : null,
     "type" : "TABLE"
   }, {
@@ -2303,7 +2694,7 @@
       "name" : "DUTID",
       "nullable" : false,
       "oldName" : "DUTID",
-      "partOfAnyRelation" : false,
+      "partOfAnyRelation" : true,
       "partOfForeignKey" : false,
       "partOfPrimaryKey" : true,
       "partOfUniqueKey" : true,
@@ -2428,7 +2819,24 @@
       "name" : "PRIMARY",
       "virtual" : false
     },
-    "relations" : [ ],
+    "relations" : [ {
+      "cardinality" : "OneToMany",
+      "columnsUniqueKey" : false,
+      "composite" : false,
+      "fieldName" : "pdutRuns",
+      "mappings" : [ {
+        "sourceColumn" : "DUTID",
+        "targetColumn" : "DUTID"
+      } ],
+      "name" : "FK_P_DUT_RUN_TO_DUT_DUTIkYEYQ",
+      "primary" : false,
+      "selfRelation" : false,
+      "sourceColumnsNotUniqueKey" : true,
+      "sourceTable" : "DUT",
+      "targetColumnsUniqueKey" : false,
+      "targetTable" : "P_DUT_RUN",
+      "virtual" : false
+    } ],
     "schema" : null,
     "type" : "TABLE"
   }, {
@@ -2449,7 +2857,7 @@
       "name" : "ENGINEID",
       "nullable" : false,
       "oldName" : "ENGINEID",
-      "partOfAnyRelation" : false,
+      "partOfAnyRelation" : true,
       "partOfForeignKey" : false,
       "partOfPrimaryKey" : true,
       "partOfUniqueKey" : true,
@@ -2491,7 +2899,7 @@
         "defaultValue" : null
       },
       "fieldName" : "productid",
-      "foreignKey" : false,
+      "foreignKey" : true,
       "generatorType" : "assigned",
       "generatorValue" : null,
       "javaType" : "big_integer",
@@ -2499,8 +2907,8 @@
       "name" : "PRODUCTID",
       "nullable" : true,
       "oldName" : "PRODUCTID",
-      "partOfAnyRelation" : false,
-      "partOfForeignKey" : false,
+      "partOfAnyRelation" : true,
+      "partOfForeignKey" : true,
       "partOfPrimaryKey" : false,
       "partOfUniqueKey" : false,
       "precision" : 19,
@@ -2516,7 +2924,7 @@
         "defaultValue" : null
       },
       "fieldName" : "buildid",
-      "foreignKey" : false,
+      "foreignKey" : true,
       "generatorType" : "assigned",
       "generatorValue" : null,
       "javaType" : "big_integer",
@@ -2524,8 +2932,8 @@
       "name" : "BUILDID",
       "nullable" : true,
       "oldName" : "BUILDID",
-      "partOfAnyRelation" : false,
-      "partOfForeignKey" : false,
+      "partOfAnyRelation" : true,
+      "partOfForeignKey" : true,
       "partOfPrimaryKey" : false,
       "partOfUniqueKey" : false,
       "precision" : 19,
@@ -2699,7 +3107,92 @@
       "name" : "PRIMARY",
       "virtual" : false
     },
-    "relations" : [ ],
+    "relations" : [ {
+      "cardinality" : "ManyToOne",
+      "columnsUniqueKey" : false,
+      "composite" : false,
+      "fieldName" : "products",
+      "mappings" : [ {
+        "sourceColumn" : "PRODUCTID",
+        "targetColumn" : "PRODUCTID"
+      } ],
+      "name" : "FK_ENGINES_TO_PRODUCTS_PgQtyp",
+      "primary" : true,
+      "selfRelation" : false,
+      "sourceColumnsNotUniqueKey" : true,
+      "sourceTable" : "ENGINES",
+      "targetColumnsUniqueKey" : false,
+      "targetTable" : "PRODUCTS",
+      "virtual" : false
+    }, {
+      "cardinality" : "ManyToOne",
+      "columnsUniqueKey" : false,
+      "composite" : false,
+      "fieldName" : "builds",
+      "mappings" : [ {
+        "sourceColumn" : "BUILDID",
+        "targetColumn" : "BUILDID"
+      } ],
+      "name" : "FK_ENGINES_TO_BUILDS_BUI2YrSO",
+      "primary" : true,
+      "selfRelation" : false,
+      "sourceColumnsNotUniqueKey" : true,
+      "sourceTable" : "ENGINES",
+      "targetColumnsUniqueKey" : false,
+      "targetTable" : "BUILDS",
+      "virtual" : false
+    }, {
+      "cardinality" : "OneToMany",
+      "columnsUniqueKey" : false,
+      "composite" : false,
+      "fieldName" : "iopEnginesDetailses",
+      "mappings" : [ {
+        "sourceColumn" : "ENGINEID",
+        "targetColumn" : "ENGINEID"
+      } ],
+      "name" : "FK_IOP_ENGINES_DETAILS_Tc8NQm",
+      "primary" : false,
+      "selfRelation" : false,
+      "sourceColumnsNotUniqueKey" : true,
+      "sourceTable" : "ENGINES",
+      "targetColumnsUniqueKey" : false,
+      "targetTable" : "IOP_ENGINES_DETAILS",
+      "virtual" : false
+    }, {
+      "cardinality" : "OneToMany",
+      "columnsUniqueKey" : false,
+      "composite" : false,
+      "fieldName" : "testcaseruns",
+      "mappings" : [ {
+        "sourceColumn" : "ENGINEID",
+        "targetColumn" : "ENGINEID"
+      } ],
+      "name" : "FK_TESTCASERUN_TO_ENGINEd0CVk",
+      "primary" : false,
+      "selfRelation" : false,
+      "sourceColumnsNotUniqueKey" : true,
+      "sourceTable" : "ENGINES",
+      "targetColumnsUniqueKey" : false,
+      "targetTable" : "TESTCASERUN",
+      "virtual" : false
+    }, {
+      "cardinality" : "OneToMany",
+      "columnsUniqueKey" : false,
+      "composite" : false,
+      "fieldName" : "testcaseses",
+      "mappings" : [ {
+        "sourceColumn" : "ENGINEID",
+        "targetColumn" : "ENGINEID"
+      } ],
+      "name" : "FK_TESTCASES_TO_ENGINES_qI3yQ",
+      "primary" : false,
+      "selfRelation" : false,
+      "sourceColumnsNotUniqueKey" : true,
+      "sourceTable" : "ENGINES",
+      "targetColumnsUniqueKey" : false,
+      "targetTable" : "TESTCASES",
+      "virtual" : false
+    } ],
     "schema" : null,
     "type" : "TABLE"
   }, {
@@ -3129,7 +3622,7 @@
         "defaultValue" : null
       },
       "fieldName" : "buildid",
-      "foreignKey" : false,
+      "foreignKey" : true,
       "generatorType" : "assigned",
       "generatorValue" : null,
       "javaType" : "big_integer",
@@ -3137,8 +3630,8 @@
       "name" : "BUILDID",
       "nullable" : true,
       "oldName" : "BUILDID",
-      "partOfAnyRelation" : false,
-      "partOfForeignKey" : false,
+      "partOfAnyRelation" : true,
+      "partOfForeignKey" : true,
       "partOfPrimaryKey" : false,
       "partOfUniqueKey" : false,
       "precision" : 19,
@@ -3154,7 +3647,7 @@
         "defaultValue" : null
       },
       "fieldName" : "productid",
-      "foreignKey" : false,
+      "foreignKey" : true,
       "generatorType" : "assigned",
       "generatorValue" : null,
       "javaType" : "big_integer",
@@ -3162,8 +3655,8 @@
       "name" : "PRODUCTID",
       "nullable" : true,
       "oldName" : "PRODUCTID",
-      "partOfAnyRelation" : false,
-      "partOfForeignKey" : false,
+      "partOfAnyRelation" : true,
+      "partOfForeignKey" : true,
       "partOfPrimaryKey" : false,
       "partOfUniqueKey" : false,
       "precision" : 19,
@@ -3237,7 +3730,41 @@
       "name" : "PRIMARY",
       "virtual" : false
     },
-    "relations" : [ ],
+    "relations" : [ {
+      "cardinality" : "ManyToOne",
+      "columnsUniqueKey" : false,
+      "composite" : false,
+      "fieldName" : "products",
+      "mappings" : [ {
+        "sourceColumn" : "PRODUCTID",
+        "targetColumn" : "PRODUCTID"
+      } ],
+      "name" : "FK_IOP_BUILD_APPS_TO_PRO3aGTE",
+      "primary" : true,
+      "selfRelation" : false,
+      "sourceColumnsNotUniqueKey" : true,
+      "sourceTable" : "IOP_BUILD_APPS",
+      "targetColumnsUniqueKey" : false,
+      "targetTable" : "PRODUCTS",
+      "virtual" : false
+    }, {
+      "cardinality" : "ManyToOne",
+      "columnsUniqueKey" : false,
+      "composite" : false,
+      "fieldName" : "builds",
+      "mappings" : [ {
+        "sourceColumn" : "BUILDID",
+        "targetColumn" : "BUILDID"
+      } ],
+      "name" : "FK_IOP_BUILD_APPS_TO_BUIDNa25",
+      "primary" : true,
+      "selfRelation" : false,
+      "sourceColumnsNotUniqueKey" : true,
+      "sourceTable" : "IOP_BUILD_APPS",
+      "targetColumnsUniqueKey" : false,
+      "targetTable" : "BUILDS",
+      "virtual" : false
+    } ],
     "schema" : null,
     "type" : "TABLE"
   }, {
@@ -3275,7 +3802,7 @@
         "defaultValue" : null
       },
       "fieldName" : "engineid",
-      "foreignKey" : false,
+      "foreignKey" : true,
       "generatorType" : "assigned",
       "generatorValue" : null,
       "javaType" : "big_integer",
@@ -3283,8 +3810,8 @@
       "name" : "ENGINEID",
       "nullable" : true,
       "oldName" : "ENGINEID",
-      "partOfAnyRelation" : false,
-      "partOfForeignKey" : false,
+      "partOfAnyRelation" : true,
+      "partOfForeignKey" : true,
       "partOfPrimaryKey" : false,
       "partOfUniqueKey" : false,
       "precision" : 19,
@@ -3300,7 +3827,7 @@
         "defaultValue" : null
       },
       "fieldName" : "productid",
-      "foreignKey" : false,
+      "foreignKey" : true,
       "generatorType" : "assigned",
       "generatorValue" : null,
       "javaType" : "big_integer",
@@ -3308,8 +3835,8 @@
       "name" : "PRODUCTID",
       "nullable" : true,
       "oldName" : "PRODUCTID",
-      "partOfAnyRelation" : false,
-      "partOfForeignKey" : false,
+      "partOfAnyRelation" : true,
+      "partOfForeignKey" : true,
       "partOfPrimaryKey" : false,
       "partOfUniqueKey" : false,
       "precision" : 19,
@@ -3383,7 +3910,41 @@
       "name" : "PRIMARY",
       "virtual" : false
     },
-    "relations" : [ ],
+    "relations" : [ {
+      "cardinality" : "ManyToOne",
+      "columnsUniqueKey" : false,
+      "composite" : false,
+      "fieldName" : "products",
+      "mappings" : [ {
+        "sourceColumn" : "PRODUCTID",
+        "targetColumn" : "PRODUCTID"
+      } ],
+      "name" : "FK_IOP_ENGINES_DETAILS_TyuolD",
+      "primary" : true,
+      "selfRelation" : false,
+      "sourceColumnsNotUniqueKey" : true,
+      "sourceTable" : "IOP_ENGINES_DETAILS",
+      "targetColumnsUniqueKey" : false,
+      "targetTable" : "PRODUCTS",
+      "virtual" : false
+    }, {
+      "cardinality" : "ManyToOne",
+      "columnsUniqueKey" : false,
+      "composite" : false,
+      "fieldName" : "engines",
+      "mappings" : [ {
+        "sourceColumn" : "ENGINEID",
+        "targetColumn" : "ENGINEID"
+      } ],
+      "name" : "FK_IOP_ENGINES_DETAILS_Tc8NQm",
+      "primary" : true,
+      "selfRelation" : false,
+      "sourceColumnsNotUniqueKey" : true,
+      "sourceTable" : "IOP_ENGINES_DETAILS",
+      "targetColumnsUniqueKey" : false,
+      "targetTable" : "ENGINES",
+      "virtual" : false
+    } ],
     "schema" : null,
     "type" : "TABLE"
   }, {
@@ -3471,7 +4032,7 @@
         "defaultValue" : null
       },
       "fieldName" : "buildid",
-      "foreignKey" : false,
+      "foreignKey" : true,
       "generatorType" : "assigned",
       "generatorValue" : null,
       "javaType" : "big_integer",
@@ -3479,8 +4040,8 @@
       "name" : "BUILDID",
       "nullable" : true,
       "oldName" : "BUILDID",
-      "partOfAnyRelation" : false,
-      "partOfForeignKey" : false,
+      "partOfAnyRelation" : true,
+      "partOfForeignKey" : true,
       "partOfPrimaryKey" : false,
       "partOfUniqueKey" : false,
       "precision" : 19,
@@ -3504,7 +4065,24 @@
       "name" : "PRIMARY",
       "virtual" : false
     },
-    "relations" : [ ],
+    "relations" : [ {
+      "cardinality" : "ManyToOne",
+      "columnsUniqueKey" : false,
+      "composite" : false,
+      "fieldName" : "builds",
+      "mappings" : [ {
+        "sourceColumn" : "BUILDID",
+        "targetColumn" : "BUILDID"
+      } ],
+      "name" : "FK_IOP_SUITE_TO_BUILDS_BqK8tM",
+      "primary" : true,
+      "selfRelation" : false,
+      "sourceColumnsNotUniqueKey" : true,
+      "sourceTable" : "IOP_SUITE",
+      "targetColumnsUniqueKey" : false,
+      "targetTable" : "BUILDS",
+      "virtual" : false
+    } ],
     "schema" : null,
     "type" : "TABLE"
   }, {
@@ -3525,7 +4103,7 @@
       "name" : "LMID",
       "nullable" : false,
       "oldName" : "LMID",
-      "partOfAnyRelation" : false,
+      "partOfAnyRelation" : true,
       "partOfForeignKey" : false,
       "partOfPrimaryKey" : true,
       "partOfUniqueKey" : true,
@@ -3575,7 +4153,24 @@
       "name" : "PRIMARY",
       "virtual" : false
     },
-    "relations" : [ ],
+    "relations" : [ {
+      "cardinality" : "OneToMany",
+      "columnsUniqueKey" : false,
+      "composite" : false,
+      "fieldName" : "networks",
+      "mappings" : [ {
+        "sourceColumn" : "LMID",
+        "targetColumn" : "INTERFACEID"
+      } ],
+      "name" : "FK_NETWORK_TO_LOADMODULEP3HlL",
+      "primary" : false,
+      "selfRelation" : false,
+      "sourceColumnsNotUniqueKey" : true,
+      "sourceTable" : "LOADMODULES",
+      "targetColumnsUniqueKey" : false,
+      "targetTable" : "NETWORK",
+      "virtual" : false
+    } ],
     "schema" : null,
     "type" : "TABLE"
   }, {
@@ -3596,7 +4191,7 @@
       "name" : "NETWORKID",
       "nullable" : false,
       "oldName" : "NETWORKID",
-      "partOfAnyRelation" : false,
+      "partOfAnyRelation" : true,
       "partOfForeignKey" : false,
       "partOfPrimaryKey" : true,
       "partOfUniqueKey" : true,
@@ -3663,7 +4258,7 @@
         "defaultValue" : null
       },
       "fieldName" : "interfaceid",
-      "foreignKey" : false,
+      "foreignKey" : true,
       "generatorType" : "assigned",
       "generatorValue" : null,
       "javaType" : "big_integer",
@@ -3671,8 +4266,8 @@
       "name" : "INTERFACEID",
       "nullable" : true,
       "oldName" : "INTERFACEID",
-      "partOfAnyRelation" : false,
-      "partOfForeignKey" : false,
+      "partOfAnyRelation" : true,
+      "partOfForeignKey" : true,
       "partOfPrimaryKey" : false,
       "partOfUniqueKey" : false,
       "precision" : 19,
@@ -3688,7 +4283,7 @@
         "defaultValue" : null
       },
       "fieldName" : "platformid",
-      "foreignKey" : false,
+      "foreignKey" : true,
       "generatorType" : "assigned",
       "generatorValue" : null,
       "javaType" : "big_integer",
@@ -3696,8 +4291,8 @@
       "name" : "PLATFORMID",
       "nullable" : true,
       "oldName" : "PLATFORMID",
-      "partOfAnyRelation" : false,
-      "partOfForeignKey" : false,
+      "partOfAnyRelation" : true,
+      "partOfForeignKey" : true,
       "partOfPrimaryKey" : false,
       "partOfUniqueKey" : false,
       "precision" : 19,
@@ -3821,7 +4416,58 @@
       "name" : "PRIMARY",
       "virtual" : false
     },
-    "relations" : [ ],
+    "relations" : [ {
+      "cardinality" : "ManyToOne",
+      "columnsUniqueKey" : false,
+      "composite" : false,
+      "fieldName" : "loadmodules",
+      "mappings" : [ {
+        "sourceColumn" : "INTERFACEID",
+        "targetColumn" : "LMID"
+      } ],
+      "name" : "FK_NETWORK_TO_LOADMODULEP3HlL",
+      "primary" : true,
+      "selfRelation" : false,
+      "sourceColumnsNotUniqueKey" : true,
+      "sourceTable" : "NETWORK",
+      "targetColumnsUniqueKey" : false,
+      "targetTable" : "LOADMODULES",
+      "virtual" : false
+    }, {
+      "cardinality" : "ManyToOne",
+      "columnsUniqueKey" : false,
+      "composite" : false,
+      "fieldName" : "chassis",
+      "mappings" : [ {
+        "sourceColumn" : "PLATFORMID",
+        "targetColumn" : "CHASSISID"
+      } ],
+      "name" : "FK_NETWORK_TO_CHASSIS_PL6zLSe",
+      "primary" : true,
+      "selfRelation" : false,
+      "sourceColumnsNotUniqueKey" : true,
+      "sourceTable" : "NETWORK",
+      "targetColumnsUniqueKey" : false,
+      "targetTable" : "CHASSIS",
+      "virtual" : false
+    }, {
+      "cardinality" : "OneToMany",
+      "columnsUniqueKey" : false,
+      "composite" : false,
+      "fieldName" : "pnetworkRuns",
+      "mappings" : [ {
+        "sourceColumn" : "NETWORKID",
+        "targetColumn" : "TESTCONFIGID"
+      } ],
+      "name" : "FK_P_NETWORK_RUN_TO_NETWi7uuE",
+      "primary" : false,
+      "selfRelation" : false,
+      "sourceColumnsNotUniqueKey" : true,
+      "sourceTable" : "NETWORK",
+      "targetColumnsUniqueKey" : false,
+      "targetTable" : "P_NETWORK_RUN",
+      "virtual" : false
+    } ],
     "schema" : null,
     "type" : "TABLE"
   }, {
@@ -3842,7 +4488,7 @@
       "name" : "PRODUCTID",
       "nullable" : false,
       "oldName" : "PRODUCTID",
-      "partOfAnyRelation" : false,
+      "partOfAnyRelation" : true,
       "partOfForeignKey" : false,
       "partOfPrimaryKey" : true,
       "partOfUniqueKey" : true,
@@ -3881,7 +4527,7 @@
         "type" : "user-defined",
         "insertable" : true,
         "updatable" : true,
-        "defaultValue" : null
+        "defaultValue" : ""
       },
       "fieldName" : "status",
       "foreignKey" : false,
@@ -3890,7 +4536,7 @@
       "javaType" : "big_integer",
       "length" : 0,
       "name" : "STATUS",
-      "nullable" : true,
+      "nullable" : false,
       "oldName" : "STATUS",
       "partOfAnyRelation" : false,
       "partOfForeignKey" : false,
@@ -3942,7 +4588,143 @@
       "name" : "PRIMARY",
       "virtual" : false
     },
-    "relations" : [ ],
+    "relations" : [ {
+      "cardinality" : "OneToMany",
+      "columnsUniqueKey" : false,
+      "composite" : false,
+      "fieldName" : "buildses",
+      "mappings" : [ {
+        "sourceColumn" : "PRODUCTID",
+        "targetColumn" : "PRODUCTID"
+      } ],
+      "name" : "FK_BUILDS_TO_PRODUCTS_PR3Gv9U",
+      "primary" : false,
+      "selfRelation" : false,
+      "sourceColumnsNotUniqueKey" : true,
+      "sourceTable" : "PRODUCTS",
+      "targetColumnsUniqueKey" : false,
+      "targetTable" : "BUILDS",
+      "virtual" : false
+    }, {
+      "cardinality" : "OneToMany",
+      "columnsUniqueKey" : false,
+      "composite" : false,
+      "fieldName" : "engineses",
+      "mappings" : [ {
+        "sourceColumn" : "PRODUCTID",
+        "targetColumn" : "PRODUCTID"
+      } ],
+      "name" : "FK_ENGINES_TO_PRODUCTS_PgQtyp",
+      "primary" : false,
+      "selfRelation" : false,
+      "sourceColumnsNotUniqueKey" : true,
+      "sourceTable" : "PRODUCTS",
+      "targetColumnsUniqueKey" : false,
+      "targetTable" : "ENGINES",
+      "virtual" : false
+    }, {
+      "cardinality" : "OneToMany",
+      "columnsUniqueKey" : false,
+      "composite" : false,
+      "fieldName" : "iopBuildAppses",
+      "mappings" : [ {
+        "sourceColumn" : "PRODUCTID",
+        "targetColumn" : "PRODUCTID"
+      } ],
+      "name" : "FK_IOP_BUILD_APPS_TO_PRO3aGTE",
+      "primary" : false,
+      "selfRelation" : false,
+      "sourceColumnsNotUniqueKey" : true,
+      "sourceTable" : "PRODUCTS",
+      "targetColumnsUniqueKey" : false,
+      "targetTable" : "IOP_BUILD_APPS",
+      "virtual" : false
+    }, {
+      "cardinality" : "OneToMany",
+      "columnsUniqueKey" : false,
+      "composite" : false,
+      "fieldName" : "iopEnginesDetailses",
+      "mappings" : [ {
+        "sourceColumn" : "PRODUCTID",
+        "targetColumn" : "PRODUCTID"
+      } ],
+      "name" : "FK_IOP_ENGINES_DETAILS_TyuolD",
+      "primary" : false,
+      "selfRelation" : false,
+      "sourceColumnsNotUniqueKey" : true,
+      "sourceTable" : "PRODUCTS",
+      "targetColumnsUniqueKey" : false,
+      "targetTable" : "IOP_ENGINES_DETAILS",
+      "virtual" : false
+    }, {
+      "cardinality" : "OneToMany",
+      "columnsUniqueKey" : false,
+      "composite" : false,
+      "fieldName" : "releaseses",
+      "mappings" : [ {
+        "sourceColumn" : "PRODUCTID",
+        "targetColumn" : "PRODUCTID"
+      } ],
+      "name" : "FK_RELEASES_TO_PRODUCTS_Gc7sA",
+      "primary" : false,
+      "selfRelation" : false,
+      "sourceColumnsNotUniqueKey" : true,
+      "sourceTable" : "PRODUCTS",
+      "targetColumnsUniqueKey" : false,
+      "targetTable" : "RELEASES",
+      "virtual" : false
+    }, {
+      "cardinality" : "OneToMany",
+      "columnsUniqueKey" : false,
+      "composite" : false,
+      "fieldName" : "testcaseruns",
+      "mappings" : [ {
+        "sourceColumn" : "PRODUCTID",
+        "targetColumn" : "PRODUCTID"
+      } ],
+      "name" : "FK_TESTCASERUN_TO_PRODUCH9Qa0",
+      "primary" : false,
+      "selfRelation" : false,
+      "sourceColumnsNotUniqueKey" : true,
+      "sourceTable" : "PRODUCTS",
+      "targetColumnsUniqueKey" : false,
+      "targetTable" : "TESTCASERUN",
+      "virtual" : false
+    }, {
+      "cardinality" : "OneToMany",
+      "columnsUniqueKey" : false,
+      "composite" : false,
+      "fieldName" : "testcaseses",
+      "mappings" : [ {
+        "sourceColumn" : "PRODUCTID",
+        "targetColumn" : "PRODUCTID"
+      } ],
+      "name" : "FK_TESTCASES_TO_PRODUCTSElRik",
+      "primary" : false,
+      "selfRelation" : false,
+      "sourceColumnsNotUniqueKey" : true,
+      "sourceTable" : "PRODUCTS",
+      "targetColumnsUniqueKey" : false,
+      "targetTable" : "TESTCASES",
+      "virtual" : false
+    }, {
+      "cardinality" : "OneToMany",
+      "columnsUniqueKey" : false,
+      "composite" : false,
+      "fieldName" : "testplans",
+      "mappings" : [ {
+        "sourceColumn" : "PRODUCTID",
+        "targetColumn" : "PRODUCTID"
+      } ],
+      "name" : "FK_TESTPLAN_TO_PRODUCTS_qMj5Q",
+      "primary" : false,
+      "selfRelation" : false,
+      "sourceColumnsNotUniqueKey" : true,
+      "sourceTable" : "PRODUCTS",
+      "targetColumnsUniqueKey" : false,
+      "targetTable" : "TESTPLAN",
+      "virtual" : false
+    } ],
     "schema" : null,
     "type" : "TABLE"
   }, {
@@ -4172,7 +4954,7 @@
         "defaultValue" : null
       },
       "fieldName" : "bugid",
-      "foreignKey" : false,
+      "foreignKey" : true,
       "generatorType" : "assigned",
       "generatorValue" : null,
       "javaType" : "big_integer",
@@ -4180,8 +4962,8 @@
       "name" : "BUGID",
       "nullable" : true,
       "oldName" : "BUGID",
-      "partOfAnyRelation" : false,
-      "partOfForeignKey" : false,
+      "partOfAnyRelation" : true,
+      "partOfForeignKey" : true,
       "partOfPrimaryKey" : false,
       "partOfUniqueKey" : false,
       "precision" : 19,
@@ -4255,7 +5037,24 @@
       "name" : "PRIMARY",
       "virtual" : false
     },
-    "relations" : [ ],
+    "relations" : [ {
+      "cardinality" : "ManyToOne",
+      "columnsUniqueKey" : false,
+      "composite" : false,
+      "fieldName" : "bugtable",
+      "mappings" : [ {
+        "sourceColumn" : "BUGID",
+        "targetColumn" : "BUGID"
+      } ],
+      "name" : "FK_P_BUGTABLE_RUN_TO_BUGmYfvx",
+      "primary" : true,
+      "selfRelation" : false,
+      "sourceColumnsNotUniqueKey" : true,
+      "sourceTable" : "P_BUGTABLE_RUN",
+      "targetColumnsUniqueKey" : false,
+      "targetTable" : "BUGTABLE",
+      "virtual" : false
+    } ],
     "schema" : null,
     "type" : "TABLE"
   }, {
@@ -4293,7 +5092,7 @@
         "defaultValue" : null
       },
       "fieldName" : "dutid",
-      "foreignKey" : false,
+      "foreignKey" : true,
       "generatorType" : "assigned",
       "generatorValue" : null,
       "javaType" : "big_integer",
@@ -4301,8 +5100,8 @@
       "name" : "DUTID",
       "nullable" : true,
       "oldName" : "DUTID",
-      "partOfAnyRelation" : false,
-      "partOfForeignKey" : false,
+      "partOfAnyRelation" : true,
+      "partOfForeignKey" : true,
       "partOfPrimaryKey" : false,
       "partOfUniqueKey" : false,
       "precision" : 19,
@@ -4318,7 +5117,7 @@
         "defaultValue" : null
       },
       "fieldName" : "runid",
-      "foreignKey" : false,
+      "foreignKey" : true,
       "generatorType" : "assigned",
       "generatorValue" : null,
       "javaType" : "big_integer",
@@ -4326,8 +5125,8 @@
       "name" : "RUNID",
       "nullable" : true,
       "oldName" : "RUNID",
-      "partOfAnyRelation" : false,
-      "partOfForeignKey" : false,
+      "partOfAnyRelation" : true,
+      "partOfForeignKey" : true,
       "partOfPrimaryKey" : false,
       "partOfUniqueKey" : false,
       "precision" : 19,
@@ -4376,7 +5175,41 @@
       "name" : "PRIMARY",
       "virtual" : false
     },
-    "relations" : [ ],
+    "relations" : [ {
+      "cardinality" : "ManyToOne",
+      "columnsUniqueKey" : false,
+      "composite" : false,
+      "fieldName" : "testcaserun",
+      "mappings" : [ {
+        "sourceColumn" : "RUNID",
+        "targetColumn" : "TESTCASERUNID"
+      } ],
+      "name" : "FK_P_DUT_RUN_TO_TESTCASEvB8E6",
+      "primary" : true,
+      "selfRelation" : false,
+      "sourceColumnsNotUniqueKey" : true,
+      "sourceTable" : "P_DUT_RUN",
+      "targetColumnsUniqueKey" : false,
+      "targetTable" : "TESTCASERUN",
+      "virtual" : false
+    }, {
+      "cardinality" : "ManyToOne",
+      "columnsUniqueKey" : false,
+      "composite" : false,
+      "fieldName" : "dut",
+      "mappings" : [ {
+        "sourceColumn" : "DUTID",
+        "targetColumn" : "DUTID"
+      } ],
+      "name" : "FK_P_DUT_RUN_TO_DUT_DUTIkYEYQ",
+      "primary" : true,
+      "selfRelation" : false,
+      "sourceColumnsNotUniqueKey" : true,
+      "sourceTable" : "P_DUT_RUN",
+      "targetColumnsUniqueKey" : false,
+      "targetTable" : "DUT",
+      "virtual" : false
+    } ],
     "schema" : null,
     "type" : "TABLE"
   }, {
@@ -4535,7 +5368,7 @@
         "defaultValue" : null
       },
       "fieldName" : "testconfigid",
-      "foreignKey" : false,
+      "foreignKey" : true,
       "generatorType" : "assigned",
       "generatorValue" : null,
       "javaType" : "big_integer",
@@ -4543,8 +5376,8 @@
       "name" : "TESTCONFIGID",
       "nullable" : true,
       "oldName" : "TESTCONFIGID",
-      "partOfAnyRelation" : false,
-      "partOfForeignKey" : false,
+      "partOfAnyRelation" : true,
+      "partOfForeignKey" : true,
       "partOfPrimaryKey" : false,
       "partOfUniqueKey" : false,
       "precision" : 19,
@@ -4560,7 +5393,7 @@
         "defaultValue" : null
       },
       "fieldName" : "runid",
-      "foreignKey" : false,
+      "foreignKey" : true,
       "generatorType" : "assigned",
       "generatorValue" : null,
       "javaType" : "big_integer",
@@ -4568,8 +5401,8 @@
       "name" : "RUNID",
       "nullable" : true,
       "oldName" : "RUNID",
-      "partOfAnyRelation" : false,
-      "partOfForeignKey" : false,
+      "partOfAnyRelation" : true,
+      "partOfForeignKey" : true,
       "partOfPrimaryKey" : false,
       "partOfUniqueKey" : false,
       "precision" : 19,
@@ -4618,7 +5451,41 @@
       "name" : "PRIMARY",
       "virtual" : false
     },
-    "relations" : [ ],
+    "relations" : [ {
+      "cardinality" : "ManyToOne",
+      "columnsUniqueKey" : false,
+      "composite" : false,
+      "fieldName" : "testcaserun",
+      "mappings" : [ {
+        "sourceColumn" : "RUNID",
+        "targetColumn" : "TESTCASERUNID"
+      } ],
+      "name" : "FK_P_NETWORK_RUN_TO_TESTtLrQR",
+      "primary" : true,
+      "selfRelation" : false,
+      "sourceColumnsNotUniqueKey" : true,
+      "sourceTable" : "P_NETWORK_RUN",
+      "targetColumnsUniqueKey" : false,
+      "targetTable" : "TESTCASERUN",
+      "virtual" : false
+    }, {
+      "cardinality" : "ManyToOne",
+      "columnsUniqueKey" : false,
+      "composite" : false,
+      "fieldName" : "network",
+      "mappings" : [ {
+        "sourceColumn" : "TESTCONFIGID",
+        "targetColumn" : "NETWORKID"
+      } ],
+      "name" : "FK_P_NETWORK_RUN_TO_NETWi7uuE",
+      "primary" : true,
+      "selfRelation" : false,
+      "sourceColumnsNotUniqueKey" : true,
+      "sourceTable" : "P_NETWORK_RUN",
+      "targetColumnsUniqueKey" : false,
+      "targetTable" : "NETWORK",
+      "virtual" : false
+    } ],
     "schema" : null,
     "type" : "TABLE"
   }, {
@@ -4973,7 +5840,7 @@
         "defaultValue" : null
       },
       "fieldName" : "productid",
-      "foreignKey" : false,
+      "foreignKey" : true,
       "generatorType" : "assigned",
       "generatorValue" : null,
       "javaType" : "big_integer",
@@ -4981,8 +5848,8 @@
       "name" : "PRODUCTID",
       "nullable" : true,
       "oldName" : "PRODUCTID",
-      "partOfAnyRelation" : false,
-      "partOfForeignKey" : false,
+      "partOfAnyRelation" : true,
+      "partOfForeignKey" : true,
       "partOfPrimaryKey" : false,
       "partOfUniqueKey" : false,
       "precision" : 19,
@@ -5006,7 +5873,24 @@
       "name" : "PRIMARY",
       "virtual" : false
     },
-    "relations" : [ ],
+    "relations" : [ {
+      "cardinality" : "ManyToOne",
+      "columnsUniqueKey" : false,
+      "composite" : false,
+      "fieldName" : "products",
+      "mappings" : [ {
+        "sourceColumn" : "PRODUCTID",
+        "targetColumn" : "PRODUCTID"
+      } ],
+      "name" : "FK_RELEASES_TO_PRODUCTS_Gc7sA",
+      "primary" : true,
+      "selfRelation" : false,
+      "sourceColumnsNotUniqueKey" : true,
+      "sourceTable" : "RELEASES",
+      "targetColumnsUniqueKey" : false,
+      "targetTable" : "PRODUCTS",
+      "virtual" : false
+    } ],
     "schema" : null,
     "type" : "TABLE"
   }, {
@@ -5148,7 +6032,7 @@
       "name" : "TESTCASERUNID",
       "nullable" : false,
       "oldName" : "TESTCASERUNID",
-      "partOfAnyRelation" : false,
+      "partOfAnyRelation" : true,
       "partOfForeignKey" : false,
       "partOfPrimaryKey" : true,
       "partOfUniqueKey" : true,
@@ -5390,7 +6274,7 @@
         "defaultValue" : null
       },
       "fieldName" : "engineid",
-      "foreignKey" : false,
+      "foreignKey" : true,
       "generatorType" : "assigned",
       "generatorValue" : null,
       "javaType" : "big_integer",
@@ -5398,8 +6282,8 @@
       "name" : "ENGINEID",
       "nullable" : true,
       "oldName" : "ENGINEID",
-      "partOfAnyRelation" : false,
-      "partOfForeignKey" : false,
+      "partOfAnyRelation" : true,
+      "partOfForeignKey" : true,
       "partOfPrimaryKey" : false,
       "partOfUniqueKey" : false,
       "precision" : 19,
@@ -5415,7 +6299,7 @@
         "defaultValue" : null
       },
       "fieldName" : "testcaseid",
-      "foreignKey" : false,
+      "foreignKey" : true,
       "generatorType" : "assigned",
       "generatorValue" : null,
       "javaType" : "big_integer",
@@ -5423,8 +6307,8 @@
       "name" : "TESTCASEID",
       "nullable" : true,
       "oldName" : "TESTCASEID",
-      "partOfAnyRelation" : false,
-      "partOfForeignKey" : false,
+      "partOfAnyRelation" : true,
+      "partOfForeignKey" : true,
       "partOfPrimaryKey" : false,
       "partOfUniqueKey" : false,
       "precision" : 19,
@@ -5440,7 +6324,7 @@
         "defaultValue" : null
       },
       "fieldName" : "buildid",
-      "foreignKey" : false,
+      "foreignKey" : true,
       "generatorType" : "assigned",
       "generatorValue" : null,
       "javaType" : "big_integer",
@@ -5448,8 +6332,8 @@
       "name" : "BUILDID",
       "nullable" : true,
       "oldName" : "BUILDID",
-      "partOfAnyRelation" : false,
-      "partOfForeignKey" : false,
+      "partOfAnyRelation" : true,
+      "partOfForeignKey" : true,
       "partOfPrimaryKey" : false,
       "partOfUniqueKey" : false,
       "precision" : 19,
@@ -5465,7 +6349,7 @@
         "defaultValue" : null
       },
       "fieldName" : "productid",
-      "foreignKey" : false,
+      "foreignKey" : true,
       "generatorType" : "assigned",
       "generatorValue" : null,
       "javaType" : "big_integer",
@@ -5473,8 +6357,8 @@
       "name" : "PRODUCTID",
       "nullable" : true,
       "oldName" : "PRODUCTID",
-      "partOfAnyRelation" : false,
-      "partOfForeignKey" : false,
+      "partOfAnyRelation" : true,
+      "partOfForeignKey" : true,
       "partOfPrimaryKey" : false,
       "partOfUniqueKey" : false,
       "precision" : 19,
@@ -5598,7 +6482,109 @@
       "name" : "PRIMARY",
       "virtual" : false
     },
-    "relations" : [ ],
+    "relations" : [ {
+      "cardinality" : "ManyToOne",
+      "columnsUniqueKey" : false,
+      "composite" : false,
+      "fieldName" : "engines",
+      "mappings" : [ {
+        "sourceColumn" : "ENGINEID",
+        "targetColumn" : "ENGINEID"
+      } ],
+      "name" : "FK_TESTCASERUN_TO_ENGINEd0CVk",
+      "primary" : true,
+      "selfRelation" : false,
+      "sourceColumnsNotUniqueKey" : true,
+      "sourceTable" : "TESTCASERUN",
+      "targetColumnsUniqueKey" : false,
+      "targetTable" : "ENGINES",
+      "virtual" : false
+    }, {
+      "cardinality" : "ManyToOne",
+      "columnsUniqueKey" : false,
+      "composite" : false,
+      "fieldName" : "testcases",
+      "mappings" : [ {
+        "sourceColumn" : "TESTCASEID",
+        "targetColumn" : "TESTCASEID"
+      } ],
+      "name" : "FK_TESTCASERUN_TO_TESTCAIMpl0",
+      "primary" : true,
+      "selfRelation" : false,
+      "sourceColumnsNotUniqueKey" : true,
+      "sourceTable" : "TESTCASERUN",
+      "targetColumnsUniqueKey" : false,
+      "targetTable" : "TESTCASES",
+      "virtual" : false
+    }, {
+      "cardinality" : "ManyToOne",
+      "columnsUniqueKey" : false,
+      "composite" : false,
+      "fieldName" : "products",
+      "mappings" : [ {
+        "sourceColumn" : "PRODUCTID",
+        "targetColumn" : "PRODUCTID"
+      } ],
+      "name" : "FK_TESTCASERUN_TO_PRODUCH9Qa0",
+      "primary" : true,
+      "selfRelation" : false,
+      "sourceColumnsNotUniqueKey" : true,
+      "sourceTable" : "TESTCASERUN",
+      "targetColumnsUniqueKey" : false,
+      "targetTable" : "PRODUCTS",
+      "virtual" : false
+    }, {
+      "cardinality" : "ManyToOne",
+      "columnsUniqueKey" : false,
+      "composite" : false,
+      "fieldName" : "builds",
+      "mappings" : [ {
+        "sourceColumn" : "BUILDID",
+        "targetColumn" : "BUILDID"
+      } ],
+      "name" : "FK_TESTCASERUN_TO_BUILDSiKkKY",
+      "primary" : true,
+      "selfRelation" : false,
+      "sourceColumnsNotUniqueKey" : true,
+      "sourceTable" : "TESTCASERUN",
+      "targetColumnsUniqueKey" : false,
+      "targetTable" : "BUILDS",
+      "virtual" : false
+    }, {
+      "cardinality" : "OneToMany",
+      "columnsUniqueKey" : false,
+      "composite" : false,
+      "fieldName" : "pdutRuns",
+      "mappings" : [ {
+        "sourceColumn" : "TESTCASERUNID",
+        "targetColumn" : "RUNID"
+      } ],
+      "name" : "FK_P_DUT_RUN_TO_TESTCASEvB8E6",
+      "primary" : false,
+      "selfRelation" : false,
+      "sourceColumnsNotUniqueKey" : true,
+      "sourceTable" : "TESTCASERUN",
+      "targetColumnsUniqueKey" : false,
+      "targetTable" : "P_DUT_RUN",
+      "virtual" : false
+    }, {
+      "cardinality" : "OneToMany",
+      "columnsUniqueKey" : false,
+      "composite" : false,
+      "fieldName" : "pnetworkRuns",
+      "mappings" : [ {
+        "sourceColumn" : "TESTCASERUNID",
+        "targetColumn" : "RUNID"
+      } ],
+      "name" : "FK_P_NETWORK_RUN_TO_TESTtLrQR",
+      "primary" : false,
+      "selfRelation" : false,
+      "sourceColumnsNotUniqueKey" : true,
+      "sourceTable" : "TESTCASERUN",
+      "targetColumnsUniqueKey" : false,
+      "targetTable" : "P_NETWORK_RUN",
+      "virtual" : false
+    } ],
     "schema" : null,
     "type" : "TABLE"
   }, {
@@ -5619,7 +6605,7 @@
       "name" : "TESTCASEID",
       "nullable" : false,
       "oldName" : "TESTCASEID",
-      "partOfAnyRelation" : false,
+      "partOfAnyRelation" : true,
       "partOfForeignKey" : false,
       "partOfPrimaryKey" : true,
       "partOfUniqueKey" : true,
@@ -5686,7 +6672,7 @@
         "defaultValue" : null
       },
       "fieldName" : "productid",
-      "foreignKey" : false,
+      "foreignKey" : true,
       "generatorType" : "assigned",
       "generatorValue" : null,
       "javaType" : "big_integer",
@@ -5694,8 +6680,8 @@
       "name" : "PRODUCTID",
       "nullable" : true,
       "oldName" : "PRODUCTID",
-      "partOfAnyRelation" : false,
-      "partOfForeignKey" : false,
+      "partOfAnyRelation" : true,
+      "partOfForeignKey" : true,
       "partOfPrimaryKey" : false,
       "partOfUniqueKey" : false,
       "precision" : 19,
@@ -5711,7 +6697,7 @@
         "defaultValue" : null
       },
       "fieldName" : "engineid",
-      "foreignKey" : false,
+      "foreignKey" : true,
       "generatorType" : "assigned",
       "generatorValue" : null,
       "javaType" : "big_integer",
@@ -5719,8 +6705,8 @@
       "name" : "ENGINEID",
       "nullable" : true,
       "oldName" : "ENGINEID",
-      "partOfAnyRelation" : false,
-      "partOfForeignKey" : false,
+      "partOfAnyRelation" : true,
+      "partOfForeignKey" : true,
       "partOfPrimaryKey" : false,
       "partOfUniqueKey" : false,
       "precision" : 19,
@@ -5869,7 +6855,58 @@
       "name" : "PRIMARY",
       "virtual" : false
     },
-    "relations" : [ ],
+    "relations" : [ {
+      "cardinality" : "ManyToOne",
+      "columnsUniqueKey" : false,
+      "composite" : false,
+      "fieldName" : "engines",
+      "mappings" : [ {
+        "sourceColumn" : "ENGINEID",
+        "targetColumn" : "ENGINEID"
+      } ],
+      "name" : "FK_TESTCASES_TO_ENGINES_qI3yQ",
+      "primary" : true,
+      "selfRelation" : false,
+      "sourceColumnsNotUniqueKey" : true,
+      "sourceTable" : "TESTCASES",
+      "targetColumnsUniqueKey" : false,
+      "targetTable" : "ENGINES",
+      "virtual" : false
+    }, {
+      "cardinality" : "ManyToOne",
+      "columnsUniqueKey" : false,
+      "composite" : false,
+      "fieldName" : "products",
+      "mappings" : [ {
+        "sourceColumn" : "PRODUCTID",
+        "targetColumn" : "PRODUCTID"
+      } ],
+      "name" : "FK_TESTCASES_TO_PRODUCTSElRik",
+      "primary" : true,
+      "selfRelation" : false,
+      "sourceColumnsNotUniqueKey" : true,
+      "sourceTable" : "TESTCASES",
+      "targetColumnsUniqueKey" : false,
+      "targetTable" : "PRODUCTS",
+      "virtual" : false
+    }, {
+      "cardinality" : "OneToMany",
+      "columnsUniqueKey" : false,
+      "composite" : false,
+      "fieldName" : "testcaseruns",
+      "mappings" : [ {
+        "sourceColumn" : "TESTCASEID",
+        "targetColumn" : "TESTCASEID"
+      } ],
+      "name" : "FK_TESTCASERUN_TO_TESTCAIMpl0",
+      "primary" : false,
+      "selfRelation" : false,
+      "sourceColumnsNotUniqueKey" : true,
+      "sourceTable" : "TESTCASES",
+      "targetColumnsUniqueKey" : false,
+      "targetTable" : "TESTCASERUN",
+      "virtual" : false
+    } ],
     "schema" : null,
     "type" : "TABLE"
   }, {
@@ -6153,7 +7190,7 @@
         "defaultValue" : null
       },
       "fieldName" : "productid",
-      "foreignKey" : false,
+      "foreignKey" : true,
       "generatorType" : "assigned",
       "generatorValue" : null,
       "javaType" : "big_integer",
@@ -6161,8 +7198,8 @@
       "name" : "PRODUCTID",
       "nullable" : true,
       "oldName" : "PRODUCTID",
-      "partOfAnyRelation" : false,
-      "partOfForeignKey" : false,
+      "partOfAnyRelation" : true,
+      "partOfForeignKey" : true,
       "partOfPrimaryKey" : false,
       "partOfUniqueKey" : false,
       "precision" : 19,
@@ -6311,7 +7348,24 @@
       "name" : "PRIMARY",
       "virtual" : false
     },
-    "relations" : [ ],
+    "relations" : [ {
+      "cardinality" : "ManyToOne",
+      "columnsUniqueKey" : false,
+      "composite" : false,
+      "fieldName" : "products",
+      "mappings" : [ {
+        "sourceColumn" : "PRODUCTID",
+        "targetColumn" : "PRODUCTID"
+      } ],
+      "name" : "FK_TESTPLAN_TO_PRODUCTS_qMj5Q",
+      "primary" : true,
+      "selfRelation" : false,
+      "sourceColumnsNotUniqueKey" : true,
+      "sourceTable" : "TESTPLAN",
+      "targetColumnsUniqueKey" : false,
+      "targetTable" : "PRODUCTS",
+      "virtual" : false
+    } ],
     "schema" : null,
     "type" : "TABLE"
   } ]

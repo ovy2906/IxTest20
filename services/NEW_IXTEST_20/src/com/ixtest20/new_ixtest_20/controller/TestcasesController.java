@@ -26,6 +26,7 @@ import com.wavemaker.tools.api.core.models.AccessSpecifier;
 import com.wordnik.swagger.annotations.Api;
 import com.wordnik.swagger.annotations.ApiOperation;
 import com.wordnik.swagger.annotations.ApiParam;
+import com.ixtest20.new_ixtest_20.Testcaserun;
 import com.ixtest20.new_ixtest_20.Testcases;
 import com.ixtest20.new_ixtest_20.service.TestcasesService;
 
@@ -117,6 +118,13 @@ public class TestcasesController {
     public Long countTestcases(@ApiParam("conditions to filter the results") @RequestParam(value = "q", required = false) String query) {
         LOGGER.debug("counting Testcases");
         return testcasesService.count(query);
+    }
+
+    @RequestMapping(value = "/{id:.+}/testcaseruns", method = RequestMethod.GET)
+    @ApiOperation(value = "Gets the testcaseruns instance associated with the given id.")
+    public Page<Testcaserun> findAssociatedTestcaseruns(@PathVariable("id") BigInteger id, Pageable pageable) {
+        LOGGER.debug("Fetching all associated testcaseruns");
+        return testcasesService.findAssociatedTestcaseruns(id, pageable);
     }
 
     /**

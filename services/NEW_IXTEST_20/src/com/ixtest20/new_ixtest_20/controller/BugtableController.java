@@ -27,6 +27,7 @@ import com.wordnik.swagger.annotations.Api;
 import com.wordnik.swagger.annotations.ApiOperation;
 import com.wordnik.swagger.annotations.ApiParam;
 import com.ixtest20.new_ixtest_20.Bugtable;
+import com.ixtest20.new_ixtest_20.PBugtableRun;
 import com.ixtest20.new_ixtest_20.service.BugtableService;
 
 /**
@@ -117,6 +118,14 @@ public class BugtableController {
     public Long countBugtables(@ApiParam("conditions to filter the results") @RequestParam(value = "q", required = false) String query) {
         LOGGER.debug("counting Bugtables");
         return bugtableService.count(query);
+    }
+
+    @RequestMapping(value = "/{id}/pbugtableRuns", method = RequestMethod.GET)
+    @ApiOperation(value = "Gets the pbugtableRuns instance associated with the given id.")
+    @WMAccessVisibility(value = AccessSpecifier.APP_ONLY)
+    public Page<PBugtableRun> findAssociatedPbugtableRuns(@PathVariable("id") BigInteger id, Pageable pageable) {
+        LOGGER.debug("Fetching all associated pbugtableRuns");
+        return bugtableService.findAssociatedPbugtableRuns(id, pageable);
     }
 
     /**

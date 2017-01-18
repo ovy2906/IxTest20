@@ -16,6 +16,7 @@ import com.wavemaker.runtime.data.expression.QueryFilter;
 import com.wavemaker.runtime.file.model.Downloadable;
 
 import com.ixtest20.new_ixtest_20.Network;
+import com.ixtest20.new_ixtest_20.PNetworkRun;
 
 /**
  * Service object for domain model class {@link Network}.
@@ -126,6 +127,17 @@ public interface NetworkService {
 	 */
 	long count(String query);
 
+    /*
+     * Returns the associated pnetworkRuns for given Network id.
+     *
+     * @param networkid value of networkid; value cannot be null
+     * @param pageable Details of the pagination information along with the sorting options. If null returns all matching records.
+     * @return Paginated list of associated PNetworkRun instances.
+     *
+     * @see Pageable
+     * @see Page
+     */
+    Page<PNetworkRun> findAssociatedPnetworkRuns(BigInteger networkid, Pageable pageable);
 
 }
 

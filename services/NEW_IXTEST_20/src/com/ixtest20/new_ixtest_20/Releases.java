@@ -11,7 +11,10 @@ import java.util.Objects;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
@@ -24,6 +27,7 @@ public class Releases implements Serializable {
     private Integer releaseid;
     private String releasename;
     private BigInteger productid;
+    private Products products;
 
     @Id
     @Column(name = "`RELEASEID`", nullable = false, scale = 0, precision = 10)
@@ -53,6 +57,19 @@ public class Releases implements Serializable {
         this.productid = productid;
     }
 
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "`PRODUCTID`", referencedColumnName = "`PRODUCTID`", insertable = false, updatable = false)
+    public Products getProducts() {
+        return this.products;
+    }
+
+    public void setProducts(Products products) {
+        if(products != null) {
+            this.productid = products.getProductid();
+        }
+
+        this.products = products;
+    }
 
     @Override
     public boolean equals(Object o) {

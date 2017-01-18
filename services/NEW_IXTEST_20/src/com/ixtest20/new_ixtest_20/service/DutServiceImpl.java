@@ -23,6 +23,7 @@ import com.wavemaker.runtime.data.expression.QueryFilter;
 import com.wavemaker.runtime.file.model.Downloadable;
 
 import com.ixtest20.new_ixtest_20.Dut;
+import com.ixtest20.new_ixtest_20.PDutRun;
 
 
 /**
@@ -35,6 +36,9 @@ public class DutServiceImpl implements DutService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(DutServiceImpl.class);
 
+    @Autowired
+	@Qualifier("NEW_IXTEST_20.PDutRunService")
+	private PDutRunService pDutRunService;
 
     @Autowired
     @Qualifier("NEW_IXTEST_20.DutDao")
@@ -49,6 +53,13 @@ public class DutServiceImpl implements DutService {
 	public Dut create(Dut dut) {
         LOGGER.debug("Creating a new Dut with information: {}", dut);
         Dut dutCreated = this.wmGenericDao.create(dut);
+        if(dutCreated.getPdutRuns() != null) {
+            for(PDutRun pdutRun : dutCreated.getPdutRuns()) {
+                pdutRun.setDut(dutCreated);
+                LOGGER.debug("Creating a new child PDutRun with information: {}", pdutRun);
+                pDutRunService.create(pdutRun);
+            }
+        }
         return dutCreated;
     }
 
@@ -123,7 +134,25 @@ public class DutServiceImpl implements DutService {
         return this.wmGenericDao.count(query);
     }
 
+    @Transactional(readOnly = true, value = "NEW_IXTEST_20TransactionManager")
+    @Override
+    public Page<PDutRun> findAssociatedPdutRuns(BigInteger dutid, Pageable pageable) {
+        LOGGER.debug("Fetching all associated pdutRuns");
 
+        StringBuilder queryBuilder = new StringBuilder();
+        queryBuilder.append("dut.dutid = '" + dutid + "'");
+
+        return pDutRunService.findAll(queryBuilder.toString(), pageable);
+    }
+
+    /**
+	 * This setter method should only be used by unit tests
+	 *
+	 * @param service PDutRunService instance
+	 */
+	protected void setPDutRunService(PDutRunService service) {
+        this.pDutRunService = service;
+    }
 
 }
 

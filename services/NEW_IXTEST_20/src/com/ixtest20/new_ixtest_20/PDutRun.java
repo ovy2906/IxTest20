@@ -12,7 +12,10 @@ import java.util.Objects;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
@@ -26,6 +29,8 @@ public class PDutRun implements Serializable {
     private BigInteger dutid;
     private BigInteger runid;
     private BigDecimal invalid;
+    private Testcaserun testcaserun;
+    private Dut dut;
 
     @Id
     @Column(name = "`ID`", nullable = false, scale = 0, precision = 19)
@@ -64,6 +69,33 @@ public class PDutRun implements Serializable {
         this.invalid = invalid;
     }
 
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "`RUNID`", referencedColumnName = "`TESTCASERUNID`", insertable = false, updatable = false)
+    public Testcaserun getTestcaserun() {
+        return this.testcaserun;
+    }
+
+    public void setTestcaserun(Testcaserun testcaserun) {
+        if(testcaserun != null) {
+            this.runid = testcaserun.getTestcaserunid();
+        }
+
+        this.testcaserun = testcaserun;
+    }
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "`DUTID`", referencedColumnName = "`DUTID`", insertable = false, updatable = false)
+    public Dut getDut() {
+        return this.dut;
+    }
+
+    public void setDut(Dut dut) {
+        if(dut != null) {
+            this.dutid = dut.getDutid();
+        }
+
+        this.dut = dut;
+    }
 
     @Override
     public boolean equals(Object o) {

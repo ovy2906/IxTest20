@@ -15,7 +15,15 @@ import com.wavemaker.runtime.data.export.ExportType;
 import com.wavemaker.runtime.data.expression.QueryFilter;
 import com.wavemaker.runtime.file.model.Downloadable;
 
+import com.ixtest20.new_ixtest_20.Builds;
+import com.ixtest20.new_ixtest_20.Engines;
+import com.ixtest20.new_ixtest_20.IopBuildApps;
+import com.ixtest20.new_ixtest_20.IopEnginesDetails;
 import com.ixtest20.new_ixtest_20.Products;
+import com.ixtest20.new_ixtest_20.Releases;
+import com.ixtest20.new_ixtest_20.Testcaserun;
+import com.ixtest20.new_ixtest_20.Testcases;
+import com.ixtest20.new_ixtest_20.Testplan;
 
 /**
  * Service object for domain model class {@link Products}.
@@ -126,6 +134,101 @@ public interface ProductsService {
 	 */
 	long count(String query);
 
+    /*
+     * Returns the associated buildses for given Products id.
+     *
+     * @param productid value of productid; value cannot be null
+     * @param pageable Details of the pagination information along with the sorting options. If null returns all matching records.
+     * @return Paginated list of associated Builds instances.
+     *
+     * @see Pageable
+     * @see Page
+     */
+    Page<Builds> findAssociatedBuildses(BigInteger productid, Pageable pageable);
+
+    /*
+     * Returns the associated engineses for given Products id.
+     *
+     * @param productid value of productid; value cannot be null
+     * @param pageable Details of the pagination information along with the sorting options. If null returns all matching records.
+     * @return Paginated list of associated Engines instances.
+     *
+     * @see Pageable
+     * @see Page
+     */
+    Page<Engines> findAssociatedEngineses(BigInteger productid, Pageable pageable);
+
+    /*
+     * Returns the associated iopBuildAppses for given Products id.
+     *
+     * @param productid value of productid; value cannot be null
+     * @param pageable Details of the pagination information along with the sorting options. If null returns all matching records.
+     * @return Paginated list of associated IopBuildApps instances.
+     *
+     * @see Pageable
+     * @see Page
+     */
+    Page<IopBuildApps> findAssociatedIopBuildAppses(BigInteger productid, Pageable pageable);
+
+    /*
+     * Returns the associated iopEnginesDetailses for given Products id.
+     *
+     * @param productid value of productid; value cannot be null
+     * @param pageable Details of the pagination information along with the sorting options. If null returns all matching records.
+     * @return Paginated list of associated IopEnginesDetails instances.
+     *
+     * @see Pageable
+     * @see Page
+     */
+    Page<IopEnginesDetails> findAssociatedIopEnginesDetailses(BigInteger productid, Pageable pageable);
+
+    /*
+     * Returns the associated releaseses for given Products id.
+     *
+     * @param productid value of productid; value cannot be null
+     * @param pageable Details of the pagination information along with the sorting options. If null returns all matching records.
+     * @return Paginated list of associated Releases instances.
+     *
+     * @see Pageable
+     * @see Page
+     */
+    Page<Releases> findAssociatedReleaseses(BigInteger productid, Pageable pageable);
+
+    /*
+     * Returns the associated testcaseruns for given Products id.
+     *
+     * @param productid value of productid; value cannot be null
+     * @param pageable Details of the pagination information along with the sorting options. If null returns all matching records.
+     * @return Paginated list of associated Testcaserun instances.
+     *
+     * @see Pageable
+     * @see Page
+     */
+    Page<Testcaserun> findAssociatedTestcaseruns(BigInteger productid, Pageable pageable);
+
+    /*
+     * Returns the associated testcaseses for given Products id.
+     *
+     * @param productid value of productid; value cannot be null
+     * @param pageable Details of the pagination information along with the sorting options. If null returns all matching records.
+     * @return Paginated list of associated Testcases instances.
+     *
+     * @see Pageable
+     * @see Page
+     */
+    Page<Testcases> findAssociatedTestcaseses(BigInteger productid, Pageable pageable);
+
+    /*
+     * Returns the associated testplans for given Products id.
+     *
+     * @param productid value of productid; value cannot be null
+     * @param pageable Details of the pagination information along with the sorting options. If null returns all matching records.
+     * @return Paginated list of associated Testplan instances.
+     *
+     * @see Pageable
+     * @see Page
+     */
+    Page<Testplan> findAssociatedTestplans(BigInteger productid, Pageable pageable);
 
 }
 

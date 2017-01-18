@@ -15,6 +15,8 @@ import com.wavemaker.runtime.data.export.ExportType;
 import com.wavemaker.runtime.data.expression.QueryFilter;
 import com.wavemaker.runtime.file.model.Downloadable;
 
+import com.ixtest20.new_ixtest_20.PDutRun;
+import com.ixtest20.new_ixtest_20.PNetworkRun;
 import com.ixtest20.new_ixtest_20.Testcaserun;
 
 /**
@@ -126,6 +128,29 @@ public interface TestcaserunService {
 	 */
 	long count(String query);
 
+    /*
+     * Returns the associated pdutRuns for given Testcaserun id.
+     *
+     * @param testcaserunid value of testcaserunid; value cannot be null
+     * @param pageable Details of the pagination information along with the sorting options. If null returns all matching records.
+     * @return Paginated list of associated PDutRun instances.
+     *
+     * @see Pageable
+     * @see Page
+     */
+    Page<PDutRun> findAssociatedPdutRuns(BigInteger testcaserunid, Pageable pageable);
+
+    /*
+     * Returns the associated pnetworkRuns for given Testcaserun id.
+     *
+     * @param testcaserunid value of testcaserunid; value cannot be null
+     * @param pageable Details of the pagination information along with the sorting options. If null returns all matching records.
+     * @return Paginated list of associated PNetworkRun instances.
+     *
+     * @see Pageable
+     * @see Page
+     */
+    Page<PNetworkRun> findAssociatedPnetworkRuns(BigInteger testcaserunid, Pageable pageable);
 
 }
 

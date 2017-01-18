@@ -23,6 +23,8 @@ import com.wavemaker.runtime.data.expression.QueryFilter;
 import com.wavemaker.runtime.file.model.Downloadable;
 
 import com.ixtest20.new_ixtest_20.AuthUser;
+import com.ixtest20.new_ixtest_20.AuthUserGroups;
+import com.ixtest20.new_ixtest_20.AuthUserUserPermissions;
 
 
 /**
@@ -35,6 +37,13 @@ public class AuthUserServiceImpl implements AuthUserService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(AuthUserServiceImpl.class);
 
+    @Autowired
+	@Qualifier("NEW_IXTEST_20.AuthUserGroupsService")
+	private AuthUserGroupsService authUserGroupsService;
+
+    @Autowired
+	@Qualifier("NEW_IXTEST_20.AuthUserUserPermissionsService")
+	private AuthUserUserPermissionsService authUserUserPermissionsService;
 
     @Autowired
     @Qualifier("NEW_IXTEST_20.AuthUserDao")
@@ -49,6 +58,21 @@ public class AuthUserServiceImpl implements AuthUserService {
 	public AuthUser create(AuthUser authUser) {
         LOGGER.debug("Creating a new AuthUser with information: {}", authUser);
         AuthUser authUserCreated = this.wmGenericDao.create(authUser);
+        if(authUserCreated.getAuthUserGroupses() != null) {
+            for(AuthUserGroups authUserGroupse : authUserCreated.getAuthUserGroupses()) {
+                authUserGroupse.setAuthUser(authUserCreated);
+                LOGGER.debug("Creating a new child AuthUserGroups with information: {}", authUserGroupse);
+                authUserGroupsService.create(authUserGroupse);
+            }
+        }
+
+        if(authUserCreated.getAuthUserUserPermissionses() != null) {
+            for(AuthUserUserPermissions authUserUserPermissionse : authUserCreated.getAuthUserUserPermissionses()) {
+                authUserUserPermissionse.setAuthUser(authUserCreated);
+                LOGGER.debug("Creating a new child AuthUserUserPermissions with information: {}", authUserUserPermissionse);
+                authUserUserPermissionsService.create(authUserUserPermissionse);
+            }
+        }
         return authUserCreated;
     }
 
@@ -123,7 +147,45 @@ public class AuthUserServiceImpl implements AuthUserService {
         return this.wmGenericDao.count(query);
     }
 
+    @Transactional(readOnly = true, value = "NEW_IXTEST_20TransactionManager")
+    @Override
+    public Page<AuthUserGroups> findAssociatedAuthUserGroupses(BigInteger id, Pageable pageable) {
+        LOGGER.debug("Fetching all associated authUserGroupses");
 
+        StringBuilder queryBuilder = new StringBuilder();
+        queryBuilder.append("authUser.id = '" + id + "'");
+
+        return authUserGroupsService.findAll(queryBuilder.toString(), pageable);
+    }
+
+    @Transactional(readOnly = true, value = "NEW_IXTEST_20TransactionManager")
+    @Override
+    public Page<AuthUserUserPermissions> findAssociatedAuthUserUserPermissionses(BigInteger id, Pageable pageable) {
+        LOGGER.debug("Fetching all associated authUserUserPermissionses");
+
+        StringBuilder queryBuilder = new StringBuilder();
+        queryBuilder.append("authUser.id = '" + id + "'");
+
+        return authUserUserPermissionsService.findAll(queryBuilder.toString(), pageable);
+    }
+
+    /**
+	 * This setter method should only be used by unit tests
+	 *
+	 * @param service AuthUserGroupsService instance
+	 */
+	protected void setAuthUserGroupsService(AuthUserGroupsService service) {
+        this.authUserGroupsService = service;
+    }
+
+    /**
+	 * This setter method should only be used by unit tests
+	 *
+	 * @param service AuthUserUserPermissionsService instance
+	 */
+	protected void setAuthUserUserPermissionsService(AuthUserUserPermissionsService service) {
+        this.authUserUserPermissionsService = service;
+    }
 
 }
 

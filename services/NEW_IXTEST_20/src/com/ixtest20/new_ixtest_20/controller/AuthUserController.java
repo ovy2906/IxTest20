@@ -27,6 +27,8 @@ import com.wordnik.swagger.annotations.Api;
 import com.wordnik.swagger.annotations.ApiOperation;
 import com.wordnik.swagger.annotations.ApiParam;
 import com.ixtest20.new_ixtest_20.AuthUser;
+import com.ixtest20.new_ixtest_20.AuthUserGroups;
+import com.ixtest20.new_ixtest_20.AuthUserUserPermissions;
 import com.ixtest20.new_ixtest_20.service.AuthUserService;
 
 /**
@@ -117,6 +119,22 @@ public class AuthUserController {
     public Long countAuthUsers(@ApiParam("conditions to filter the results") @RequestParam(value = "q", required = false) String query) {
         LOGGER.debug("counting AuthUsers");
         return authUserService.count(query);
+    }
+
+    @RequestMapping(value = "/{id}/authUserGroupses", method = RequestMethod.GET)
+    @ApiOperation(value = "Gets the authUserGroupses instance associated with the given id.")
+    @WMAccessVisibility(value = AccessSpecifier.APP_ONLY)
+    public Page<AuthUserGroups> findAssociatedAuthUserGroupses(@PathVariable("id") BigInteger id, Pageable pageable) {
+        LOGGER.debug("Fetching all associated authUserGroupses");
+        return authUserService.findAssociatedAuthUserGroupses(id, pageable);
+    }
+
+    @RequestMapping(value = "/{id}/authUserUserPermissionses", method = RequestMethod.GET)
+    @ApiOperation(value = "Gets the authUserUserPermissionses instance associated with the given id.")
+    @WMAccessVisibility(value = AccessSpecifier.APP_ONLY)
+    public Page<AuthUserUserPermissions> findAssociatedAuthUserUserPermissionses(@PathVariable("id") BigInteger id, Pageable pageable) {
+        LOGGER.debug("Fetching all associated authUserUserPermissionses");
+        return authUserService.findAssociatedAuthUserUserPermissionses(id, pageable);
     }
 
     /**

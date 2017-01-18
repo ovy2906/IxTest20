@@ -26,6 +26,7 @@ import com.wavemaker.tools.api.core.models.AccessSpecifier;
 import com.wordnik.swagger.annotations.Api;
 import com.wordnik.swagger.annotations.ApiOperation;
 import com.wordnik.swagger.annotations.ApiParam;
+import com.ixtest20.new_ixtest_20.AuthPermission;
 import com.ixtest20.new_ixtest_20.DjangoContentType;
 import com.ixtest20.new_ixtest_20.service.DjangoContentTypeService;
 
@@ -117,6 +118,14 @@ public class DjangoContentTypeController {
     public Long countDjangoContentTypes(@ApiParam("conditions to filter the results") @RequestParam(value = "q", required = false) String query) {
         LOGGER.debug("counting DjangoContentTypes");
         return djangoContentTypeService.count(query);
+    }
+
+    @RequestMapping(value = "/{id}/authPermissions", method = RequestMethod.GET)
+    @ApiOperation(value = "Gets the authPermissions instance associated with the given id.")
+    @WMAccessVisibility(value = AccessSpecifier.APP_ONLY)
+    public Page<AuthPermission> findAssociatedAuthPermissions(@PathVariable("id") BigInteger id, Pageable pageable) {
+        LOGGER.debug("Fetching all associated authPermissions");
+        return djangoContentTypeService.findAssociatedAuthPermissions(id, pageable);
     }
 
     /**

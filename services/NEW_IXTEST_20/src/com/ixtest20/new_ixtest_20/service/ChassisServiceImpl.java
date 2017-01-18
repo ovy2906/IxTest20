@@ -23,6 +23,7 @@ import com.wavemaker.runtime.data.expression.QueryFilter;
 import com.wavemaker.runtime.file.model.Downloadable;
 
 import com.ixtest20.new_ixtest_20.Chassis;
+import com.ixtest20.new_ixtest_20.Network;
 
 
 /**
@@ -35,6 +36,9 @@ public class ChassisServiceImpl implements ChassisService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ChassisServiceImpl.class);
 
+    @Autowired
+	@Qualifier("NEW_IXTEST_20.NetworkService")
+	private NetworkService networkService;
 
     @Autowired
     @Qualifier("NEW_IXTEST_20.ChassisDao")
@@ -49,6 +53,13 @@ public class ChassisServiceImpl implements ChassisService {
 	public Chassis create(Chassis chassis) {
         LOGGER.debug("Creating a new Chassis with information: {}", chassis);
         Chassis chassisCreated = this.wmGenericDao.create(chassis);
+        if(chassisCreated.getNetworks() != null) {
+            for(Network network : chassisCreated.getNetworks()) {
+                network.setChassis(chassisCreated);
+                LOGGER.debug("Creating a new child Network with information: {}", network);
+                networkService.create(network);
+            }
+        }
         return chassisCreated;
     }
 
@@ -123,7 +134,25 @@ public class ChassisServiceImpl implements ChassisService {
         return this.wmGenericDao.count(query);
     }
 
+    @Transactional(readOnly = true, value = "NEW_IXTEST_20TransactionManager")
+    @Override
+    public Page<Network> findAssociatedNetworks(BigInteger chassisid, Pageable pageable) {
+        LOGGER.debug("Fetching all associated networks");
 
+        StringBuilder queryBuilder = new StringBuilder();
+        queryBuilder.append("chassis.chassisid = '" + chassisid + "'");
+
+        return networkService.findAll(queryBuilder.toString(), pageable);
+    }
+
+    /**
+	 * This setter method should only be used by unit tests
+	 *
+	 * @param service NetworkService instance
+	 */
+	protected void setNetworkService(NetworkService service) {
+        this.networkService = service;
+    }
 
 }
 

@@ -27,6 +27,7 @@ import com.wordnik.swagger.annotations.Api;
 import com.wordnik.swagger.annotations.ApiOperation;
 import com.wordnik.swagger.annotations.ApiParam;
 import com.ixtest20.new_ixtest_20.Dut;
+import com.ixtest20.new_ixtest_20.PDutRun;
 import com.ixtest20.new_ixtest_20.service.DutService;
 
 /**
@@ -117,6 +118,14 @@ public class DutController {
     public Long countDuts(@ApiParam("conditions to filter the results") @RequestParam(value = "q", required = false) String query) {
         LOGGER.debug("counting Duts");
         return dutService.count(query);
+    }
+
+    @RequestMapping(value = "/{id}/pdutRuns", method = RequestMethod.GET)
+    @ApiOperation(value = "Gets the pdutRuns instance associated with the given id.")
+    @WMAccessVisibility(value = AccessSpecifier.APP_ONLY)
+    public Page<PDutRun> findAssociatedPdutRuns(@PathVariable("id") BigInteger id, Pageable pageable) {
+        LOGGER.debug("Fetching all associated pdutRuns");
+        return dutService.findAssociatedPdutRuns(id, pageable);
     }
 
     /**

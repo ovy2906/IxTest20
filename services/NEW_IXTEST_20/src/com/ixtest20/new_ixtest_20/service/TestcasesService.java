@@ -15,6 +15,7 @@ import com.wavemaker.runtime.data.export.ExportType;
 import com.wavemaker.runtime.data.expression.QueryFilter;
 import com.wavemaker.runtime.file.model.Downloadable;
 
+import com.ixtest20.new_ixtest_20.Testcaserun;
 import com.ixtest20.new_ixtest_20.Testcases;
 
 /**
@@ -126,6 +127,17 @@ public interface TestcasesService {
 	 */
 	long count(String query);
 
+    /*
+     * Returns the associated testcaseruns for given Testcases id.
+     *
+     * @param testcaseid value of testcaseid; value cannot be null
+     * @param pageable Details of the pagination information along with the sorting options. If null returns all matching records.
+     * @return Paginated list of associated Testcaserun instances.
+     *
+     * @see Pageable
+     * @see Page
+     */
+    Page<Testcaserun> findAssociatedTestcaseruns(BigInteger testcaseid, Pageable pageable);
 
 }
 

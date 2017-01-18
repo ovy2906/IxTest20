@@ -12,9 +12,12 @@ import java.util.Objects;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
@@ -28,6 +31,7 @@ public class PBugtableRun implements Serializable {
     private BigInteger bugid;
     private BigInteger runid;
     private BigDecimal invalid;
+    private Bugtable bugtable;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -67,6 +71,19 @@ public class PBugtableRun implements Serializable {
         this.invalid = invalid;
     }
 
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "`BUGID`", referencedColumnName = "`BUGID`", insertable = false, updatable = false)
+    public Bugtable getBugtable() {
+        return this.bugtable;
+    }
+
+    public void setBugtable(Bugtable bugtable) {
+        if(bugtable != null) {
+            this.bugid = bugtable.getBugid();
+        }
+
+        this.bugtable = bugtable;
+    }
 
     @Override
     public boolean equals(Object o) {

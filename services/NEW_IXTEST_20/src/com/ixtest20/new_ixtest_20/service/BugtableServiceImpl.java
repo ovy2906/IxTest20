@@ -23,6 +23,7 @@ import com.wavemaker.runtime.data.expression.QueryFilter;
 import com.wavemaker.runtime.file.model.Downloadable;
 
 import com.ixtest20.new_ixtest_20.Bugtable;
+import com.ixtest20.new_ixtest_20.PBugtableRun;
 
 
 /**
@@ -35,6 +36,9 @@ public class BugtableServiceImpl implements BugtableService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(BugtableServiceImpl.class);
 
+    @Autowired
+	@Qualifier("NEW_IXTEST_20.PBugtableRunService")
+	private PBugtableRunService pBugtableRunService;
 
     @Autowired
     @Qualifier("NEW_IXTEST_20.BugtableDao")
@@ -49,6 +53,13 @@ public class BugtableServiceImpl implements BugtableService {
 	public Bugtable create(Bugtable bugtable) {
         LOGGER.debug("Creating a new Bugtable with information: {}", bugtable);
         Bugtable bugtableCreated = this.wmGenericDao.create(bugtable);
+        if(bugtableCreated.getPbugtableRuns() != null) {
+            for(PBugtableRun pbugtableRun : bugtableCreated.getPbugtableRuns()) {
+                pbugtableRun.setBugtable(bugtableCreated);
+                LOGGER.debug("Creating a new child PBugtableRun with information: {}", pbugtableRun);
+                pBugtableRunService.create(pbugtableRun);
+            }
+        }
         return bugtableCreated;
     }
 
@@ -123,7 +134,25 @@ public class BugtableServiceImpl implements BugtableService {
         return this.wmGenericDao.count(query);
     }
 
+    @Transactional(readOnly = true, value = "NEW_IXTEST_20TransactionManager")
+    @Override
+    public Page<PBugtableRun> findAssociatedPbugtableRuns(BigInteger bugid, Pageable pageable) {
+        LOGGER.debug("Fetching all associated pbugtableRuns");
 
+        StringBuilder queryBuilder = new StringBuilder();
+        queryBuilder.append("bugtable.bugid = '" + bugid + "'");
+
+        return pBugtableRunService.findAll(queryBuilder.toString(), pageable);
+    }
+
+    /**
+	 * This setter method should only be used by unit tests
+	 *
+	 * @param service PBugtableRunService instance
+	 */
+	protected void setPBugtableRunService(PBugtableRunService service) {
+        this.pBugtableRunService = service;
+    }
 
 }
 

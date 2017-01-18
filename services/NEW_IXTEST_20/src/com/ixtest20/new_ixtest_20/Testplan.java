@@ -12,8 +12,11 @@ import java.util.Objects;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.Type;
@@ -36,6 +39,7 @@ public class Testplan implements Serializable {
     @Type(type = "DateTime")
     private LocalDateTime updatedon;
     private BigDecimal status;
+    private Products products;
 
     @Id
     @Column(name = "`BRANCHID`", nullable = true, scale = 0, precision = 19)
@@ -118,6 +122,19 @@ public class Testplan implements Serializable {
     }
 
 
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "`PRODUCTID`", referencedColumnName = "`PRODUCTID`", insertable = false, updatable = false)
+    public Products getProducts() {
+        return this.products;
+    }
+
+    public void setProducts(Products products) {
+        if(products != null) {
+            this.productid = products.getProductid();
+        }
+
+        this.products = products;
+    }
 
     @Override
     public boolean equals(Object o) {

@@ -12,7 +12,10 @@ import java.util.Objects;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
@@ -26,6 +29,8 @@ public class PNetworkRun implements Serializable {
     private BigInteger testconfigid;
     private BigInteger runid;
     private BigDecimal invalid;
+    private Testcaserun testcaserun;
+    private Network network;
 
     @Id
     @Column(name = "`ID`", nullable = false, scale = 0, precision = 19)
@@ -64,6 +69,33 @@ public class PNetworkRun implements Serializable {
         this.invalid = invalid;
     }
 
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "`RUNID`", referencedColumnName = "`TESTCASERUNID`", insertable = false, updatable = false)
+    public Testcaserun getTestcaserun() {
+        return this.testcaserun;
+    }
+
+    public void setTestcaserun(Testcaserun testcaserun) {
+        if(testcaserun != null) {
+            this.runid = testcaserun.getTestcaserunid();
+        }
+
+        this.testcaserun = testcaserun;
+    }
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "`TESTCONFIGID`", referencedColumnName = "`NETWORKID`", insertable = false, updatable = false)
+    public Network getNetwork() {
+        return this.network;
+    }
+
+    public void setNetwork(Network network) {
+        if(network != null) {
+            this.testconfigid = network.getNetworkid();
+        }
+
+        this.network = network;
+    }
 
     @Override
     public boolean equals(Object o) {

@@ -27,6 +27,10 @@ import com.wordnik.swagger.annotations.Api;
 import com.wordnik.swagger.annotations.ApiOperation;
 import com.wordnik.swagger.annotations.ApiParam;
 import com.ixtest20.new_ixtest_20.Builds;
+import com.ixtest20.new_ixtest_20.Engines;
+import com.ixtest20.new_ixtest_20.IopBuildApps;
+import com.ixtest20.new_ixtest_20.IopSuite;
+import com.ixtest20.new_ixtest_20.Testcaserun;
 import com.ixtest20.new_ixtest_20.service.BuildsService;
 
 /**
@@ -117,6 +121,37 @@ public class BuildsController {
     public Long countBuilds(@ApiParam("conditions to filter the results") @RequestParam(value = "q", required = false) String query) {
         LOGGER.debug("counting Builds");
         return buildsService.count(query);
+    }
+
+    @RequestMapping(value = "/{id}/engineses", method = RequestMethod.GET)
+    @ApiOperation(value = "Gets the engineses instance associated with the given id.")
+    @WMAccessVisibility(value = AccessSpecifier.APP_ONLY)
+    public Page<Engines> findAssociatedEngineses(@PathVariable("id") BigInteger id, Pageable pageable) {
+        LOGGER.debug("Fetching all associated engineses");
+        return buildsService.findAssociatedEngineses(id, pageable);
+    }
+
+    @RequestMapping(value = "/{id}/iopBuildAppses", method = RequestMethod.GET)
+    @ApiOperation(value = "Gets the iopBuildAppses instance associated with the given id.")
+    @WMAccessVisibility(value = AccessSpecifier.APP_ONLY)
+    public Page<IopBuildApps> findAssociatedIopBuildAppses(@PathVariable("id") BigInteger id, Pageable pageable) {
+        LOGGER.debug("Fetching all associated iopBuildAppses");
+        return buildsService.findAssociatedIopBuildAppses(id, pageable);
+    }
+
+    @RequestMapping(value = "/{id}/iopSuites", method = RequestMethod.GET)
+    @ApiOperation(value = "Gets the iopSuites instance associated with the given id.")
+    @WMAccessVisibility(value = AccessSpecifier.APP_ONLY)
+    public Page<IopSuite> findAssociatedIopSuites(@PathVariable("id") BigInteger id, Pageable pageable) {
+        LOGGER.debug("Fetching all associated iopSuites");
+        return buildsService.findAssociatedIopSuites(id, pageable);
+    }
+
+    @RequestMapping(value = "/{id:.+}/testcaseruns", method = RequestMethod.GET)
+    @ApiOperation(value = "Gets the testcaseruns instance associated with the given id.")
+    public Page<Testcaserun> findAssociatedTestcaseruns(@PathVariable("id") BigInteger id, Pageable pageable) {
+        LOGGER.debug("Fetching all associated testcaseruns");
+        return buildsService.findAssociatedTestcaseruns(id, pageable);
     }
 
     /**

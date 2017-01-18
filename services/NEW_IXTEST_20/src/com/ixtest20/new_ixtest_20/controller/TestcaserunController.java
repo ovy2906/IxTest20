@@ -26,6 +26,8 @@ import com.wavemaker.tools.api.core.models.AccessSpecifier;
 import com.wordnik.swagger.annotations.Api;
 import com.wordnik.swagger.annotations.ApiOperation;
 import com.wordnik.swagger.annotations.ApiParam;
+import com.ixtest20.new_ixtest_20.PDutRun;
+import com.ixtest20.new_ixtest_20.PNetworkRun;
 import com.ixtest20.new_ixtest_20.Testcaserun;
 import com.ixtest20.new_ixtest_20.service.TestcaserunService;
 
@@ -117,6 +119,21 @@ public class TestcaserunController {
     public Long countTestcaseruns(@ApiParam("conditions to filter the results") @RequestParam(value = "q", required = false) String query) {
         LOGGER.debug("counting Testcaseruns");
         return testcaserunService.count(query);
+    }
+
+    @RequestMapping(value = "/{id}/pdutRuns", method = RequestMethod.GET)
+    @ApiOperation(value = "Gets the pdutRuns instance associated with the given id.")
+    @WMAccessVisibility(value = AccessSpecifier.APP_ONLY)
+    public Page<PDutRun> findAssociatedPdutRuns(@PathVariable("id") BigInteger id, Pageable pageable) {
+        LOGGER.debug("Fetching all associated pdutRuns");
+        return testcaserunService.findAssociatedPdutRuns(id, pageable);
+    }
+
+    @RequestMapping(value = "/{id:.+}/pnetworkRuns", method = RequestMethod.GET)
+    @ApiOperation(value = "Gets the pnetworkRuns instance associated with the given id.")
+    public Page<PNetworkRun> findAssociatedPnetworkRuns(@PathVariable("id") BigInteger id, Pageable pageable) {
+        LOGGER.debug("Fetching all associated pnetworkRuns");
+        return testcaserunService.findAssociatedPnetworkRuns(id, pageable);
     }
 
     /**

@@ -23,6 +23,7 @@ import com.wavemaker.runtime.data.expression.QueryFilter;
 import com.wavemaker.runtime.file.model.Downloadable;
 
 import com.ixtest20.new_ixtest_20.AssociatedApp;
+import com.ixtest20.new_ixtest_20.Builds;
 
 
 /**
@@ -35,6 +36,9 @@ public class AssociatedAppServiceImpl implements AssociatedAppService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(AssociatedAppServiceImpl.class);
 
+    @Autowired
+	@Qualifier("NEW_IXTEST_20.BuildsService")
+	private BuildsService buildsService;
 
     @Autowired
     @Qualifier("NEW_IXTEST_20.AssociatedAppDao")
@@ -49,6 +53,13 @@ public class AssociatedAppServiceImpl implements AssociatedAppService {
 	public AssociatedApp create(AssociatedApp associatedApp) {
         LOGGER.debug("Creating a new AssociatedApp with information: {}", associatedApp);
         AssociatedApp associatedAppCreated = this.wmGenericDao.create(associatedApp);
+        if(associatedAppCreated.getBuildses() != null) {
+            for(Builds buildse : associatedAppCreated.getBuildses()) {
+                buildse.setAssociatedApp(associatedAppCreated);
+                LOGGER.debug("Creating a new child Builds with information: {}", buildse);
+                buildsService.create(buildse);
+            }
+        }
         return associatedAppCreated;
     }
 
@@ -123,7 +134,25 @@ public class AssociatedAppServiceImpl implements AssociatedAppService {
         return this.wmGenericDao.count(query);
     }
 
+    @Transactional(readOnly = true, value = "NEW_IXTEST_20TransactionManager")
+    @Override
+    public Page<Builds> findAssociatedBuildses(BigInteger id, Pageable pageable) {
+        LOGGER.debug("Fetching all associated buildses");
 
+        StringBuilder queryBuilder = new StringBuilder();
+        queryBuilder.append("associatedApp.id = '" + id + "'");
+
+        return buildsService.findAll(queryBuilder.toString(), pageable);
+    }
+
+    /**
+	 * This setter method should only be used by unit tests
+	 *
+	 * @param service BuildsService instance
+	 */
+	protected void setBuildsService(BuildsService service) {
+        this.buildsService = service;
+    }
 
 }
 

@@ -15,6 +15,7 @@ import com.wavemaker.runtime.data.export.ExportType;
 import com.wavemaker.runtime.data.expression.QueryFilter;
 import com.wavemaker.runtime.file.model.Downloadable;
 
+import com.ixtest20.new_ixtest_20.AuthPermission;
 import com.ixtest20.new_ixtest_20.DjangoContentType;
 
 /**
@@ -126,6 +127,17 @@ public interface DjangoContentTypeService {
 	 */
 	long count(String query);
 
+    /*
+     * Returns the associated authPermissions for given DjangoContentType id.
+     *
+     * @param id value of id; value cannot be null
+     * @param pageable Details of the pagination information along with the sorting options. If null returns all matching records.
+     * @return Paginated list of associated AuthPermission instances.
+     *
+     * @see Pageable
+     * @see Page
+     */
+    Page<AuthPermission> findAssociatedAuthPermissions(BigInteger id, Pageable pageable);
 
 }
 

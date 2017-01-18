@@ -23,6 +23,7 @@ import com.wavemaker.runtime.data.expression.QueryFilter;
 import com.wavemaker.runtime.file.model.Downloadable;
 
 import com.ixtest20.new_ixtest_20.Network;
+import com.ixtest20.new_ixtest_20.PNetworkRun;
 
 
 /**
@@ -35,6 +36,9 @@ public class NetworkServiceImpl implements NetworkService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(NetworkServiceImpl.class);
 
+    @Autowired
+	@Qualifier("NEW_IXTEST_20.PNetworkRunService")
+	private PNetworkRunService pNetworkRunService;
 
     @Autowired
     @Qualifier("NEW_IXTEST_20.NetworkDao")
@@ -49,6 +53,13 @@ public class NetworkServiceImpl implements NetworkService {
 	public Network create(Network network) {
         LOGGER.debug("Creating a new Network with information: {}", network);
         Network networkCreated = this.wmGenericDao.create(network);
+        if(networkCreated.getPnetworkRuns() != null) {
+            for(PNetworkRun pnetworkRun : networkCreated.getPnetworkRuns()) {
+                pnetworkRun.setNetwork(networkCreated);
+                LOGGER.debug("Creating a new child PNetworkRun with information: {}", pnetworkRun);
+                pNetworkRunService.create(pnetworkRun);
+            }
+        }
         return networkCreated;
     }
 
@@ -123,7 +134,25 @@ public class NetworkServiceImpl implements NetworkService {
         return this.wmGenericDao.count(query);
     }
 
+    @Transactional(readOnly = true, value = "NEW_IXTEST_20TransactionManager")
+    @Override
+    public Page<PNetworkRun> findAssociatedPnetworkRuns(BigInteger networkid, Pageable pageable) {
+        LOGGER.debug("Fetching all associated pnetworkRuns");
 
+        StringBuilder queryBuilder = new StringBuilder();
+        queryBuilder.append("network.networkid = '" + networkid + "'");
+
+        return pNetworkRunService.findAll(queryBuilder.toString(), pageable);
+    }
+
+    /**
+	 * This setter method should only be used by unit tests
+	 *
+	 * @param service PNetworkRunService instance
+	 */
+	protected void setPNetworkRunService(PNetworkRunService service) {
+        this.pNetworkRunService = service;
+    }
 
 }
 

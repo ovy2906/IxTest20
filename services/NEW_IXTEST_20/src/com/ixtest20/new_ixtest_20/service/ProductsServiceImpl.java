@@ -22,7 +22,15 @@ import com.wavemaker.runtime.data.export.ExportType;
 import com.wavemaker.runtime.data.expression.QueryFilter;
 import com.wavemaker.runtime.file.model.Downloadable;
 
+import com.ixtest20.new_ixtest_20.Builds;
+import com.ixtest20.new_ixtest_20.Engines;
+import com.ixtest20.new_ixtest_20.IopBuildApps;
+import com.ixtest20.new_ixtest_20.IopEnginesDetails;
 import com.ixtest20.new_ixtest_20.Products;
+import com.ixtest20.new_ixtest_20.Releases;
+import com.ixtest20.new_ixtest_20.Testcaserun;
+import com.ixtest20.new_ixtest_20.Testcases;
+import com.ixtest20.new_ixtest_20.Testplan;
 
 
 /**
@@ -35,6 +43,37 @@ public class ProductsServiceImpl implements ProductsService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ProductsServiceImpl.class);
 
+    @Autowired
+	@Qualifier("NEW_IXTEST_20.IopBuildAppsService")
+	private IopBuildAppsService iopBuildAppsService;
+
+    @Autowired
+	@Qualifier("NEW_IXTEST_20.ReleasesService")
+	private ReleasesService releasesService;
+
+    @Autowired
+	@Qualifier("NEW_IXTEST_20.TestcasesService")
+	private TestcasesService testcasesService;
+
+    @Autowired
+	@Qualifier("NEW_IXTEST_20.IopEnginesDetailsService")
+	private IopEnginesDetailsService iopEnginesDetailsService;
+
+    @Autowired
+	@Qualifier("NEW_IXTEST_20.TestplanService")
+	private TestplanService testplanService;
+
+    @Autowired
+	@Qualifier("NEW_IXTEST_20.TestcaserunService")
+	private TestcaserunService testcaserunService;
+
+    @Autowired
+	@Qualifier("NEW_IXTEST_20.EnginesService")
+	private EnginesService enginesService;
+
+    @Autowired
+	@Qualifier("NEW_IXTEST_20.BuildsService")
+	private BuildsService buildsService;
 
     @Autowired
     @Qualifier("NEW_IXTEST_20.ProductsDao")
@@ -49,6 +88,69 @@ public class ProductsServiceImpl implements ProductsService {
 	public Products create(Products products) {
         LOGGER.debug("Creating a new Products with information: {}", products);
         Products productsCreated = this.wmGenericDao.create(products);
+        if(productsCreated.getBuildses() != null) {
+            for(Builds buildse : productsCreated.getBuildses()) {
+                buildse.setProducts(productsCreated);
+                LOGGER.debug("Creating a new child Builds with information: {}", buildse);
+                buildsService.create(buildse);
+            }
+        }
+
+        if(productsCreated.getEngineses() != null) {
+            for(Engines enginese : productsCreated.getEngineses()) {
+                enginese.setProducts(productsCreated);
+                LOGGER.debug("Creating a new child Engines with information: {}", enginese);
+                enginesService.create(enginese);
+            }
+        }
+
+        if(productsCreated.getIopBuildAppses() != null) {
+            for(IopBuildApps iopBuildAppse : productsCreated.getIopBuildAppses()) {
+                iopBuildAppse.setProducts(productsCreated);
+                LOGGER.debug("Creating a new child IopBuildApps with information: {}", iopBuildAppse);
+                iopBuildAppsService.create(iopBuildAppse);
+            }
+        }
+
+        if(productsCreated.getIopEnginesDetailses() != null) {
+            for(IopEnginesDetails iopEnginesDetailse : productsCreated.getIopEnginesDetailses()) {
+                iopEnginesDetailse.setProducts(productsCreated);
+                LOGGER.debug("Creating a new child IopEnginesDetails with information: {}", iopEnginesDetailse);
+                iopEnginesDetailsService.create(iopEnginesDetailse);
+            }
+        }
+
+        if(productsCreated.getReleaseses() != null) {
+            for(Releases releasese : productsCreated.getReleaseses()) {
+                releasese.setProducts(productsCreated);
+                LOGGER.debug("Creating a new child Releases with information: {}", releasese);
+                releasesService.create(releasese);
+            }
+        }
+
+        if(productsCreated.getTestcaseruns() != null) {
+            for(Testcaserun testcaserun : productsCreated.getTestcaseruns()) {
+                testcaserun.setProducts(productsCreated);
+                LOGGER.debug("Creating a new child Testcaserun with information: {}", testcaserun);
+                testcaserunService.create(testcaserun);
+            }
+        }
+
+        if(productsCreated.getTestcaseses() != null) {
+            for(Testcases testcasese : productsCreated.getTestcaseses()) {
+                testcasese.setProducts(productsCreated);
+                LOGGER.debug("Creating a new child Testcases with information: {}", testcasese);
+                testcasesService.create(testcasese);
+            }
+        }
+
+        if(productsCreated.getTestplans() != null) {
+            for(Testplan testplan : productsCreated.getTestplans()) {
+                testplan.setProducts(productsCreated);
+                LOGGER.debug("Creating a new child Testplan with information: {}", testplan);
+                testplanService.create(testplan);
+            }
+        }
         return productsCreated;
     }
 
@@ -123,7 +225,165 @@ public class ProductsServiceImpl implements ProductsService {
         return this.wmGenericDao.count(query);
     }
 
+    @Transactional(readOnly = true, value = "NEW_IXTEST_20TransactionManager")
+    @Override
+    public Page<Builds> findAssociatedBuildses(BigInteger productid, Pageable pageable) {
+        LOGGER.debug("Fetching all associated buildses");
 
+        StringBuilder queryBuilder = new StringBuilder();
+        queryBuilder.append("products.productid = '" + productid + "'");
+
+        return buildsService.findAll(queryBuilder.toString(), pageable);
+    }
+
+    @Transactional(readOnly = true, value = "NEW_IXTEST_20TransactionManager")
+    @Override
+    public Page<Engines> findAssociatedEngineses(BigInteger productid, Pageable pageable) {
+        LOGGER.debug("Fetching all associated engineses");
+
+        StringBuilder queryBuilder = new StringBuilder();
+        queryBuilder.append("products.productid = '" + productid + "'");
+
+        return enginesService.findAll(queryBuilder.toString(), pageable);
+    }
+
+    @Transactional(readOnly = true, value = "NEW_IXTEST_20TransactionManager")
+    @Override
+    public Page<IopBuildApps> findAssociatedIopBuildAppses(BigInteger productid, Pageable pageable) {
+        LOGGER.debug("Fetching all associated iopBuildAppses");
+
+        StringBuilder queryBuilder = new StringBuilder();
+        queryBuilder.append("products.productid = '" + productid + "'");
+
+        return iopBuildAppsService.findAll(queryBuilder.toString(), pageable);
+    }
+
+    @Transactional(readOnly = true, value = "NEW_IXTEST_20TransactionManager")
+    @Override
+    public Page<IopEnginesDetails> findAssociatedIopEnginesDetailses(BigInteger productid, Pageable pageable) {
+        LOGGER.debug("Fetching all associated iopEnginesDetailses");
+
+        StringBuilder queryBuilder = new StringBuilder();
+        queryBuilder.append("products.productid = '" + productid + "'");
+
+        return iopEnginesDetailsService.findAll(queryBuilder.toString(), pageable);
+    }
+
+    @Transactional(readOnly = true, value = "NEW_IXTEST_20TransactionManager")
+    @Override
+    public Page<Releases> findAssociatedReleaseses(BigInteger productid, Pageable pageable) {
+        LOGGER.debug("Fetching all associated releaseses");
+
+        StringBuilder queryBuilder = new StringBuilder();
+        queryBuilder.append("products.productid = '" + productid + "'");
+
+        return releasesService.findAll(queryBuilder.toString(), pageable);
+    }
+
+    @Transactional(readOnly = true, value = "NEW_IXTEST_20TransactionManager")
+    @Override
+    public Page<Testcaserun> findAssociatedTestcaseruns(BigInteger productid, Pageable pageable) {
+        LOGGER.debug("Fetching all associated testcaseruns");
+
+        StringBuilder queryBuilder = new StringBuilder();
+        queryBuilder.append("products.productid = '" + productid + "'");
+
+        return testcaserunService.findAll(queryBuilder.toString(), pageable);
+    }
+
+    @Transactional(readOnly = true, value = "NEW_IXTEST_20TransactionManager")
+    @Override
+    public Page<Testcases> findAssociatedTestcaseses(BigInteger productid, Pageable pageable) {
+        LOGGER.debug("Fetching all associated testcaseses");
+
+        StringBuilder queryBuilder = new StringBuilder();
+        queryBuilder.append("products.productid = '" + productid + "'");
+
+        return testcasesService.findAll(queryBuilder.toString(), pageable);
+    }
+
+    @Transactional(readOnly = true, value = "NEW_IXTEST_20TransactionManager")
+    @Override
+    public Page<Testplan> findAssociatedTestplans(BigInteger productid, Pageable pageable) {
+        LOGGER.debug("Fetching all associated testplans");
+
+        StringBuilder queryBuilder = new StringBuilder();
+        queryBuilder.append("products.productid = '" + productid + "'");
+
+        return testplanService.findAll(queryBuilder.toString(), pageable);
+    }
+
+    /**
+	 * This setter method should only be used by unit tests
+	 *
+	 * @param service IopBuildAppsService instance
+	 */
+	protected void setIopBuildAppsService(IopBuildAppsService service) {
+        this.iopBuildAppsService = service;
+    }
+
+    /**
+	 * This setter method should only be used by unit tests
+	 *
+	 * @param service ReleasesService instance
+	 */
+	protected void setReleasesService(ReleasesService service) {
+        this.releasesService = service;
+    }
+
+    /**
+	 * This setter method should only be used by unit tests
+	 *
+	 * @param service TestcasesService instance
+	 */
+	protected void setTestcasesService(TestcasesService service) {
+        this.testcasesService = service;
+    }
+
+    /**
+	 * This setter method should only be used by unit tests
+	 *
+	 * @param service IopEnginesDetailsService instance
+	 */
+	protected void setIopEnginesDetailsService(IopEnginesDetailsService service) {
+        this.iopEnginesDetailsService = service;
+    }
+
+    /**
+	 * This setter method should only be used by unit tests
+	 *
+	 * @param service TestplanService instance
+	 */
+	protected void setTestplanService(TestplanService service) {
+        this.testplanService = service;
+    }
+
+    /**
+	 * This setter method should only be used by unit tests
+	 *
+	 * @param service TestcaserunService instance
+	 */
+	protected void setTestcaserunService(TestcaserunService service) {
+        this.testcaserunService = service;
+    }
+
+    /**
+	 * This setter method should only be used by unit tests
+	 *
+	 * @param service EnginesService instance
+	 */
+	protected void setEnginesService(EnginesService service) {
+        this.enginesService = service;
+    }
+
+    /**
+	 * This setter method should only be used by unit tests
+	 *
+	 * @param service BuildsService instance
+	 */
+	protected void setBuildsService(BuildsService service) {
+        this.buildsService = service;
+    }
 
 }
 

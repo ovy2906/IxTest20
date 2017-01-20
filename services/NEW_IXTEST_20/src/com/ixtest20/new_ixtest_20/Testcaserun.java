@@ -55,10 +55,10 @@ public class Testcaserun implements Serializable {
     private BigInteger iopSuiteId;
     private BigDecimal invalid;
     private String cardSerialNumber;
-    private Engines engines;
     private Testcases testcases;
-    private Products products;
+    private Engines engines;
     private Builds builds;
+    private Products products;
     private List<PDutRun> pdutRuns = new ArrayList<>();
     private List<PNetworkRun> pnetworkRuns = new ArrayList<>();
 
@@ -226,20 +226,6 @@ public class Testcaserun implements Serializable {
     }
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "`ENGINEID`", referencedColumnName = "`ENGINEID`", insertable = false, updatable = false)
-    public Engines getEngines() {
-        return this.engines;
-    }
-
-    public void setEngines(Engines engines) {
-        if(engines != null) {
-            this.engineid = engines.getEngineid();
-        }
-
-        this.engines = engines;
-    }
-
-    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "`TESTCASEID`", referencedColumnName = "`TESTCASEID`", insertable = false, updatable = false)
     public Testcases getTestcases() {
         return this.testcases;
@@ -254,17 +240,17 @@ public class Testcaserun implements Serializable {
     }
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "`PRODUCTID`", referencedColumnName = "`PRODUCTID`", insertable = false, updatable = false)
-    public Products getProducts() {
-        return this.products;
+    @JoinColumn(name = "`ENGINEID`", referencedColumnName = "`ENGINEID`", insertable = false, updatable = false)
+    public Engines getEngines() {
+        return this.engines;
     }
 
-    public void setProducts(Products products) {
-        if(products != null) {
-            this.productid = products.getProductid();
+    public void setEngines(Engines engines) {
+        if(engines != null) {
+            this.engineid = engines.getEngineid();
         }
 
-        this.products = products;
+        this.engines = engines;
     }
 
     @ManyToOne(fetch = FetchType.EAGER)
@@ -279,6 +265,20 @@ public class Testcaserun implements Serializable {
         }
 
         this.builds = builds;
+    }
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "`PRODUCTID`", referencedColumnName = "`PRODUCTID`", insertable = false, updatable = false)
+    public Products getProducts() {
+        return this.products;
+    }
+
+    public void setProducts(Products products) {
+        if(products != null) {
+            this.productid = products.getProductid();
+        }
+
+        this.products = products;
     }
 
     @JsonInclude(Include.NON_EMPTY)

@@ -26,6 +26,7 @@ import com.wavemaker.tools.api.core.models.AccessSpecifier;
 import com.wordnik.swagger.annotations.Api;
 import com.wordnik.swagger.annotations.ApiOperation;
 import com.wordnik.swagger.annotations.ApiParam;
+import com.ixtest20.new_ixtest_20.Engines;
 import com.ixtest20.new_ixtest_20.IopSuite;
 import com.ixtest20.new_ixtest_20.service.IopSuiteService;
 
@@ -117,6 +118,14 @@ public class IopSuiteController {
     public Long countIopSuites(@ApiParam("conditions to filter the results") @RequestParam(value = "q", required = false) String query) {
         LOGGER.debug("counting IopSuites");
         return iopSuiteService.count(query);
+    }
+
+    @RequestMapping(value = "/{id}/engineses", method = RequestMethod.GET)
+    @ApiOperation(value = "Gets the engineses instance associated with the given id.")
+    @WMAccessVisibility(value = AccessSpecifier.APP_ONLY)
+    public Page<Engines> findAssociatedEngineses(@PathVariable("id") BigInteger id, Pageable pageable) {
+        LOGGER.debug("Fetching all associated engineses");
+        return iopSuiteService.findAssociatedEngineses(id, pageable);
     }
 
     /**

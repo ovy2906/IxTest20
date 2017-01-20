@@ -950,23 +950,6 @@
       "cardinality" : "ManyToOne",
       "columnsUniqueKey" : false,
       "composite" : false,
-      "fieldName" : "authUser",
-      "mappings" : [ {
-        "sourceColumn" : "USER_ID",
-        "targetColumn" : "ID"
-      } ],
-      "name" : "FK_AUTH_USER_GROUPS_TO_AOsGHF",
-      "primary" : true,
-      "selfRelation" : false,
-      "sourceColumnsNotUniqueKey" : true,
-      "sourceTable" : "AUTH_USER_GROUPS",
-      "targetColumnsUniqueKey" : false,
-      "targetTable" : "AUTH_USER",
-      "virtual" : false
-    }, {
-      "cardinality" : "ManyToOne",
-      "columnsUniqueKey" : false,
-      "composite" : false,
       "fieldName" : "authGroup",
       "mappings" : [ {
         "sourceColumn" : "GROUP_ID",
@@ -979,6 +962,23 @@
       "sourceTable" : "AUTH_USER_GROUPS",
       "targetColumnsUniqueKey" : false,
       "targetTable" : "AUTH_GROUP",
+      "virtual" : false
+    }, {
+      "cardinality" : "ManyToOne",
+      "columnsUniqueKey" : false,
+      "composite" : false,
+      "fieldName" : "authUser",
+      "mappings" : [ {
+        "sourceColumn" : "USER_ID",
+        "targetColumn" : "ID"
+      } ],
+      "name" : "FK_AUTH_USER_GROUPS_TO_AOsGHF",
+      "primary" : true,
+      "selfRelation" : false,
+      "sourceColumnsNotUniqueKey" : true,
+      "sourceTable" : "AUTH_USER_GROUPS",
+      "targetColumnsUniqueKey" : false,
+      "targetTable" : "AUTH_USER",
       "virtual" : false
     } ],
     "schema" : null,
@@ -1594,23 +1594,6 @@
       "cardinality" : "ManyToOne",
       "columnsUniqueKey" : false,
       "composite" : false,
-      "fieldName" : "products",
-      "mappings" : [ {
-        "sourceColumn" : "PRODUCTID",
-        "targetColumn" : "PRODUCTID"
-      } ],
-      "name" : "FK_BUILDS_TO_PRODUCTS_PR3Gv9U",
-      "primary" : true,
-      "selfRelation" : false,
-      "sourceColumnsNotUniqueKey" : true,
-      "sourceTable" : "BUILDS",
-      "targetColumnsUniqueKey" : false,
-      "targetTable" : "PRODUCTS",
-      "virtual" : false
-    }, {
-      "cardinality" : "ManyToOne",
-      "columnsUniqueKey" : false,
-      "composite" : false,
       "fieldName" : "associatedApp",
       "mappings" : [ {
         "sourceColumn" : "SERVEREXPECTED",
@@ -1623,6 +1606,23 @@
       "sourceTable" : "BUILDS",
       "targetColumnsUniqueKey" : false,
       "targetTable" : "ASSOCIATED_APP",
+      "virtual" : false
+    }, {
+      "cardinality" : "ManyToOne",
+      "columnsUniqueKey" : false,
+      "composite" : false,
+      "fieldName" : "products",
+      "mappings" : [ {
+        "sourceColumn" : "PRODUCTID",
+        "targetColumn" : "PRODUCTID"
+      } ],
+      "name" : "FK_BUILDS_TO_PRODUCTS_PR3Gv9U",
+      "primary" : true,
+      "selfRelation" : false,
+      "sourceColumnsNotUniqueKey" : true,
+      "sourceTable" : "BUILDS",
+      "targetColumnsUniqueKey" : false,
+      "targetTable" : "PRODUCTS",
       "virtual" : false
     }, {
       "cardinality" : "OneToMany",
@@ -2974,7 +2974,7 @@
         "defaultValue" : null
       },
       "fieldName" : "iopSuiteId",
-      "foreignKey" : false,
+      "foreignKey" : true,
       "generatorType" : "assigned",
       "generatorValue" : null,
       "javaType" : "big_integer",
@@ -2982,8 +2982,8 @@
       "name" : "IOP_SUITE_ID",
       "nullable" : true,
       "oldName" : "IOP_SUITE_ID",
-      "partOfAnyRelation" : false,
-      "partOfForeignKey" : false,
+      "partOfAnyRelation" : true,
+      "partOfForeignKey" : true,
       "partOfPrimaryKey" : false,
       "partOfUniqueKey" : false,
       "precision" : 19,
@@ -3111,18 +3111,18 @@
       "cardinality" : "ManyToOne",
       "columnsUniqueKey" : false,
       "composite" : false,
-      "fieldName" : "products",
+      "fieldName" : "iopSuite",
       "mappings" : [ {
-        "sourceColumn" : "PRODUCTID",
-        "targetColumn" : "PRODUCTID"
+        "sourceColumn" : "IOP_SUITE_ID",
+        "targetColumn" : "IOP_SUITE_ID"
       } ],
-      "name" : "FK_ENGINES_TO_PRODUCTS_PgQtyp",
+      "name" : "FK_ENGINES_TO_IOP_SUITE_vSPXy",
       "primary" : true,
       "selfRelation" : false,
       "sourceColumnsNotUniqueKey" : true,
       "sourceTable" : "ENGINES",
       "targetColumnsUniqueKey" : false,
-      "targetTable" : "PRODUCTS",
+      "targetTable" : "IOP_SUITE",
       "virtual" : false
     }, {
       "cardinality" : "ManyToOne",
@@ -3140,6 +3140,23 @@
       "sourceTable" : "ENGINES",
       "targetColumnsUniqueKey" : false,
       "targetTable" : "BUILDS",
+      "virtual" : false
+    }, {
+      "cardinality" : "ManyToOne",
+      "columnsUniqueKey" : false,
+      "composite" : false,
+      "fieldName" : "products",
+      "mappings" : [ {
+        "sourceColumn" : "PRODUCTID",
+        "targetColumn" : "PRODUCTID"
+      } ],
+      "name" : "FK_ENGINES_TO_PRODUCTS_PgQtyp",
+      "primary" : true,
+      "selfRelation" : false,
+      "sourceColumnsNotUniqueKey" : true,
+      "sourceTable" : "ENGINES",
+      "targetColumnsUniqueKey" : false,
+      "targetTable" : "PRODUCTS",
       "virtual" : false
     }, {
       "cardinality" : "OneToMany",
@@ -3734,23 +3751,6 @@
       "cardinality" : "ManyToOne",
       "columnsUniqueKey" : false,
       "composite" : false,
-      "fieldName" : "products",
-      "mappings" : [ {
-        "sourceColumn" : "PRODUCTID",
-        "targetColumn" : "PRODUCTID"
-      } ],
-      "name" : "FK_IOP_BUILD_APPS_TO_PRO3aGTE",
-      "primary" : true,
-      "selfRelation" : false,
-      "sourceColumnsNotUniqueKey" : true,
-      "sourceTable" : "IOP_BUILD_APPS",
-      "targetColumnsUniqueKey" : false,
-      "targetTable" : "PRODUCTS",
-      "virtual" : false
-    }, {
-      "cardinality" : "ManyToOne",
-      "columnsUniqueKey" : false,
-      "composite" : false,
       "fieldName" : "builds",
       "mappings" : [ {
         "sourceColumn" : "BUILDID",
@@ -3763,6 +3763,23 @@
       "sourceTable" : "IOP_BUILD_APPS",
       "targetColumnsUniqueKey" : false,
       "targetTable" : "BUILDS",
+      "virtual" : false
+    }, {
+      "cardinality" : "ManyToOne",
+      "columnsUniqueKey" : false,
+      "composite" : false,
+      "fieldName" : "products",
+      "mappings" : [ {
+        "sourceColumn" : "PRODUCTID",
+        "targetColumn" : "PRODUCTID"
+      } ],
+      "name" : "FK_IOP_BUILD_APPS_TO_PRO3aGTE",
+      "primary" : true,
+      "selfRelation" : false,
+      "sourceColumnsNotUniqueKey" : true,
+      "sourceTable" : "IOP_BUILD_APPS",
+      "targetColumnsUniqueKey" : false,
+      "targetTable" : "PRODUCTS",
       "virtual" : false
     } ],
     "schema" : null,
@@ -3914,23 +3931,6 @@
       "cardinality" : "ManyToOne",
       "columnsUniqueKey" : false,
       "composite" : false,
-      "fieldName" : "products",
-      "mappings" : [ {
-        "sourceColumn" : "PRODUCTID",
-        "targetColumn" : "PRODUCTID"
-      } ],
-      "name" : "FK_IOP_ENGINES_DETAILS_TyuolD",
-      "primary" : true,
-      "selfRelation" : false,
-      "sourceColumnsNotUniqueKey" : true,
-      "sourceTable" : "IOP_ENGINES_DETAILS",
-      "targetColumnsUniqueKey" : false,
-      "targetTable" : "PRODUCTS",
-      "virtual" : false
-    }, {
-      "cardinality" : "ManyToOne",
-      "columnsUniqueKey" : false,
-      "composite" : false,
       "fieldName" : "engines",
       "mappings" : [ {
         "sourceColumn" : "ENGINEID",
@@ -3943,6 +3943,23 @@
       "sourceTable" : "IOP_ENGINES_DETAILS",
       "targetColumnsUniqueKey" : false,
       "targetTable" : "ENGINES",
+      "virtual" : false
+    }, {
+      "cardinality" : "ManyToOne",
+      "columnsUniqueKey" : false,
+      "composite" : false,
+      "fieldName" : "products",
+      "mappings" : [ {
+        "sourceColumn" : "PRODUCTID",
+        "targetColumn" : "PRODUCTID"
+      } ],
+      "name" : "FK_IOP_ENGINES_DETAILS_TyuolD",
+      "primary" : true,
+      "selfRelation" : false,
+      "sourceColumnsNotUniqueKey" : true,
+      "sourceTable" : "IOP_ENGINES_DETAILS",
+      "targetColumnsUniqueKey" : false,
+      "targetTable" : "PRODUCTS",
       "virtual" : false
     } ],
     "schema" : null,
@@ -3965,7 +3982,7 @@
       "name" : "IOP_SUITE_ID",
       "nullable" : false,
       "oldName" : "IOP_SUITE_ID",
-      "partOfAnyRelation" : false,
+      "partOfAnyRelation" : true,
       "partOfForeignKey" : false,
       "partOfPrimaryKey" : true,
       "partOfUniqueKey" : true,
@@ -4081,6 +4098,23 @@
       "sourceTable" : "IOP_SUITE",
       "targetColumnsUniqueKey" : false,
       "targetTable" : "BUILDS",
+      "virtual" : false
+    }, {
+      "cardinality" : "OneToMany",
+      "columnsUniqueKey" : false,
+      "composite" : false,
+      "fieldName" : "engineses",
+      "mappings" : [ {
+        "sourceColumn" : "IOP_SUITE_ID",
+        "targetColumn" : "IOP_SUITE_ID"
+      } ],
+      "name" : "FK_ENGINES_TO_IOP_SUITE_vSPXy",
+      "primary" : false,
+      "selfRelation" : false,
+      "sourceColumnsNotUniqueKey" : true,
+      "sourceTable" : "IOP_SUITE",
+      "targetColumnsUniqueKey" : false,
+      "targetTable" : "ENGINES",
       "virtual" : false
     } ],
     "schema" : null,
@@ -4474,14 +4508,14 @@
     "catalog" : "NEW_IXTEST_20",
     "columns" : [ {
       "columnValue" : {
-        "type" : "user-defined",
-        "insertable" : true,
-        "updatable" : true,
+        "type" : "database-defined",
+        "insertable" : false,
+        "updatable" : false,
         "defaultValue" : null
       },
       "fieldName" : "productid",
       "foreignKey" : false,
-      "generatorType" : "assigned",
+      "generatorType" : "identity",
       "generatorValue" : null,
       "javaType" : "big_integer",
       "length" : 0,
@@ -4582,7 +4616,7 @@
       "columns" : [ "PRODUCTID" ],
       "composite" : false,
       "generator" : {
-        "generatorType" : "assigned",
+        "generatorType" : "identity",
         "generatorValue" : null
       },
       "name" : "PRIMARY",
@@ -6486,23 +6520,6 @@
       "cardinality" : "ManyToOne",
       "columnsUniqueKey" : false,
       "composite" : false,
-      "fieldName" : "engines",
-      "mappings" : [ {
-        "sourceColumn" : "ENGINEID",
-        "targetColumn" : "ENGINEID"
-      } ],
-      "name" : "FK_TESTCASERUN_TO_ENGINEd0CVk",
-      "primary" : true,
-      "selfRelation" : false,
-      "sourceColumnsNotUniqueKey" : true,
-      "sourceTable" : "TESTCASERUN",
-      "targetColumnsUniqueKey" : false,
-      "targetTable" : "ENGINES",
-      "virtual" : false
-    }, {
-      "cardinality" : "ManyToOne",
-      "columnsUniqueKey" : false,
-      "composite" : false,
       "fieldName" : "testcases",
       "mappings" : [ {
         "sourceColumn" : "TESTCASEID",
@@ -6520,18 +6537,18 @@
       "cardinality" : "ManyToOne",
       "columnsUniqueKey" : false,
       "composite" : false,
-      "fieldName" : "products",
+      "fieldName" : "engines",
       "mappings" : [ {
-        "sourceColumn" : "PRODUCTID",
-        "targetColumn" : "PRODUCTID"
+        "sourceColumn" : "ENGINEID",
+        "targetColumn" : "ENGINEID"
       } ],
-      "name" : "FK_TESTCASERUN_TO_PRODUCH9Qa0",
+      "name" : "FK_TESTCASERUN_TO_ENGINEd0CVk",
       "primary" : true,
       "selfRelation" : false,
       "sourceColumnsNotUniqueKey" : true,
       "sourceTable" : "TESTCASERUN",
       "targetColumnsUniqueKey" : false,
-      "targetTable" : "PRODUCTS",
+      "targetTable" : "ENGINES",
       "virtual" : false
     }, {
       "cardinality" : "ManyToOne",
@@ -6549,6 +6566,23 @@
       "sourceTable" : "TESTCASERUN",
       "targetColumnsUniqueKey" : false,
       "targetTable" : "BUILDS",
+      "virtual" : false
+    }, {
+      "cardinality" : "ManyToOne",
+      "columnsUniqueKey" : false,
+      "composite" : false,
+      "fieldName" : "products",
+      "mappings" : [ {
+        "sourceColumn" : "PRODUCTID",
+        "targetColumn" : "PRODUCTID"
+      } ],
+      "name" : "FK_TESTCASERUN_TO_PRODUCH9Qa0",
+      "primary" : true,
+      "selfRelation" : false,
+      "sourceColumnsNotUniqueKey" : true,
+      "sourceTable" : "TESTCASERUN",
+      "targetColumnsUniqueKey" : false,
+      "targetTable" : "PRODUCTS",
       "virtual" : false
     }, {
       "cardinality" : "OneToMany",

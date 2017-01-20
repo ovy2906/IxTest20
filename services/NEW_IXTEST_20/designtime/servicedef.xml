@@ -150,6 +150,7 @@
             <element name="enginename" typeRef="java.lang.String" allowNull="true"/>
             <element name="invalid" typeRef="java.lang.Integer" allowNull="true"/>
             <element name="iopEnginesDetailses" typeRef="com.ixtest20.new_ixtest_20.IopEnginesDetails" isList="true" allowNull="true"/>
+            <element name="iopSuite" typeRef="com.ixtest20.new_ixtest_20.IopSuite" allowNull="true"/>
             <element name="iopSuiteId" typeRef="java.lang.Integer" allowNull="true"/>
             <element name="ixtestplancount" typeRef="java.lang.Integer" allowNull="true"/>
             <element name="ixtestplanid" typeRef="java.lang.Integer" allowNull="true"/>
@@ -199,6 +200,7 @@
         <dataobject javaType="com.ixtest20.new_ixtest_20.IopSuite">
             <element name="buildid" typeRef="java.lang.Integer" allowNull="true"/>
             <element name="builds" typeRef="com.ixtest20.new_ixtest_20.Builds" allowNull="true"/>
+            <element name="engineses" typeRef="com.ixtest20.new_ixtest_20.Engines" isList="true" allowNull="true"/>
             <element name="iopSuiteId" typeRef="java.lang.Integer" allowNull="true"/>
             <element name="iopSuiteName" typeRef="java.lang.String" allowNull="true"/>
             <element name="totalTestCases" typeRef="java.lang.Integer" allowNull="true"/>

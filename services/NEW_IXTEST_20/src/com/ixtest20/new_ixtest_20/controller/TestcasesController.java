@@ -120,8 +120,9 @@ public class TestcasesController {
         return testcasesService.count(query);
     }
 
-    @RequestMapping(value = "/{id:.+}/testcaseruns", method = RequestMethod.GET)
+    @RequestMapping(value = "/{id}/testcaseruns", method = RequestMethod.GET)
     @ApiOperation(value = "Gets the testcaseruns instance associated with the given id.")
+    @WMAccessVisibility(value = AccessSpecifier.APP_ONLY)
     public Page<Testcaserun> findAssociatedTestcaseruns(@PathVariable("id") BigInteger id, Pageable pageable) {
         LOGGER.debug("Fetching all associated testcaseruns");
         return testcasesService.findAssociatedTestcaseruns(id, pageable);

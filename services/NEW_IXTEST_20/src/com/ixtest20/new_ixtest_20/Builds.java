@@ -47,8 +47,8 @@ public class Builds implements Serializable {
     private BigInteger xmlVersion;
     private String anchornumber;
     private BigDecimal invalid;
-    private Products products;
     private AssociatedApp associatedApp;
+    private Products products;
     private List<Engines> engineses = new ArrayList<>();
     private List<IopBuildApps> iopBuildAppses = new ArrayList<>();
     private List<IopSuite> iopSuites = new ArrayList<>();
@@ -138,20 +138,6 @@ public class Builds implements Serializable {
     }
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "`PRODUCTID`", referencedColumnName = "`PRODUCTID`", insertable = false, updatable = false)
-    public Products getProducts() {
-        return this.products;
-    }
-
-    public void setProducts(Products products) {
-        if(products != null) {
-            this.productid = products.getProductid();
-        }
-
-        this.products = products;
-    }
-
-    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "`SERVEREXPECTED`", referencedColumnName = "`ID`", insertable = false, updatable = false)
     public AssociatedApp getAssociatedApp() {
         return this.associatedApp;
@@ -163,6 +149,20 @@ public class Builds implements Serializable {
         }
 
         this.associatedApp = associatedApp;
+    }
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "`PRODUCTID`", referencedColumnName = "`PRODUCTID`", insertable = false, updatable = false)
+    public Products getProducts() {
+        return this.products;
+    }
+
+    public void setProducts(Products products) {
+        if(products != null) {
+            this.productid = products.getProductid();
+        }
+
+        this.products = products;
     }
 
     @JsonInclude(Include.NON_EMPTY)

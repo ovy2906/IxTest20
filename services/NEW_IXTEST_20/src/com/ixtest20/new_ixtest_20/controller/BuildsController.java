@@ -147,8 +147,9 @@ public class BuildsController {
         return buildsService.findAssociatedIopSuites(id, pageable);
     }
 
-    @RequestMapping(value = "/{id:.+}/testcaseruns", method = RequestMethod.GET)
+    @RequestMapping(value = "/{id}/testcaseruns", method = RequestMethod.GET)
     @ApiOperation(value = "Gets the testcaseruns instance associated with the given id.")
+    @WMAccessVisibility(value = AccessSpecifier.APP_ONLY)
     public Page<Testcaserun> findAssociatedTestcaseruns(@PathVariable("id") BigInteger id, Pageable pageable) {
         LOGGER.debug("Fetching all associated testcaseruns");
         return buildsService.findAssociatedTestcaseruns(id, pageable);

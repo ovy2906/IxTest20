@@ -15,6 +15,7 @@ import com.wavemaker.runtime.data.export.ExportType;
 import com.wavemaker.runtime.data.expression.QueryFilter;
 import com.wavemaker.runtime.file.model.Downloadable;
 
+import com.ixtest20.new_ixtest_20.Engines;
 import com.ixtest20.new_ixtest_20.IopSuite;
 
 /**
@@ -126,6 +127,17 @@ public interface IopSuiteService {
 	 */
 	long count(String query);
 
+    /*
+     * Returns the associated engineses for given IopSuite id.
+     *
+     * @param iopSuiteId value of iopSuiteId; value cannot be null
+     * @param pageable Details of the pagination information along with the sorting options. If null returns all matching records.
+     * @return Paginated list of associated Engines instances.
+     *
+     * @see Pageable
+     * @see Page
+     */
+    Page<Engines> findAssociatedEngineses(BigInteger iopSuiteId, Pageable pageable);
 
 }
 

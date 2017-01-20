@@ -22,6 +22,7 @@ import com.wavemaker.runtime.data.export.ExportType;
 import com.wavemaker.runtime.data.expression.QueryFilter;
 import com.wavemaker.runtime.file.model.Downloadable;
 
+import com.ixtest20.new_ixtest_20.Engines;
 import com.ixtest20.new_ixtest_20.IopSuite;
 
 
@@ -35,6 +36,9 @@ public class IopSuiteServiceImpl implements IopSuiteService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(IopSuiteServiceImpl.class);
 
+    @Autowired
+	@Qualifier("NEW_IXTEST_20.EnginesService")
+	private EnginesService enginesService;
 
     @Autowired
     @Qualifier("NEW_IXTEST_20.IopSuiteDao")
@@ -49,6 +53,13 @@ public class IopSuiteServiceImpl implements IopSuiteService {
 	public IopSuite create(IopSuite iopSuite) {
         LOGGER.debug("Creating a new IopSuite with information: {}", iopSuite);
         IopSuite iopSuiteCreated = this.wmGenericDao.create(iopSuite);
+        if(iopSuiteCreated.getEngineses() != null) {
+            for(Engines enginese : iopSuiteCreated.getEngineses()) {
+                enginese.setIopSuite(iopSuiteCreated);
+                LOGGER.debug("Creating a new child Engines with information: {}", enginese);
+                enginesService.create(enginese);
+            }
+        }
         return iopSuiteCreated;
     }
 
@@ -123,7 +134,25 @@ public class IopSuiteServiceImpl implements IopSuiteService {
         return this.wmGenericDao.count(query);
     }
 
+    @Transactional(readOnly = true, value = "NEW_IXTEST_20TransactionManager")
+    @Override
+    public Page<Engines> findAssociatedEngineses(BigInteger iopSuiteId, Pageable pageable) {
+        LOGGER.debug("Fetching all associated engineses");
 
+        StringBuilder queryBuilder = new StringBuilder();
+        queryBuilder.append("iopSuite.iopSuiteId = '" + iopSuiteId + "'");
+
+        return enginesService.findAll(queryBuilder.toString(), pageable);
+    }
+
+    /**
+	 * This setter method should only be used by unit tests
+	 *
+	 * @param service EnginesService instance
+	 */
+	protected void setEnginesService(EnginesService service) {
+        this.enginesService = service;
+    }
 
 }
 

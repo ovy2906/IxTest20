@@ -42,8 +42,9 @@ public class Engines implements Serializable {
     private BigInteger ixtestplancount;
     private String parentenginename;
     private BigDecimal invalid;
-    private Products products;
+    private IopSuite iopSuite;
     private Builds builds;
+    private Products products;
     private List<IopEnginesDetails> iopEnginesDetailses = new ArrayList<>();
     private List<Testcaserun> testcaseruns = new ArrayList<>();
     private List<Testcases> testcaseses = new ArrayList<>();
@@ -140,17 +141,17 @@ public class Engines implements Serializable {
     }
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "`PRODUCTID`", referencedColumnName = "`PRODUCTID`", insertable = false, updatable = false)
-    public Products getProducts() {
-        return this.products;
+    @JoinColumn(name = "`IOP_SUITE_ID`", referencedColumnName = "`IOP_SUITE_ID`", insertable = false, updatable = false)
+    public IopSuite getIopSuite() {
+        return this.iopSuite;
     }
 
-    public void setProducts(Products products) {
-        if(products != null) {
-            this.productid = products.getProductid();
+    public void setIopSuite(IopSuite iopSuite) {
+        if(iopSuite != null) {
+            this.iopSuiteId = iopSuite.getIopSuiteId();
         }
 
-        this.products = products;
+        this.iopSuite = iopSuite;
     }
 
     @ManyToOne(fetch = FetchType.EAGER)
@@ -165,6 +166,20 @@ public class Engines implements Serializable {
         }
 
         this.builds = builds;
+    }
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "`PRODUCTID`", referencedColumnName = "`PRODUCTID`", insertable = false, updatable = false)
+    public Products getProducts() {
+        return this.products;
+    }
+
+    public void setProducts(Products products) {
+        if(products != null) {
+            this.productid = products.getProductid();
+        }
+
+        this.products = products;
     }
 
     @JsonInclude(Include.NON_EMPTY)

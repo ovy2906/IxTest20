@@ -120,8 +120,9 @@ public class NetworkController {
         return networkService.count(query);
     }
 
-    @RequestMapping(value = "/{id:.+}/pnetworkRuns", method = RequestMethod.GET)
+    @RequestMapping(value = "/{id}/pnetworkRuns", method = RequestMethod.GET)
     @ApiOperation(value = "Gets the pnetworkRuns instance associated with the given id.")
+    @WMAccessVisibility(value = AccessSpecifier.APP_ONLY)
     public Page<PNetworkRun> findAssociatedPnetworkRuns(@PathVariable("id") BigInteger id, Pageable pageable) {
         LOGGER.debug("Fetching all associated pnetworkRuns");
         return networkService.findAssociatedPnetworkRuns(id, pageable);

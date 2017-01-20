@@ -130,15 +130,17 @@ public class EnginesController {
         return enginesService.findAssociatedIopEnginesDetailses(id, pageable);
     }
 
-    @RequestMapping(value = "/{id:.+}/testcaseruns", method = RequestMethod.GET)
+    @RequestMapping(value = "/{id}/testcaseruns", method = RequestMethod.GET)
     @ApiOperation(value = "Gets the testcaseruns instance associated with the given id.")
+    @WMAccessVisibility(value = AccessSpecifier.APP_ONLY)
     public Page<Testcaserun> findAssociatedTestcaseruns(@PathVariable("id") BigInteger id, Pageable pageable) {
         LOGGER.debug("Fetching all associated testcaseruns");
         return enginesService.findAssociatedTestcaseruns(id, pageable);
     }
 
-    @RequestMapping(value = "/{id:.+}/testcaseses", method = RequestMethod.GET)
+    @RequestMapping(value = "/{id}/testcaseses", method = RequestMethod.GET)
     @ApiOperation(value = "Gets the testcaseses instance associated with the given id.")
+    @WMAccessVisibility(value = AccessSpecifier.APP_ONLY)
     public Page<Testcases> findAssociatedTestcaseses(@PathVariable("id") BigInteger id, Pageable pageable) {
         LOGGER.debug("Fetching all associated testcaseses");
         return enginesService.findAssociatedTestcaseses(id, pageable);

@@ -159,29 +159,33 @@ public class ProductsController {
         return productsService.findAssociatedIopEnginesDetailses(id, pageable);
     }
 
-    @RequestMapping(value = "/{id:.+}/releaseses", method = RequestMethod.GET)
+    @RequestMapping(value = "/{id}/releaseses", method = RequestMethod.GET)
     @ApiOperation(value = "Gets the releaseses instance associated with the given id.")
+    @WMAccessVisibility(value = AccessSpecifier.APP_ONLY)
     public Page<Releases> findAssociatedReleaseses(@PathVariable("id") BigInteger id, Pageable pageable) {
         LOGGER.debug("Fetching all associated releaseses");
         return productsService.findAssociatedReleaseses(id, pageable);
     }
 
-    @RequestMapping(value = "/{id:.+}/testcaseruns", method = RequestMethod.GET)
+    @RequestMapping(value = "/{id}/testcaseruns", method = RequestMethod.GET)
     @ApiOperation(value = "Gets the testcaseruns instance associated with the given id.")
+    @WMAccessVisibility(value = AccessSpecifier.APP_ONLY)
     public Page<Testcaserun> findAssociatedTestcaseruns(@PathVariable("id") BigInteger id, Pageable pageable) {
         LOGGER.debug("Fetching all associated testcaseruns");
         return productsService.findAssociatedTestcaseruns(id, pageable);
     }
 
-    @RequestMapping(value = "/{id:.+}/testcaseses", method = RequestMethod.GET)
+    @RequestMapping(value = "/{id}/testcaseses", method = RequestMethod.GET)
     @ApiOperation(value = "Gets the testcaseses instance associated with the given id.")
+    @WMAccessVisibility(value = AccessSpecifier.APP_ONLY)
     public Page<Testcases> findAssociatedTestcaseses(@PathVariable("id") BigInteger id, Pageable pageable) {
         LOGGER.debug("Fetching all associated testcaseses");
         return productsService.findAssociatedTestcaseses(id, pageable);
     }
 
-    @RequestMapping(value = "/{id:.+}/testplans", method = RequestMethod.GET)
+    @RequestMapping(value = "/{id}/testplans", method = RequestMethod.GET)
     @ApiOperation(value = "Gets the testplans instance associated with the given id.")
+    @WMAccessVisibility(value = AccessSpecifier.APP_ONLY)
     public Page<Testplan> findAssociatedTestplans(@PathVariable("id") BigInteger id, Pageable pageable) {
         LOGGER.debug("Fetching all associated testplans");
         return productsService.findAssociatedTestplans(id, pageable);

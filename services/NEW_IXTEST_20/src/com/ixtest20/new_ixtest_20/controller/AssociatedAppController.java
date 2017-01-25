@@ -47,7 +47,7 @@ public class AssociatedAppController {
 
     @ApiOperation(value = "Creates a new AssociatedApp instance.")
     @RequestMapping(method = RequestMethod.POST)
-    @WMAccessVisibility(value = AccessSpecifier.APP_ONLY)
+    @WMAccessVisibility(value = AccessSpecifier.UNAVAILABLE)
     public AssociatedApp createAssociatedApp(@RequestBody AssociatedApp associatedApp) {
         LOGGER.debug("Create AssociatedApp with information: {}", associatedApp);
         associatedApp = associatedAppService.create(associatedApp);

@@ -77,7 +77,7 @@ public class DeletedEngineController {
 
     @ApiOperation(value = "Deletes the DeletedEngine instance associated with the given id.")
     @RequestMapping(value = "/{id:.+}", method = RequestMethod.DELETE)
-    @WMAccessVisibility(value = AccessSpecifier.APP_ONLY)
+    @WMAccessVisibility(value = AccessSpecifier.UNAVAILABLE)
     public boolean deleteDeletedEngine(@PathVariable("id") BigDecimal id) throws EntityNotFoundException {
         LOGGER.debug("Deleting DeletedEngine with id: {}", id);
         DeletedEngine deletedDeletedEngine = deletedEngineService.delete(id);

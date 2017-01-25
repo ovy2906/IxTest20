@@ -7,15 +7,28 @@
             <wm-composite name="composite1">
                 <wm-label class="col-md-3 control-label" name="ProductLabel" caption="Product"></wm-label>
                 <wm-container class="col-md-9" name="container1">
-                    <wm-select name="select1" datafield="productid" dataset="bind:Variables.Products.dataSet" displayfield="productname" orderby="productname:desc" datavalue="bind:Variables.Products.firstRecord.productname" show="true"></wm-select>
+                    <wm-select name="selectProduct" datafield="productid" dataset="bind:Variables.Products.dataSet" displayfield="productname" orderby="productname:desc" show="true" required="true"></wm-select>
                 </wm-container>
             </wm-composite>
             <wm-composite name="composite2">
                 <wm-label class="col-md-3 control-label" name="TeamLabel" caption="Team"></wm-label>
                 <wm-container class="col-md-9" name="container2">
-                    <wm-select name="select2"></wm-select>
+                    <wm-select name="selectTeam" dataset="bind:Variables.Builds.dataSet" datafield="path" displayfield="path" orderby="path:desc"></wm-select>
                 </wm-container>
             </wm-composite>
+            <wm-composite name="composite3">
+                <wm-label class="col-md-3 control-label" name="BuildNumberLabel" caption="Build Number"></wm-label>
+                <wm-container class="col-md-9" name="container3">
+                    <wm-select name="buildNumberSelect" dataset="bind:Variables.BuildNumber.dataSet" datafield="buildnumber" displayfield="buildnumber" orderby="buildnumber:desc" required="true"></wm-select>
+                </wm-container>
+            </wm-composite>
+            <wm-composite name="composite4">
+                <wm-label class="col-md-3 control-label" name="ReportDateLabel" caption="Report Date"></wm-label>
+                <wm-container class="col-md-9" name="container4">
+                    <wm-select name="selectReportDate" dataset="bind:Variables.BuildDate.dataSet" datafield="builddate" displayfield="builddate" orderby="builddate:desc"></wm-select>
+                </wm-container>
+            </wm-composite>
+            <wm-button class="btn-default" caption="Submit" type="submit" margin="unset 0.5em" name="SubmitButton" horizontalalign="center" on-click="Variables.goToPage_Results.invoke()"></wm-button>
         </wm-page-content>
         <wm-right-panel columnwidth="2" name="rightpanel" content="rightnav"></wm-right-panel>
     </wm-content>

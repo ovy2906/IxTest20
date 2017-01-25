@@ -13,13 +13,6 @@
             </resource>
             <resource>
                 <filtering>true</filtering>
-                <directory>services/MyJavaService/src</directory>
-                <excludes>
-                    <exclude>**/*.java</exclude>
-                </excludes>
-            </resource>
-            <resource>
-                <filtering>true</filtering>
                 <directory>services/NEW_IXTEST_20/src</directory>
                 <excludes>
                     <exclude>**/*.java</exclude>
@@ -111,7 +104,6 @@
                         <configuration>
                             <sources>
                             
-                                <source>services/MyJavaService/src</source>
                                 <source>services/NEW_IXTEST_20/src</source>
                                 <source>services/securityService/src</source>
                             </sources>

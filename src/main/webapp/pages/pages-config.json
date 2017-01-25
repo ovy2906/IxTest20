@@ -11,6 +11,19 @@
   "type" : "PAGE",
   "params" : [ ]
 }, {
+  "name" : "Results",
+  "type" : "PAGE",
+  "params" : [ {
+    "name" : "productId",
+    "type" : "integer"
+  }, {
+    "name" : "team",
+    "type" : "string"
+  }, {
+    "name" : "buildno",
+    "type" : "string"
+  } ]
+}, {
   "name" : "footer",
   "type" : "FOOTER",
   "params" : [ ]
